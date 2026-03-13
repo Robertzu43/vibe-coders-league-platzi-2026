@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+__pycache__/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Build
+dist/
+build/
+out/
+*.o
+*.exe
+
+# Logs
+*.log
+npm-debug.log*
