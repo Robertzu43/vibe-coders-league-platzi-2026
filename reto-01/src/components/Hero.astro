@@ -1,0 +1,102 @@
+---
+---
+
+<section id="hero">
+  <div class="hero-content">
+    <h1 class="hero-title" id="hero-title"></h1><span class="cursor" id="hero-cursor">|</span>
+    <p class="hero-subtitle" id="hero-subtitle">Donde el código se encuentra con el futuro</p>
+    <p class="hero-info" id="hero-info">Octubre 2026 · Bogotá, Colombia</p>
+    <a class="hero-cta" id="hero-cta" href="#tickets">Obtener Entradas</a>
+  </div>
+</section>
+
+<style>
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+      var(--color-bg-black);
+  }
+
+  .hero-content {
+    text-align: center;
+    padding: 0 var(--container-padding);
+    max-width: var(--container-max-width);
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: var(--text-hero);
+    font-weight: var(--font-weight-bold);
+    color: white;
+    line-height: 1.1;
+    display: inline;
+  }
+
+  .cursor {
+    font-size: var(--text-hero);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    animation: cursor-blink 1.06s step-end infinite;
+    line-height: 1.1;
+    display: inline;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-h3);
+    color: var(--color-text-secondary);
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .hero-info {
+    font-size: var(--text-body);
+    color: var(--color-text-secondary);
+    margin-top: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    margin-top: 40px;
+    background: white;
+    color: var(--color-bg-black);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--text-body);
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease, scale var(--transition-fast);
+  }
+
+  .hero-cta:hover {
+    scale: 1.05;
+  }
+
+  .hero-subtitle.visible,
+  .hero-info.visible,
+  .hero-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  import '../scripts/typewriter.ts';
+</script>
