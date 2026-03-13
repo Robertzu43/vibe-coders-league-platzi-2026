@@ -93,7 +93,7 @@ html {
 /* Base body styles */
 body {
   font-family: var(--font-family);
-  background: var(--color-bg-dark);
+  background: var(--color-bg-black);
   color: var(--color-text-primary);
   overflow-x: hidden;
   font-size: var(--text-body);
@@ -116,6 +116,17 @@ body {
   font-weight: var(--font-weight-bold);
   line-height: 1.1;
   margin-bottom: 60px;
+}
+
+/* Neural network canvas — full page background */
+.neural-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Focus-visible styles for keyboard navigation */
