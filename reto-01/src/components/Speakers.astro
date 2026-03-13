@@ -26,25 +26,68 @@ function getInitials(name: string): string {
     >
       Speakers
     </h2>
-    <div class="speakers-grid">
-      {speakers.map((speaker, i) => (
-        <div
-          class="speaker-card"
-          style="opacity: 0; transform: translateY(40px);"
-        >
+
+    <!-- Desktop dock -->
+    <div class="dock-wrapper">
+      <div class="speakers-dock">
+        {speakers.map((speaker, i) => (
           <div
-            class="speaker-avatar"
+            class="dock-item"
+            data-name={speaker.name}
+            data-role={speaker.role}
+            data-company={speaker.company}
+            data-tags={speaker.tags.join(',')}
+            style="opacity: 0; transform: translateY(30px);"
+          >
+            <div
+              class="dock-avatar"
+              style={`background: ${gradients[i % gradients.length]};`}
+            >
+              {getInitials(speaker.name)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Glassmorphism info card -->
+      <div class="dock-info-card" style="opacity: 0; transform: translateY(10px); pointer-events: none;">
+        <p class="dock-card-name"></p>
+        <p class="dock-card-role"></p>
+        <p class="dock-card-company"></p>
+        <div class="dock-card-tags"></div>
+      </div>
+    </div>
+
+    <!-- Mobile carousel -->
+    <div class="speakers-carousel">
+      {speakers.map((speaker, i) => (
+        <div class="carousel-item">
+          <div
+            class="carousel-avatar"
             style={`background: ${gradients[i % gradients.length]};`}
           >
             {getInitials(speaker.name)}
           </div>
-          <h3 class="speaker-name">{speaker.name}</h3>
-          <p class="speaker-role">{speaker.role} · {speaker.company}</p>
+          <div class="carousel-card">
+            <p class="carousel-card-name">{speaker.name}</p>
+            <p class="carousel-card-role">{speaker.role}</p>
+            <p class="carousel-card-company">{speaker.company}</p>
+            <div class="carousel-card-tags">
+              {speaker.tags.map((tag) => (
+                <span class="dock-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  import { initDock } from '../scripts/dock';
+  document.addEventListener('DOMContentLoaded', initDock);
+</script>
 
 <style>
   .section {
@@ -57,70 +100,171 @@ function getInitials(name: string): string {
     padding: 0 var(--container-padding);
   }
 
-  .speakers-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
+  /* Dock wrapper */
+  .dock-wrapper {
+    position: relative;
+    padding-bottom: 120px;
   }
 
-  @media (max-width: 1199px) {
-    .speakers-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .speakers-dock {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 24px;
+    padding: 40px 20px 20px;
   }
 
-  @media (max-width: 767px) {
-    .speakers-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .speaker-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    padding: 32px;
-    text-align: center;
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-fast);
-  }
-
-  .speaker-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  }
-
-  .speaker-card:hover .speaker-avatar {
-    filter: grayscale(0%);
-  }
-
-  .speaker-avatar {
-    width: 120px;
-    height: 120px;
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s ease-out, filter 0.2s ease, box-shadow 0.2s ease;
     border-radius: 50%;
-    margin: 0 auto;
+  }
+
+  .dock-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 22px;
     font-weight: bold;
     color: white;
     filter: grayscale(100%);
-    transition: filter var(--transition-fast);
+    transition: filter 0.2s ease;
+    user-select: none;
   }
 
-  .speaker-name {
-    font-size: var(--text-h3);
+  /* Info card — glassmorphism */
+  .dock-info-card {
+    position: absolute;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    min-width: 220px;
+    text-align: center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+  }
+
+  .dock-card-name {
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--color-text-dark);
-    margin-top: 16px;
-    margin-bottom: 0;
+    margin: 0 0 4px;
   }
 
-  .speaker-role {
-    font-size: var(--text-small);
+  .dock-card-role {
+    font-size: 0.85rem;
     color: var(--color-text-secondary);
-    margin-top: 6px;
-    margin-bottom: 0;
+    margin: 0 0 2px;
+  }
+
+  .dock-card-company {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 10px;
+  }
+
+  .dock-card-tags {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .dock-tag {
+    display: inline-block;
+    background: rgba(124, 58, 237, 0.12);
+    color: #7c3aed;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  /* Mobile carousel */
+  .speakers-carousel {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .dock-wrapper {
+      display: none;
+    }
+
+    .speakers-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 20px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .speakers-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-item {
+      flex: 0 0 80%;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .carousel-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .carousel-card-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin: 0 0 4px;
+    }
+
+    .carousel-card-role {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin: 0 0 2px;
+    }
+
+    .carousel-card-company {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin: 0 0 10px;
+    }
+
+    .carousel-card-tags {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
   }
 </style>
