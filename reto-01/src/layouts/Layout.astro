@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import '../styles/animations.css';
+
+interface Props {
+  title?: string;
+}
+
+const {
+  title = 'Vibecode Summit Colombia 2026 — Festival de Tecnología, Vibe Coding & Web3',
+} = Astro.props;
+
+const description =
+  'Únete al Vibecode Summit Colombia. 3 días de charlas, workshops y hackathon sobre vibe coding, web3, crypto e inteligencia artificial. Octubre 2026, Bogotá.';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Font preloads -->
+    <link
+      rel="preload"
+      href="/fonts/Inter-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Inter-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
