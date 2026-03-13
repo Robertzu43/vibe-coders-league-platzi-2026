@@ -7,7 +7,7 @@ function initAnimations() {
   // Respect prefers-reduced-motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
-    gsap.set('.section-title, .speaker-card, .timeline-item, .sponsor-logo, .ticket-card', {
+    gsap.set('.section-title, .dock-item, .timeline-item, .sponsor-card, .ticket-card', {
       opacity: 1,
       x: 0,
       y: 0,
@@ -55,17 +55,17 @@ function initAnimations() {
     });
   });
 
-  // 4. Speaker cards stagger (start at opacity:0, translateY(40px))
-  const speakersGrid = document.querySelector('.speakers-grid');
-  if (speakersGrid) {
-    gsap.to('.speaker-card', {
+  // 4. Dock items stagger (start at opacity:0, translateY(30px))
+  const speakersDock = document.querySelector('.speakers-dock');
+  if (speakersDock) {
+    gsap.to('.dock-item', {
       y: 0,
       opacity: 1,
       duration: 0.6,
-      stagger: 0.12,
+      stagger: 0.08,
       ease: 'power2.out',
       scrollTrigger: {
-        trigger: '.speakers-grid',
+        trigger: '.speakers-dock',
         start: 'top 75%',
       },
     });
@@ -90,7 +90,7 @@ function initAnimations() {
   // 6. Location parallax — .venue-image-wrapper moves at differential speed
   ScrollTrigger.matchMedia({
     '(min-width: 768px)': function () {
-      gsap.to('.venue-image-wrapper', {
+      gsap.to('.venue-image', {
         yPercent: -20,
         ease: 'none',
         scrollTrigger: {
@@ -102,7 +102,7 @@ function initAnimations() {
       });
     },
     '(max-width: 767px)': function () {
-      gsap.to('.venue-image-wrapper', {
+      gsap.to('.venue-image', {
         yPercent: -5,
         ease: 'none',
         scrollTrigger: {
@@ -115,20 +115,22 @@ function initAnimations() {
     },
   });
 
-  // 7. Sponsor logos stagger (all .sponsor-logo elements start at opacity:0)
-  const sponsorLogos = document.querySelectorAll('.sponsor-logo');
-  if (sponsorLogos.length) {
-    gsap.to('.sponsor-logo', {
-      opacity: 1,
-      duration: 0.4,
-      stagger: 0.08,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '#sponsors .tier-logos',
-        start: 'top 80%',
-      },
-    });
-  }
+  // 7. Sponsor cards stagger by tier
+  ['platinum', 'gold', 'silver'].forEach((tier) => {
+    const tierSection = document.querySelector(`.tier-${tier}`);
+    if (tierSection) {
+      gsap.to(`.tier-${tier} .sponsor-card`, {
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: `.tier-${tier}`,
+          start: 'top 80%',
+        },
+      });
+    }
+  });
 
   // 8. Ticket cards stagger (start at opacity:0, scale(0.9))
   const ticketsGrid = document.querySelector('.tickets-grid');
