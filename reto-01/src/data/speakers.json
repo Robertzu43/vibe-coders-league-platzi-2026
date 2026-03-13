@@ -1,10 +1,10 @@
 [
-  { "name": "Mariana Velasco", "role": "CTO", "company": "Protocolo Lumina" },
-  { "name": "Andrés Ríos", "role": "Founder", "company": "VibeStudio" },
-  { "name": "Camila Herrera", "role": "Head of Engineering", "company": "ChainLab" },
-  { "name": "Diego Montoya", "role": "AI Research Lead", "company": "NeuralForge" },
-  { "name": "Valentina Cruz", "role": "Web3 Developer Advocate", "company": "EtherCore" },
-  { "name": "Santiago Mora", "role": "Blockchain Architect", "company": "CryptoAndes" },
-  { "name": "Isabella Torres", "role": "Product Lead", "company": "CodeVerse DAO" },
-  { "name": "Mateo Guzmán", "role": "Senior Protocol Engineer", "company": "ZK Labs" }
+  { "name": "Mariana Velasco", "role": "CTO", "company": "Protocolo Lumina", "tags": ["DeFi", "Web3"] },
+  { "name": "Andrés Ríos", "role": "Founder", "company": "VibeStudio", "tags": ["Vibe Coding", "Tools"] },
+  { "name": "Camila Herrera", "role": "Head of Engineering", "company": "ChainLab", "tags": ["Web3", "Security"] },
+  { "name": "Diego Montoya", "role": "AI Research Lead", "company": "NeuralForge", "tags": ["AI", "Agents"] },
+  { "name": "Valentina Cruz", "role": "Web3 Developer Advocate", "company": "EtherCore", "tags": ["Web3", "DevRel"] },
+  { "name": "Santiago Mora", "role": "Blockchain Architect", "company": "CryptoAndes", "tags": ["Crypto", "Architecture"] },
+  { "name": "Isabella Torres", "role": "Product Lead", "company": "CodeVerse DAO", "tags": ["DAOs", "Product"] },
+  { "name": "Mateo Guzmán", "role": "Senior Protocol Engineer", "company": "ZK Labs", "tags": ["ZK Proofs", "Crypto"] }
 ]
