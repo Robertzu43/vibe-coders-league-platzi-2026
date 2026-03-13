@@ -1,59 +1,74 @@
 ---
-// Ubicacion.astro — Venue section
+// Ubicacion.astro — Venue section with split layout
+import { Image } from 'astro:assets';
+import venueImg from '../assets/images/venue.jpg';
 ---
 
 <section id="ubicacion">
-  <!-- Replace with actual venue image -->
-  <div class="venue-image-wrapper parallax-image">
-    <div class="venue-overlay"></div>
-    <div class="venue-text">
-      <h2 class="venue-name">Centro de Convenciones Ágora</h2>
-      <p class="venue-city">Bogotá, Colombia</p>
+  <div class="ubicacion-split">
+    <div class="venue-image-side">
+      <Image
+        src={venueImg}
+        alt="Centro de Convenciones Ágora, Bogotá"
+        class="venue-image"
+        loading="lazy"
+        widths={[600, 900, 1200]}
+        sizes="(max-width: 767px) 100vw, 60vw"
+      />
+      <div class="venue-overlay"></div>
+      <div class="venue-text">
+        <h2 class="venue-name">Centro de Convenciones Ágora</h2>
+        <p class="venue-city">Bogotá, Colombia</p>
+      </div>
     </div>
-  </div>
 
-  <div class="venue-info">
-    <div class="container">
-      <div class="info-grid">
-        <div class="info-block">
-          <span class="info-label">Dirección</span>
-          <p class="info-content">
-            Carrera 37 No. 24-67<br />
-            Bogotá, Colombia
-          </p>
-        </div>
-        <div class="info-block">
-          <span class="info-label">Cómo Llegar</span>
-          <p class="info-content">
-            Metro línea 1, estación Ágora.<br />
-            Bus Transmilenio ruta 93.<br />
-            Parqueadero disponible en sitio.
-          </p>
-        </div>
-        <div class="info-block">
-          <span class="info-label">Fecha</span>
-          <p class="info-content">15–17 Octubre 2026</p>
-        </div>
+    <div class="venue-info-panel">
+      <div class="info-block" style="opacity: 0; transform: translateY(20px);">
+        <span class="info-label">Dirección</span>
+        <p class="info-content">
+          Carrera 37 No. 24-67<br />
+          Bogotá, Colombia
+        </p>
+      </div>
+      <div class="info-block" style="opacity: 0; transform: translateY(20px);">
+        <span class="info-label">Cómo Llegar</span>
+        <p class="info-content">
+          Metro línea 1, estación Ágora.<br />
+          Bus Transmilenio ruta 93.<br />
+          Parqueadero disponible en sitio.
+        </p>
+      </div>
+      <div class="info-block" style="opacity: 0; transform: translateY(20px);">
+        <span class="info-label">Fecha</span>
+        <p class="info-content">15–17 Octubre 2026</p>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .venue-image-wrapper {
-    height: 80vh;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  .ubicacion-split {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 80vh;
+  }
+
+  .venue-image-side {
+    flex: 0 0 60%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .venue-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .venue-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .venue-text {
@@ -74,60 +89,43 @@
     font-weight: bold;
     margin: 0;
     line-height: 1.1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   }
 
   .venue-city {
     font-size: var(--text-h3);
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     margin-top: 12px;
     margin-bottom: 0;
   }
 
-  .venue-info {
+  .venue-info-panel {
+    flex: 0 0 40%;
     background: var(--color-bg-dark);
-    padding: 60px 0;
-  }
-
-  .container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-  }
-
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-
-  @media (max-width: 1199px) {
-    .info-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .info-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .venue-name {
-      font-size: clamp(28px, 7vw, 48px);
-    }
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
   }
 
   .info-block {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 32px 0;
+  }
+
+  .info-block + .info-block {
+    border-top: 1px solid var(--color-border);
   }
 
   .info-label {
     font-size: var(--text-small);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--color-text-secondary);
-    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent, #7c3aed);
+    font-weight: var(--font-weight-semibold, 600);
   }
 
   .info-content {
@@ -135,5 +133,25 @@
     color: white;
     margin: 0;
     line-height: 1.6;
+  }
+
+  @media (max-width: 767px) {
+    .ubicacion-split {
+      flex-direction: column;
+    }
+
+    .venue-image-side {
+      flex: none;
+      height: 50vh;
+    }
+
+    .venue-info-panel {
+      flex: none;
+      padding: 40px var(--container-padding);
+    }
+
+    .venue-name {
+      font-size: clamp(28px, 7vw, 48px);
+    }
   }
 </style>
