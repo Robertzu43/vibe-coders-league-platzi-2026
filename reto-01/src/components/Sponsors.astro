@@ -2,7 +2,7 @@
 import sponsors from '../data/sponsors.json';
 ---
 
-<section id="sponsors" class="section" style="background: var(--color-bg-dark);">
+<section id="sponsors" class="sponsors-section">
   <div class="container">
     <h2
       class="section-title gsap-reveal"
@@ -12,72 +12,33 @@ import sponsors from '../data/sponsors.json';
     </h2>
 
     <!-- Platinum -->
-    <div class="tier-group">
-      <h3 class="tier-label">Platinum</h3>
-      <div class="tier-logos">
-        {sponsors.platinum.map((s) => (
-          <div class="sponsor-logo" style="opacity: 0;">
-            <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="178" height="58" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-              <text
-                x="90"
-                y="35"
-                text-anchor="middle"
-                fill="rgba(160,160,160,1)"
-                font-family="inherit"
-                font-size="14"
-                font-weight="600"
-              >{s.name}</text>
-            </svg>
-          </div>
-        ))}
-      </div>
+    <div class="tier-group tier-platinum">
+      {sponsors.platinum.map((s) => (
+        <div class="sponsor-card sponsor-card--platinum" style="opacity: 0; transform: translateY(20px);">
+          <div class="card-glow"></div>
+          <span class="card-tier-label">Platinum</span>
+          <span class="card-name">{s.name}</span>
+        </div>
+      ))}
     </div>
 
     <!-- Gold -->
-    <div class="tier-group">
-      <h3 class="tier-label">Gold</h3>
-      <div class="tier-logos">
-        {sponsors.gold.map((s) => (
-          <div class="sponsor-logo" style="opacity: 0;">
-            <svg width="120" height="50" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="118" height="48" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-              <text
-                x="60"
-                y="29"
-                text-anchor="middle"
-                fill="rgba(160,160,160,1)"
-                font-family="inherit"
-                font-size="12"
-                font-weight="600"
-              >{s.name}</text>
-            </svg>
-          </div>
-        ))}
-      </div>
+    <div class="tier-group tier-gold">
+      {sponsors.gold.map((s) => (
+        <div class="sponsor-card sponsor-card--gold" style="opacity: 0; transform: translateY(20px);">
+          <span class="card-tier-label card-tier-label--gold">Gold</span>
+          <span class="card-name">{s.name}</span>
+        </div>
+      ))}
     </div>
 
     <!-- Silver -->
-    <div class="tier-group">
-      <h3 class="tier-label">Silver</h3>
-      <div class="tier-logos">
-        {sponsors.silver.map((s) => (
-          <div class="sponsor-logo" style="opacity: 0;">
-            <svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="78" height="38" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
-              <text
-                x="40"
-                y="24"
-                text-anchor="middle"
-                fill="rgba(160,160,160,1)"
-                font-family="inherit"
-                font-size="10"
-                font-weight="600"
-              >{s.name}</text>
-            </svg>
-          </div>
-        ))}
-      </div>
+    <div class="tier-group tier-silver">
+      {sponsors.silver.map((s) => (
+        <div class="sponsor-card sponsor-card--silver" style="opacity: 0; transform: translateY(20px);">
+          <span class="card-name">{s.name}</span>
+        </div>
+      ))}
     </div>
 
     <a href="#" class="sponsor-cta">Sé sponsor</a>
@@ -85,7 +46,14 @@ import sponsors from '../data/sponsors.json';
 </section>
 
 <style>
-  .section {
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .sponsors-section {
+    background: var(--color-bg-dark);
     padding: var(--section-padding) 0;
   }
 
@@ -93,51 +61,183 @@ import sponsors from '../data/sponsors.json';
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 var(--container-padding);
-  }
-
-  .tier-group {
-    margin-bottom: 48px;
-  }
-
-  .tier-label {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: var(--text-small);
-    color: var(--color-text-secondary);
-    margin-bottom: 24px;
-    text-align: center;
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .tier-logos {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-title {
+    width: 100%;
+  }
+
+  /* ── Tier groups ── */
+  .tier-group {
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .tier-platinum {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tier-gold {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tier-silver {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* ── Base card ── */
+  .sponsor-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
-  }
-
-  .sponsor-logo {
-    filter: grayscale(100%) opacity(0.6);
-    transition: filter 0.3s ease;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
   }
 
-  .sponsor-logo:hover {
-    filter: none;
+  /* ── Platinum card ── */
+  .sponsor-card--platinum {
+    min-height: 120px;
+    padding: 32px;
+    border-radius: 16px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.25);
   }
 
+  .sponsor-card--platinum:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.5);
+    animation: border-rotate 3s linear infinite;
+    border-image: conic-gradient(from var(--border-angle), transparent 25%, var(--color-accent) 50%, transparent 75%) 1;
+  }
+
+  .card-glow {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.35), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── Gold card ── */
+  .sponsor-card--gold {
+    padding: 20px 16px;
+    border-radius: 12px;
+    background: rgba(245, 158, 11, 0.06);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+  }
+
+  .sponsor-card--gold:hover {
+    box-shadow: 0 6px 30px rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.35);
+    animation: border-rotate 3s linear infinite;
+    border-image: conic-gradient(from var(--border-angle), transparent 25%, #f59e0b 50%, transparent 75%) 1;
+  }
+
+  /* ── Silver card ── */
+  .sponsor-card--silver {
+    padding: 14px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .sponsor-card--silver:hover {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* ── Labels ── */
+  .card-tier-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+
+  .card-tier-label--gold {
+    color: #d4a017;
+  }
+
+  /* ── Names ── */
+  .sponsor-card--platinum .card-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .sponsor-card--gold .card-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ccc;
+  }
+
+  .sponsor-card--silver .card-name {
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* ── CTA ── */
   .sponsor-cta {
-    display: block;
-    text-align: center;
+    display: inline-block;
     margin-top: 16px;
+    padding: 10px 24px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
     color: var(--color-text-secondary);
     text-decoration: none;
     font-size: var(--text-small);
-    transition: text-decoration var(--transition-fast);
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .sponsor-cta:hover {
-    text-decoration: underline;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-accent);
+  }
+
+  /* ── Animated border rotation ── */
+  @keyframes border-rotate {
+    to {
+      --border-angle: 360deg;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .tier-gold {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tier-silver {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tier-platinum {
+      grid-template-columns: 1fr;
+    }
+
+    .tier-gold {
+      grid-template-columns: 1fr;
+    }
+
+    .tier-silver {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
