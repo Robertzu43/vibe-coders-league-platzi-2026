@@ -1,0 +1,20 @@
+{
+  "platinum": [
+    { "name": "ChainVerse Labs" },
+    { "name": "NeuralPay" }
+  ],
+  "gold": [
+    { "name": "CryptoAndes" },
+    { "name": "BlockForge" },
+    { "name": "VibeTools" },
+    { "name": "DataNode" }
+  ],
+  "silver": [
+    { "name": "ZKSync Studio" },
+    { "name": "TokenBridge" },
+    { "name": "DevPulse" },
+    { "name": "SmartLayer" },
+    { "name": "CodeNexus" },
+    { "name": "HashFlow" }
+  ]
+}

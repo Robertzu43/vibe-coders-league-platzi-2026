@@ -1,0 +1,33 @@
+{
+  "days": [
+    {
+      "label": "Día 1 — 15 Oct",
+      "title": "Keynotes & Visión",
+      "events": [
+        { "time": "09:00", "title": "Apertura: El Estado del Vibe Coding en 2026", "speaker": "Andrés Ríos", "tag": "Vibe Coding" },
+        { "time": "10:30", "title": "Web3 en Latinoamérica: Oportunidades Reales", "speaker": "Mariana Velasco", "tag": "Web3" },
+        { "time": "14:00", "title": "De Prompts a Producción: AI como Co-piloto", "speaker": "Diego Montoya", "tag": "AI" },
+        { "time": "16:00", "title": "Panel: El Futuro de las DAOs", "speaker": "Isabella Torres", "tag": "Crypto" }
+      ]
+    },
+    {
+      "label": "Día 2 — 16 Oct",
+      "title": "Workshops & Deep Dives",
+      "events": [
+        { "time": "09:00", "title": "Workshop: Vibe Coding en Vivo con Claude", "speaker": "Andrés Ríos", "tag": "Vibe Coding" },
+        { "time": "11:00", "title": "Smart Contracts con Solidity: De Cero a Deploy", "speaker": "Santiago Mora", "tag": "Crypto" },
+        { "time": "14:00", "title": "Construyendo AI Agents para Web3", "speaker": "Diego Montoya", "tag": "AI" },
+        { "time": "16:00", "title": "DeFi Protocols: Arquitectura y Seguridad", "speaker": "Camila Herrera", "tag": "Web3" }
+      ]
+    },
+    {
+      "label": "Día 3 — 17 Oct",
+      "title": "Hackathon & Demos",
+      "events": [
+        { "time": "09:00", "title": "Hackathon: 8 Horas para Cambiar el Juego", "speaker": "Todos los mentores", "tag": "Vibe Coding" },
+        { "time": "17:00", "title": "Demo Day: Presentación de Proyectos", "speaker": "Participantes", "tag": "Web3" },
+        { "time": "19:00", "title": "Ceremonia de Cierre & Networking", "speaker": "Valentina Cruz", "tag": "Crypto" }
+      ]
+    }
+  ]
+}

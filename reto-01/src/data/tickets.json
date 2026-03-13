@@ -1,0 +1,23 @@
+[
+  {
+    "tier": "Early Bird",
+    "price": 149,
+    "currency": "USD",
+    "features": ["Acceso general 3 días", "Swag básico", "Acceso a grabaciones"],
+    "highlighted": false
+  },
+  {
+    "tier": "General",
+    "price": 299,
+    "currency": "USD",
+    "features": ["Todo Early Bird", "Workshops incluidos", "Swag completo", "Certificado"],
+    "highlighted": false
+  },
+  {
+    "tier": "VIP",
+    "price": 599,
+    "currency": "USD",
+    "features": ["Todo General", "Networking exclusivo", "Acceso backstage", "Meet & greet con speakers"],
+    "highlighted": true
+  }
+]
