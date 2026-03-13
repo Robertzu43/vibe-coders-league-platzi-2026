@@ -1,0 +1,126 @@
+---
+import speakers from '../data/speakers.json';
+
+const gradients = [
+  'linear-gradient(135deg, #7c3aed, #3b82f6)',
+  'linear-gradient(135deg, #06b6d4, #10b981)',
+  'linear-gradient(135deg, #f59e0b, #ef4444)',
+  'linear-gradient(135deg, #8b5cf6, #ec4899)',
+  'linear-gradient(135deg, #3b82f6, #06b6d4)',
+  'linear-gradient(135deg, #10b981, #7c3aed)',
+  'linear-gradient(135deg, #ef4444, #f59e0b)',
+  'linear-gradient(135deg, #ec4899, #8b5cf6)',
+];
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(' ');
+  return (parts[0][0] + (parts[1] ? parts[1][0] : '')).toUpperCase();
+}
+---
+
+<section id="speakers" class="section" style="background: var(--color-bg-light);">
+  <div class="container">
+    <h2
+      class="section-title gsap-reveal"
+      style="color: var(--color-text-dark); opacity: 0; transform: translateY(60px);"
+    >
+      Speakers
+    </h2>
+    <div class="speakers-grid">
+      {speakers.map((speaker, i) => (
+        <div
+          class="speaker-card"
+          style="opacity: 0; transform: translateY(40px);"
+        >
+          <div
+            class="speaker-avatar"
+            style={`background: ${gradients[i % gradients.length]};`}
+          >
+            {getInitials(speaker.name)}
+          </div>
+          <h3 class="speaker-name">{speaker.name}</h3>
+          <p class="speaker-role">{speaker.role} · {speaker.company}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 1199px) {
+    .speakers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .speakers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .speaker-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 32px;
+    text-align: center;
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .speaker-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  }
+
+  .speaker-card:hover .speaker-avatar {
+    filter: grayscale(0%);
+  }
+
+  .speaker-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    filter: grayscale(100%);
+    transition: filter var(--transition-fast);
+  }
+
+  .speaker-name {
+    font-size: var(--text-h3);
+    color: var(--color-text-dark);
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+
+  .speaker-role {
+    font-size: var(--text-small);
+    color: var(--color-text-secondary);
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+</style>
