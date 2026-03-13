@@ -20,8 +20,8 @@ function initTypewriter() {
   }
 
   let i = 0;
-  const speed = 60; // ms per character
-  const pauseAfterVibecode = 400; // ms pause after "VIBECODE"
+  const speed = 110; // ms per character
+  const pauseAfterVibecode = 800; // ms pause after "VIBECODE"
 
   function type() {
     if (i < text.length) {
