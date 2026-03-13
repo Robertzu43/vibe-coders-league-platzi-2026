@@ -6,7 +6,9 @@ export function initNavbar() {
 
   hamburger.addEventListener('click', () => {
     nav.classList.toggle('open');
-    if (nav.classList.contains('open')) {
+    const isOpen = nav.classList.contains('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -17,6 +19,7 @@ export function initNavbar() {
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     });
   });

@@ -95,6 +95,22 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  @media (max-width: 767px) {
+    .hero-title,
+    .cursor {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 4vw, 22px);
+    }
+
+    .hero-cta {
+      padding: 14px 28px;
+    }
+  }
 </style>
 
 <script>

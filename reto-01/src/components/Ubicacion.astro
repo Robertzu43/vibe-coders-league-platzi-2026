@@ -100,9 +100,19 @@
     gap: 40px;
   }
 
+  @media (max-width: 1199px) {
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 767px) {
     .info-grid {
       grid-template-columns: 1fr;
+    }
+
+    .venue-name {
+      font-size: clamp(28px, 7vw, 48px);
     }
   }
 
