@@ -1,0 +1,129 @@
+---
+// Ubicacion.astro — Venue section
+---
+
+<section id="ubicacion">
+  <!-- Replace with actual venue image -->
+  <div class="venue-image-wrapper parallax-image">
+    <div class="venue-overlay"></div>
+    <div class="venue-text">
+      <h2 class="venue-name">Centro de Convenciones Ágora</h2>
+      <p class="venue-city">Bogotá, Colombia</p>
+    </div>
+  </div>
+
+  <div class="venue-info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-block">
+          <span class="info-label">Dirección</span>
+          <p class="info-content">
+            Carrera 37 No. 24-67<br />
+            Bogotá, Colombia
+          </p>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Cómo Llegar</span>
+          <p class="info-content">
+            Metro línea 1, estación Ágora.<br />
+            Bus Transmilenio ruta 93.<br />
+            Parqueadero disponible en sitio.
+          </p>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Fecha</span>
+          <p class="info-content">15–17 Octubre 2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venue-image-wrapper {
+    height: 80vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .venue-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .venue-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 var(--container-padding);
+    z-index: 1;
+  }
+
+  .venue-name {
+    font-size: var(--text-section-title);
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .venue-city {
+    font-size: var(--text-h3);
+    color: var(--color-text-secondary);
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+
+  .venue-info {
+    background: var(--color-bg-dark);
+    padding: 60px 0;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  @media (max-width: 767px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .info-label {
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .info-content {
+    font-size: var(--text-body);
+    color: white;
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>
