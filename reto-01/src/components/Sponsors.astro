@@ -1,0 +1,143 @@
+---
+import sponsors from '../data/sponsors.json';
+---
+
+<section id="sponsors" class="section" style="background: var(--color-bg-dark);">
+  <div class="container">
+    <h2
+      class="section-title gsap-reveal"
+      style="color: white; opacity: 0; transform: translateY(60px);"
+    >
+      Sponsors
+    </h2>
+
+    <!-- Platinum -->
+    <div class="tier-group">
+      <h3 class="tier-label">Platinum</h3>
+      <div class="tier-logos">
+        {sponsors.platinum.map((s) => (
+          <div class="sponsor-logo" style="opacity: 0;">
+            <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="178" height="58" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+              <text
+                x="90"
+                y="35"
+                text-anchor="middle"
+                fill="rgba(160,160,160,1)"
+                font-family="inherit"
+                font-size="14"
+                font-weight="600"
+              >{s.name}</text>
+            </svg>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="tier-group">
+      <h3 class="tier-label">Gold</h3>
+      <div class="tier-logos">
+        {sponsors.gold.map((s) => (
+          <div class="sponsor-logo" style="opacity: 0;">
+            <svg width="120" height="50" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="118" height="48" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+              <text
+                x="60"
+                y="29"
+                text-anchor="middle"
+                fill="rgba(160,160,160,1)"
+                font-family="inherit"
+                font-size="12"
+                font-weight="600"
+              >{s.name}</text>
+            </svg>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Silver -->
+    <div class="tier-group">
+      <h3 class="tier-label">Silver</h3>
+      <div class="tier-logos">
+        {sponsors.silver.map((s) => (
+          <div class="sponsor-logo" style="opacity: 0;">
+            <svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="78" height="38" rx="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" />
+              <text
+                x="40"
+                y="24"
+                text-anchor="middle"
+                fill="rgba(160,160,160,1)"
+                font-family="inherit"
+                font-size="10"
+                font-weight="600"
+              >{s.name}</text>
+            </svg>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <a href="#" class="sponsor-cta">Sé sponsor</a>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .tier-group {
+    margin-bottom: 48px;
+  }
+
+  .tier-label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--text-small);
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .tier-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .sponsor-logo {
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .sponsor-logo:hover {
+    filter: none;
+  }
+
+  .sponsor-cta {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--text-small);
+    transition: text-decoration var(--transition-fast);
+  }
+
+  .sponsor-cta:hover {
+    text-decoration: underline;
+  }
+</style>
