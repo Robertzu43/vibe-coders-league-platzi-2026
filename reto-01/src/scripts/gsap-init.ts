@@ -7,12 +7,15 @@ function initAnimations() {
   // Respect prefers-reduced-motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
-    gsap.set('.section-title, .dock-item, .timeline-item, .sponsor-card, .ticket-card, .info-block', {
+    gsap.set('.section-title, .dock-item, .timeline-item, .sponsor-card, .ticket-card, .venue-card', {
       opacity: 1,
       x: 0,
       y: 0,
       scale: 1,
     });
+    gsap.set('.venue-hero', { clipPath: 'inset(0 0% 0 0)' });
+    const venueEl = document.querySelector('.venue-hero');
+    if (venueEl) venueEl.classList.add('revealed');
     return;
   }
 
@@ -87,46 +90,62 @@ function initAnimations() {
     });
   });
 
-  // 6. Location parallax — .venue-image-wrapper moves at differential speed
-  ScrollTrigger.matchMedia({
-    '(min-width: 768px)': function () {
-      gsap.to('.venue-image', {
-        yPercent: -20,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#ubicacion',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    },
-    '(max-width: 767px)': function () {
-      gsap.to('.venue-image', {
-        yPercent: -5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#ubicacion',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    },
-  });
+  // 6. Location cinematic reveal — clip-path wipe + parallax
+  const venueHero = document.querySelector('.venue-hero');
+  if (venueHero) {
+    gsap.to('.venue-hero', {
+      clipPath: 'inset(0 0% 0 0)',
+      duration: 1.2,
+      ease: 'power3.inOut',
+      scrollTrigger: {
+        trigger: '#ubicacion',
+        start: 'top 70%',
+      },
+      onComplete: () => {
+        venueHero.classList.add('revealed');
+      },
+    });
 
-  // 6b. Venue info blocks stagger
-  const venueInfoBlocks = document.querySelectorAll('.venue-info-panel .info-block');
-  if (venueInfoBlocks.length) {
-    gsap.to('.venue-info-panel .info-block', {
+    ScrollTrigger.matchMedia({
+      '(min-width: 768px)': function () {
+        gsap.to('.venue-image', {
+          yPercent: -15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#ubicacion',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      },
+      '(max-width: 767px)': function () {
+        gsap.to('.venue-image', {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#ubicacion',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      },
+    });
+  }
+
+  // 6b. Venue cards stagger
+  const venueCards = document.querySelectorAll('.venue-card');
+  if (venueCards.length) {
+    gsap.to('.venue-card', {
       y: 0,
       opacity: 1,
       duration: 0.6,
-      stagger: 0.15,
+      stagger: 0.12,
       ease: 'power2.out',
       scrollTrigger: {
-        trigger: '.venue-info-panel',
-        start: 'top 75%',
+        trigger: '.venue-cards',
+        start: 'top 80%',
       },
     });
   }

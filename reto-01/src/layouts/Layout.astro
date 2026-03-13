@@ -51,9 +51,12 @@ const description =
     />
   </head>
   <body>
+    <canvas id="neural-canvas" class="neural-canvas"></canvas>
     <slot />
     <script>
       import '../scripts/gsap-init.ts';
+      import { initNeuralNetwork } from '../scripts/neural-bg.ts';
+      document.addEventListener('DOMContentLoaded', initNeuralNetwork);
     </script>
   </body>
 </html>

@@ -17,10 +17,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background:
-      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-      var(--color-bg-black);
+    z-index: 1;
   }
 
   .hero-content {
@@ -54,7 +51,7 @@
 
   .hero-subtitle {
     font-size: var(--text-h3);
-    color: var(--color-text-secondary);
+    color: var(--color-accent);
     margin-top: 24px;
     opacity: 0;
     transform: translateY(10px);
