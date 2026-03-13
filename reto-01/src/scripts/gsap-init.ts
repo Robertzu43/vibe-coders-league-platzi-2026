@@ -7,7 +7,7 @@ function initAnimations() {
   // Respect prefers-reduced-motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {
-    gsap.set('.section-title, .dock-item, .timeline-item, .sponsor-card, .ticket-card', {
+    gsap.set('.section-title, .dock-item, .timeline-item, .sponsor-card, .ticket-card, .info-block', {
       opacity: 1,
       x: 0,
       y: 0,
@@ -115,13 +115,30 @@ function initAnimations() {
     },
   });
 
+  // 6b. Venue info blocks stagger
+  const venueInfoBlocks = document.querySelectorAll('.venue-info-panel .info-block');
+  if (venueInfoBlocks.length) {
+    gsap.to('.venue-info-panel .info-block', {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.venue-info-panel',
+        start: 'top 75%',
+      },
+    });
+  }
+
   // 7. Sponsor cards stagger by tier
   ['platinum', 'gold', 'silver'].forEach((tier) => {
     const tierSection = document.querySelector(`.tier-${tier}`);
     if (tierSection) {
       gsap.to(`.tier-${tier} .sponsor-card`, {
+        y: 0,
         opacity: 1,
-        duration: 0.4,
+        duration: 0.5,
         stagger: 0.1,
         ease: 'power2.out',
         scrollTrigger: {
