@@ -18,11 +18,12 @@ function getInitials(name: string): string {
 }
 ---
 
-<section id="speakers" class="section" style="background: var(--color-bg-light);">
+<section id="speakers" class="section">
+  <canvas id="neural-canvas" class="neural-bg"></canvas>
   <div class="container">
     <h2
       class="section-title gsap-reveal"
-      style="color: var(--color-text-dark); opacity: 0; transform: translateY(60px);"
+      style="color: white; opacity: 0; transform: translateY(60px);"
     >
       Speakers
     </h2>
@@ -86,18 +87,36 @@ function getInitials(name: string): string {
 
 <script>
   import { initDock } from '../scripts/dock';
-  document.addEventListener('DOMContentLoaded', initDock);
+  import { initNeuralNetwork } from '../scripts/neural-bg';
+  document.addEventListener('DOMContentLoaded', () => {
+    initDock();
+    initNeuralNetwork();
+  });
 </script>
 
 <style>
   .section {
     padding: var(--section-padding) 0;
+    background: var(--color-bg-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neural-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 var(--container-padding);
+    position: relative;
+    z-index: 1;
   }
 
   /* Dock wrapper */
@@ -157,7 +176,7 @@ function getInitials(name: string): string {
   .dock-card-name {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-text-dark);
+    color: white;
     margin: 0 0 4px;
   }
 
@@ -245,7 +264,7 @@ function getInitials(name: string): string {
     .carousel-card-name {
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--color-text-dark);
+      color: white;
       margin: 0 0 4px;
     }
 
