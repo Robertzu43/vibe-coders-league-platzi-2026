@@ -1,0 +1,162 @@
+---
+---
+
+<nav>
+  <div class="nav-container">
+    <a href="#" class="nav-logo">VIBECODE</a>
+
+    <ul class="nav-links">
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#agenda">Agenda</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+      <li><a href="#tickets">Entradas</a></li>
+    </ul>
+
+    <button class="hamburger" aria-label="Menú de navegación">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background var(--transition-medium), backdrop-filter var(--transition-medium);
+  }
+
+  nav.scrolled {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nav-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 20px var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.15em;
+    color: white;
+    text-decoration: none;
+    font-size: var(--text-body);
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--text-small);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.97);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a {
+      font-size: var(--text-h3);
+      color: var(--color-text-primary);
+    }
+
+    nav.open .nav-links {
+      display: flex;
+      opacity: 1;
+    }
+
+    nav.open .hamburger span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    nav.open .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+
+    nav.open .hamburger span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+</style>
+
+<script>
+  import { initNavbar } from '../scripts/navbar.ts';
+
+  // Scroll handler for .scrolled class
+  const nav = document.querySelector('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+</script>
