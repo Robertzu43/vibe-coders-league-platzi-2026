@@ -1,0 +1,26 @@
+/* Cursor blink animation */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1.06s step-end infinite;
+}
+
+/* Fade in up animation */
+@keyframes fade-in-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Visible class triggers fade-in-up */
+.visible {
+  animation: fade-in-up 0.6s ease forwards;
+}

@@ -1,0 +1,119 @@
+/* CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* @font-face declarations */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design tokens */
+:root {
+  --color-bg-dark: #0a0a0a;
+  --color-bg-black: #000000;
+  --color-bg-light: #fafafa;
+  --color-bg-white: #ffffff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-dark: #1a1a1a;
+  --color-accent: #7c3aed;
+  --color-accent-blue: #3b82f6;
+  --color-accent-glow: rgba(124, 58, 237, 0.15);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-tag-web3: #8b5cf6;
+  --color-tag-vibecoding: #06b6d4;
+  --color-tag-crypto: #f59e0b;
+  --color-tag-ai: #10b981;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --text-hero: clamp(48px, 8vw, 120px);
+  --text-section-title: clamp(36px, 5vw, 72px);
+  --text-h3: clamp(20px, 2.5vw, 28px);
+  --text-body: clamp(16px, 1.2vw, 18px);
+  --text-small: clamp(13px, 1vw, 14px);
+  --section-padding: clamp(80px, 12vw, 200px);
+  --container-max-width: 1280px;
+  --container-padding: clamp(20px, 4vw, 80px);
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Base body styles */
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section {
+  padding: var(--section-padding) 0;
+}
+
+.section-title {
+  font-size: var(--text-section-title);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  margin-bottom: 60px;
+}
