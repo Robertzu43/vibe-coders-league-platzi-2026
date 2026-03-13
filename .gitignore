@@ -24,6 +24,9 @@ out/
 *.o
 *.exe
 
+# Superpowers
+.superpowers/
+
 # Logs
 *.log
 npm-debug.log*
