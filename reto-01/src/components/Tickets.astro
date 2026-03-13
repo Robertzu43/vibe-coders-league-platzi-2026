@@ -1,0 +1,169 @@
+---
+import tickets from '../data/tickets.json';
+---
+
+<section
+  id="tickets"
+  class="section"
+  style="background: radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.1) 0%, transparent 60%), var(--color-bg-dark);"
+>
+  <div class="container">
+    <h2
+      class="section-title gsap-reveal"
+      style="color: white; opacity: 0; transform: translateY(60px);"
+    >
+      Asegura tu lugar
+    </h2>
+
+    <div class="tickets-grid">
+      {tickets.map((ticket) => (
+        <div
+          class={`ticket-card${ticket.highlighted ? ' ticket-card--vip' : ''}`}
+          style="opacity: 0; transform: scale(0.9);"
+        >
+          <h3 class="ticket-tier">{ticket.tier}</h3>
+
+          <div class="ticket-price">
+            <span class="price-currency">$</span>
+            <span class="price-value">{ticket.price}</span>
+            <span class="price-suffix">USD</span>
+          </div>
+
+          <ul class="ticket-features">
+            {ticket.features.map((feature) => (
+              <li class="ticket-feature">{feature}</li>
+            ))}
+          </ul>
+
+          <a
+            href="#"
+            class={`ticket-cta${ticket.highlighted ? ' ticket-cta--vip' : ''}`}
+          >
+            Comprar
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  .tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1199px) {
+    .tickets-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .ticket-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .ticket-card--vip {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 40px var(--color-accent-glow);
+  }
+
+  .ticket-tier {
+    font-size: var(--text-h3);
+    font-weight: var(--font-weight-bold);
+    color: white;
+    margin: 0 0 0 0;
+  }
+
+  .ticket-price {
+    color: white;
+    margin: 24px 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .price-currency {
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .price-value {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+  }
+
+  .price-suffix {
+    font-size: var(--text-small);
+    color: var(--color-text-secondary);
+    margin-left: 4px;
+  }
+
+  .ticket-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 0;
+  }
+
+  .ticket-feature {
+    padding: 8px 0;
+    color: var(--color-text-secondary);
+    font-size: var(--text-body);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  .ticket-feature:last-child {
+    border-bottom: none;
+  }
+
+  .ticket-feature::before {
+    content: '✓';
+    color: var(--color-accent);
+    margin-right: 8px;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .ticket-cta {
+    display: inline-block;
+    margin-top: 32px;
+    background: white;
+    color: var(--color-bg-black);
+    font-weight: var(--font-weight-semibold);
+    padding: 14px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+  }
+
+  .ticket-cta:hover {
+    transform: scale(1.05);
+  }
+
+  .ticket-cta--vip {
+    background: var(--color-accent);
+    color: white;
+  }
+</style>
