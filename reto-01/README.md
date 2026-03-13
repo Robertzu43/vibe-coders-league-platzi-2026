@@ -1,10 +1,31 @@
-# Reto 1
+# Reto 1: Vibecode Summit Colombia
 
-> Vibe Coders League Platzi 2026
+Landing page para un festival ficticio de tecnología centrado en vibe coding, web3 y crypto.
 
-Descripción del reto pendiente.
+## Tech Stack
 
-## Estado
+- **Astro 5** — generación estática
+- **GSAP + ScrollTrigger** — animaciones scroll-driven
+- **CSS vanilla** — sin frameworks
+- **Inter** — tipografía self-hosted
 
-- [ ] En progreso
-- [ ] Completado
+## Ejecutar
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Estructura
+
+- `src/components/` — Navbar, Hero, Speakers, Agenda, Ubicación, Sponsors, Tickets, Footer
+- `src/data/` — JSON con datos de speakers, agenda, sponsors, tickets
+- `src/scripts/` — GSAP init, typewriter, navbar
+- `src/styles/` — CSS global con design tokens
