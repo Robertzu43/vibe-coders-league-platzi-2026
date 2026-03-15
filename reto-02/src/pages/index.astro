@@ -7,6 +7,8 @@ import GenreBreakdown from '../components/GenreBreakdown.astro';
 import SoundDNA from '../components/SoundDNA.astro';
 import ListeningHours from '../components/ListeningHours.astro';
 import MonthlyTrend from '../components/MonthlyTrend.astro';
+import TrackList from '../components/TrackList.astro';
+import NowPlaying from '../components/NowPlaying.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import artistsShort from '../data/top-artists-short.json';
 import artistsMedium from '../data/top-artists-medium.json';
@@ -32,6 +34,7 @@ import audioLong from '../data/audio-features-long.json';
     <Sidebar />
     <main class="dashboard-main">
       <TopArtists variant="compact" />
+      <NowPlaying />
       <div class="main-grid">
         <GenreBreakdown />
         <SoundDNA />
@@ -40,6 +43,7 @@ import audioLong from '../data/audio-features-long.json';
         <ListeningHours />
         <MonthlyTrend />
       </div>
+      <TrackList variant="full" />
       <CtaBanner />
     </main>
   </div>
@@ -49,13 +53,15 @@ import audioLong from '../data/audio-features-long.json';
   .main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 16px 0;
+    gap: 20px;
+    margin: 20px 0;
   }
 
   @media (max-width: 767px) {
     .main-grid {
       grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 12px 0;
     }
   }
 </style>

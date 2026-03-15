@@ -15,7 +15,7 @@ function formatDuration(ms: number): string {
 }
 ---
 
-<section class="track-list" data-section="tracks">
+<section class="track-list glass-card" data-section="tracks">
   <h2 class="section-heading">{variant === 'recent' ? 'Recently Played' : 'Top Tracks'}</h2>
   <div class="tracks" id={variant === 'recent' ? 'recent-tracks' : 'top-tracks'}>
     {tracks.map((track, i) => (
@@ -37,12 +37,10 @@ function formatDuration(ms: number): string {
   </div>
 </section>
 
-<style>
-  .section-heading {
-    color: white;
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 16px;
+<style is:global>
+  .track-list {
+    padding: 24px;
+    margin-top: 20px;
   }
 
   .tracks {
