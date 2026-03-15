@@ -33,7 +33,7 @@ const gradientColors = [
         <div class="genre-track">
           <div
             class="genre-fill"
-            style={`--target-width: ${genre.percent}%; background: linear-gradient(90deg, ${gradientColors[i]});`}
+            style={`width: ${genre.percent}%; background: linear-gradient(90deg, ${gradientColors[i]});`}
           ></div>
         </div>
         <span class="genre-percent" style={`color: ${gradientColors[i].split(',')[0]}`}>{genre.percent}%</span>
@@ -86,7 +86,6 @@ const gradientColors = [
   .genre-fill {
     height: 100%;
     border-radius: 10px;
-    width: var(--target-width);
   }
 
   .genre-percent {

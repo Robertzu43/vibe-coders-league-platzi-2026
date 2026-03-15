@@ -5,7 +5,8 @@ import Sidebar from '../components/Sidebar.astro';
 import TopArtists from '../components/TopArtists.astro';
 import GenreBreakdown from '../components/GenreBreakdown.astro';
 import SoundDNA from '../components/SoundDNA.astro';
-import TrackList from '../components/TrackList.astro';
+import ListeningHours from '../components/ListeningHours.astro';
+import MonthlyTrend from '../components/MonthlyTrend.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import artistsShort from '../data/top-artists-short.json';
 import artistsMedium from '../data/top-artists-medium.json';
@@ -30,22 +31,14 @@ import audioLong from '../data/audio-features-long.json';
     <TopBar />
     <Sidebar />
     <main class="dashboard-main">
-      <div class="view-content" data-view="overview">
-        <TopArtists variant="compact" />
-        <div class="main-grid">
-          <GenreBreakdown />
-          <SoundDNA />
-        </div>
-        <TrackList variant="recent" />
+      <TopArtists variant="compact" />
+      <div class="main-grid">
+        <GenreBreakdown />
+        <SoundDNA />
       </div>
-      <div class="view-content" data-view="artists" style="display:none;">
-        <TopArtists variant="expanded" />
-      </div>
-      <div class="view-content" data-view="tracks" style="display:none;">
-        <TrackList variant="full" />
-      </div>
-      <div class="view-content" data-view="analysis" style="display:none;">
-        <SoundDNA variant="expanded" />
+      <div class="main-grid">
+        <ListeningHours />
+        <MonthlyTrend />
       </div>
       <CtaBanner />
     </main>

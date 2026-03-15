@@ -1,0 +1,121 @@
+---
+const hourlyData = [
+  { hour: '6am', value: 15 },
+  { hour: '7am', value: 25 },
+  { hour: '8am', value: 45 },
+  { hour: '9am', value: 60 },
+  { hour: '10am', value: 40 },
+  { hour: '11am', value: 35 },
+  { hour: '12pm', value: 50 },
+  { hour: '1pm', value: 55 },
+  { hour: '2pm', value: 45 },
+  { hour: '3pm', value: 35 },
+  { hour: '4pm', value: 30 },
+  { hour: '5pm', value: 40 },
+  { hour: '6pm', value: 65 },
+  { hour: '7pm', value: 80 },
+  { hour: '8pm', value: 90 },
+  { hour: '9pm', value: 100 },
+  { hour: '10pm', value: 85 },
+  { hour: '11pm', value: 60 },
+  { hour: '12am', value: 30 },
+];
+---
+
+<section class="listening-hours glass-card" data-section="hours">
+  <h2 class="section-heading">Listening Activity</h2>
+  <p class="section-subtitle">When you listen the most</p>
+  <div class="hours-chart">
+    {hourlyData.map(h => (
+      <div class="hour-bar-wrapper">
+        <div class="hour-bar" style={`--bar-height: ${h.value}%; background: linear-gradient(180deg, var(--color-spotify), var(--color-accent-purple-dark));`}>
+          <span class="hour-tooltip">{h.value}%</span>
+        </div>
+        <span class="hour-label">{h.hour}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .listening-hours {
+    padding: 20px;
+  }
+
+  .section-heading {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .section-subtitle {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    margin-top: -12px;
+    margin-bottom: 16px;
+  }
+
+  .hours-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 150px;
+    padding-top: 20px;
+  }
+
+  .hour-bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .hour-bar {
+    width: 100%;
+    height: var(--bar-height);
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    position: relative;
+    transition: opacity 0.2s ease;
+  }
+
+  .hour-bar:hover {
+    opacity: 0.8;
+  }
+
+  .hour-tooltip {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  .hour-bar:hover .hour-tooltip {
+    opacity: 1;
+  }
+
+  .hour-label {
+    color: var(--color-text-muted);
+    font-size: 9px;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 767px) {
+    .hours-chart {
+      overflow-x: auto;
+      min-width: 500px;
+    }
+  }
+</style>
