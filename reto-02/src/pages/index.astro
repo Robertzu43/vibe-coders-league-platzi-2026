@@ -7,9 +7,25 @@ import GenreBreakdown from '../components/GenreBreakdown.astro';
 import SoundDNA from '../components/SoundDNA.astro';
 import TrackList from '../components/TrackList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
+import artistsShort from '../data/top-artists-short.json';
+import artistsMedium from '../data/top-artists-medium.json';
+import artistsLong from '../data/top-artists-long.json';
+import tracksShort from '../data/top-tracks-short.json';
+import tracksMedium from '../data/top-tracks-medium.json';
+import tracksLong from '../data/top-tracks-long.json';
+import recentlyPlayed from '../data/recently-played.json';
+import audioShort from '../data/audio-features-short.json';
+import audioMedium from '../data/audio-features-medium.json';
+import audioLong from '../data/audio-features-long.json';
 ---
 
 <Layout>
+  <script id="spotify-data" type="application/json" set:html={JSON.stringify({
+    artists: { short: artistsShort, medium: artistsMedium, long: artistsLong },
+    tracks: { short: tracksShort, medium: tracksMedium, long: tracksLong },
+    audio: { short: audioShort, medium: audioMedium, long: audioLong },
+    recent: recentlyPlayed,
+  })} />
   <div class="dashboard">
     <TopBar />
     <Sidebar />
