@@ -6,6 +6,8 @@ interface Props {
 }
 const { variant = 'compact' } = Astro.props;
 const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
+const minutesData = [2847, 1923, 1456, 987, 743];
+const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467, 423, 398, 376, 345, 312, 289, 267, 245, 223];
 ---
 
 {variant === 'compact' && (
@@ -14,7 +16,13 @@ const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
     <div class="artists-row" id="artists-compact">
       {artists.slice(0, 5).map((artist, i) => (
         <div class="artist-circle" data-rank={i + 1} style={`--glow-color: ${glowColors[i]}`}>
-          <img src={artist.image} alt={artist.name} loading={i < 3 ? 'eager' : 'lazy'} />
+          <div class="artist-img-wrapper">
+            <img src={artist.image} alt={artist.name} loading={i < 3 ? 'eager' : 'lazy'} />
+            <div class="artist-minutes-overlay">
+              <span class="minutes-value">{minutesData[i].toLocaleString()}</span>
+              <span class="minutes-label">min</span>
+            </div>
+          </div>
           <span class="artist-name">{artist.name}</span>
           <span class="artist-genre">{artist.genres[0]}</span>
         </div>
@@ -30,7 +38,13 @@ const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
       {artists.map((artist, i) => (
         <div class="artist-card glass-card">
           <span class="artist-rank">#{i + 1}</span>
-          <img src={artist.image} alt={artist.name} class="artist-card-img" loading="lazy" />
+          <div class="artist-img-wrapper-card">
+            <img src={artist.image} alt={artist.name} class="artist-card-img" loading="lazy" />
+            <div class="artist-minutes-overlay">
+              <span class="minutes-value">{allMinutesData[i]?.toLocaleString() ?? '--'}</span>
+              <span class="minutes-label">min</span>
+            </div>
+          </div>
           <span class="artist-name">{artist.name}</span>
           <span class="artist-genre">{artist.genres[0]}</span>
         </div>
@@ -58,31 +72,69 @@ const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
     flex-shrink: 0;
   }
 
-  .artist-circle img {
+  .artist-img-wrapper {
+    position: relative;
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden;
+    display: inline-block;
     box-shadow: 0 0 30px var(--glow-color, rgba(255, 255, 255, 0.1));
   }
 
-  .artist-circle[data-rank="1"] img {
+  .artist-circle[data-rank="1"] .artist-img-wrapper {
     width: 100px;
     height: 100px;
   }
 
-  .artist-circle[data-rank="2"] img {
+  .artist-circle[data-rank="2"] .artist-img-wrapper {
     width: 80px;
     height: 80px;
   }
 
-  .artist-circle[data-rank="3"] img {
+  .artist-circle[data-rank="3"] .artist-img-wrapper {
     width: 70px;
     height: 70px;
   }
 
-  .artist-circle[data-rank="4"] img,
-  .artist-circle[data-rank="5"] img {
+  .artist-circle[data-rank="4"] .artist-img-wrapper,
+  .artist-circle[data-rank="5"] .artist-img-wrapper {
     width: 60px;
     height: 60px;
+  }
+
+  .artist-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .artist-minutes-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .artist-img-wrapper:hover .artist-minutes-overlay {
+    opacity: 1;
+  }
+
+  .minutes-value {
+    color: var(--color-spotify);
+    font-weight: 700;
+    font-size: var(--text-lg);
+  }
+
+  .minutes-label {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
   }
 
   .artist-name {
@@ -99,6 +151,7 @@ const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
     display: block;
   }
 
+  /* Expanded variant */
   .artists-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -110,12 +163,24 @@ const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
     text-align: center;
   }
 
-  .artist-card-img {
+  .artist-img-wrapper-card {
+    position: relative;
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden;
     margin: 0 auto 8px;
+  }
+
+  .artist-img-wrapper-card:hover .artist-minutes-overlay {
+    opacity: 1;
+  }
+
+  .artist-card-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .artist-rank {

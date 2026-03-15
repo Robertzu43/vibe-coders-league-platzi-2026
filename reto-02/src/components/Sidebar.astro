@@ -8,7 +8,7 @@ import profile from '../data/profile.json';
       <img src={profile.avatar} alt={profile.displayName} class="profile-avatar" />
     </div>
     <span class="profile-name">{profile.displayName}</span>
-    <span class="profile-subtitle">Spotify User</span>
+    <span class="profile-subtitle">Music Listener</span>
   </div>
 
   <div class="sidebar-stats" id="sidebar-stats">
@@ -25,25 +25,6 @@ import profile from '../data/profile.json';
       <span class="stat-label">Genres</span>
     </div>
   </div>
-
-  <nav class="sidebar-nav" aria-label="Dashboard views">
-    <button class="nav-link active" data-view="overview">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-text">Overview</span>
-    </button>
-    <button class="nav-link" data-view="artists">
-      <span class="nav-icon">🎤</span>
-      <span class="nav-text">Artists</span>
-    </button>
-    <button class="nav-link" data-view="tracks">
-      <span class="nav-icon">🎵</span>
-      <span class="nav-text">Tracks</span>
-    </button>
-    <button class="nav-link" data-view="analysis">
-      <span class="nav-icon">📊</span>
-      <span class="nav-text">Analysis</span>
-    </button>
-  </nav>
 </aside>
 
 <style>
@@ -124,60 +105,14 @@ import profile from '../data/profile.json';
     display: block;
   }
 
-  .sidebar-nav {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    border: none;
-    background: transparent;
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    font-family: inherit;
-    transition: all var(--transition-fast);
-  }
-
-  .nav-link.active {
-    background: rgba(29, 185, 84, 0.15);
-    color: var(--color-spotify);
-  }
-
-  .nav-link:hover:not(.active) {
-    background: var(--color-surface-hover);
-  }
-
   @media (max-width: 1023px) {
     .profile-name,
     .profile-subtitle {
       display: none;
     }
 
-    .nav-text {
-      display: none;
-    }
-
     .sidebar-stats {
       display: none;
-    }
-
-    .sidebar-nav {
-      align-items: center;
-    }
-
-    .nav-link {
-      justify-content: center;
-      padding: 12px;
     }
   }
 
@@ -199,23 +134,5 @@ import profile from '../data/profile.json';
     .sidebar-stats {
       display: none;
     }
-
-    .sidebar-nav {
-      flex-direction: row;
-      width: 100%;
-      justify-content: space-around;
-    }
-
-    .nav-link {
-      flex-direction: column;
-      gap: 2px;
-      padding: 8px;
-      font-size: 10px;
-      justify-content: center;
-    }
   }
 </style>
-
-<script>
-  import '../scripts/view-switch.ts';
-</script>
