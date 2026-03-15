@@ -7,7 +7,7 @@ Repositorio con los 13 retos del Vibe Coders League de Platzi 2026.
 | # | Reto | Estado |
 |---|------|--------|
 | 01 | [Vibecode Summit Colombia](./reto-01) | Completado |
-| 02 | [Reto 2](./reto-02) | Pendiente |
+| 02 | [Music DNA Dashboard](./reto-02) | Completado |
 | 03 | [Reto 3](./reto-03) | Pendiente |
 | 04 | [Reto 4](./reto-04) | Pendiente |
 | 05 | [Reto 5](./reto-05) | Pendiente |
