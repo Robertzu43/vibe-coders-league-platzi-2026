@@ -1,0 +1,9 @@
+---
+interface Props {
+  variant?: 'compact' | 'expanded';
+}
+
+const { variant = 'compact' } = Astro.props;
+---
+
+<section data-variant={variant}>TopArtists</section>
