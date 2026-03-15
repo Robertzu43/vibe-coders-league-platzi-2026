@@ -1,0 +1,9 @@
+---
+interface Props {
+  variant?: 'default' | 'expanded';
+}
+
+const { variant = 'default' } = Astro.props;
+---
+
+<section data-variant={variant}>SoundDNA</section>

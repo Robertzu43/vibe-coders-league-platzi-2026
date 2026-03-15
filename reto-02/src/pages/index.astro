@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Sidebar from '../components/Sidebar.astro';
+import TopArtists from '../components/TopArtists.astro';
+import GenreBreakdown from '../components/GenreBreakdown.astro';
+import SoundDNA from '../components/SoundDNA.astro';
+import TrackList from '../components/TrackList.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+
+<Layout>
+  <div class="dashboard">
+    <TopBar />
+    <Sidebar />
+    <main class="dashboard-main">
+      <div class="view-content" data-view="overview">
+        <TopArtists variant="compact" />
+        <div class="main-grid">
+          <GenreBreakdown />
+          <SoundDNA />
+        </div>
+        <TrackList variant="recent" />
+      </div>
+      <div class="view-content" data-view="artists" style="display:none;">
+        <TopArtists variant="expanded" />
+      </div>
+      <div class="view-content" data-view="tracks" style="display:none;">
+        <TrackList variant="full" />
+      </div>
+      <div class="view-content" data-view="analysis" style="display:none;">
+        <SoundDNA variant="expanded" />
+      </div>
+      <CtaBanner />
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  @media (max-width: 767px) {
+    .main-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

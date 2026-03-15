@@ -1,0 +1,9 @@
+---
+interface Props {
+  variant?: 'recent' | 'full';
+}
+
+const { variant = 'recent' } = Astro.props;
+---
+
+<section data-variant={variant}>TrackList</section>
