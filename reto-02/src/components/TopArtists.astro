@@ -7,7 +7,7 @@ interface Props {
 const { variant = 'compact' } = Astro.props;
 const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
 const minutesData = [2847, 1923, 1456, 987, 743];
-const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467, 423, 398, 376, 345, 312, 289, 267, 245, 223];
+const maxMinutes = minutesData[0];
 ---
 
 {variant === 'compact' && (
@@ -16,15 +16,23 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
     <div class="artists-row" id="artists-compact">
       {artists.slice(0, 5).map((artist, i) => (
         <div class="artist-circle" data-rank={i + 1} style={`--glow-color: ${glowColors[i]}`}>
-          <div class="artist-img-wrapper">
-            <img src={artist.image} alt={artist.name} loading={i < 3 ? 'eager' : 'lazy'} />
-            <div class="artist-minutes-overlay">
-              <span class="minutes-value">{minutesData[i].toLocaleString()}</span>
-              <span class="minutes-label">min</span>
+          <div class="artist-flip-card">
+            <div class="artist-flip-inner">
+              <div class="artist-flip-front">
+                <img src={artist.image} alt={artist.name} loading={i < 3 ? 'eager' : 'lazy'} />
+              </div>
+              <div class="artist-flip-back">
+                <span class="minutes-value">{minutesData[i].toLocaleString()}</span>
+                <span class="minutes-label">min</span>
+              </div>
             </div>
           </div>
           <span class="artist-name">{artist.name}</span>
           <span class="artist-genre">{artist.genres[0]}</span>
+          <div class="artist-minutes-bar">
+            <div class="artist-minutes-fill" style={`width: ${(minutesData[i] / maxMinutes) * 100}%; background: ${glowColors[i]};`}></div>
+          </div>
+          <span class="artist-minutes-text" style={`color: ${glowColors[i]}`}>{minutesData[i].toLocaleString()} min</span>
         </div>
       ))}
     </div>
@@ -38,11 +46,15 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
       {artists.map((artist, i) => (
         <div class="artist-card glass-card">
           <span class="artist-rank">#{i + 1}</span>
-          <div class="artist-img-wrapper-card">
-            <img src={artist.image} alt={artist.name} class="artist-card-img" loading="lazy" />
-            <div class="artist-minutes-overlay">
-              <span class="minutes-value">{allMinutesData[i]?.toLocaleString() ?? '--'}</span>
-              <span class="minutes-label">min</span>
+          <div class="artist-flip-card artist-flip-card--small">
+            <div class="artist-flip-inner">
+              <div class="artist-flip-front">
+                <img src={artist.image} alt={artist.name} class="artist-card-img" loading="lazy" />
+              </div>
+              <div class="artist-flip-back">
+                <span class="minutes-value">{allMinutesData[i]?.toLocaleString() ?? '--'}</span>
+                <span class="minutes-label">min</span>
+              </div>
             </div>
           </div>
           <span class="artist-name">{artist.name}</span>
@@ -53,18 +65,12 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
   </section>
 )}
 
-<style>
-  .section-heading {
-    color: white;
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-
+<style is:global>
   .artists-row {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     align-items: flex-end;
+    justify-content: center;
   }
 
   .artist-circle {
@@ -72,75 +78,96 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
     flex-shrink: 0;
   }
 
-  .artist-img-wrapper {
-    position: relative;
+  /* ─── Flip Card ──────────────────────────────────── */
+  .artist-flip-card {
+    perspective: 600px;
     border-radius: 50%;
-    overflow: hidden;
     display: inline-block;
     box-shadow: 0 0 30px var(--glow-color, rgba(255, 255, 255, 0.1));
   }
 
-  .artist-circle[data-rank="1"] .artist-img-wrapper {
-    width: 100px;
-    height: 100px;
+  .artist-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
   }
 
-  .artist-circle[data-rank="2"] .artist-img-wrapper {
-    width: 80px;
-    height: 80px;
+  .artist-flip-card:hover .artist-flip-inner {
+    transform: rotateY(180deg);
   }
 
-  .artist-circle[data-rank="3"] .artist-img-wrapper {
-    width: 70px;
-    height: 70px;
+  .artist-flip-front,
+  .artist-flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
-  .artist-circle[data-rank="4"] .artist-img-wrapper,
-  .artist-circle[data-rank="5"] .artist-img-wrapper {
-    width: 60px;
-    height: 60px;
-  }
-
-  .artist-img-wrapper img {
+  .artist-flip-front img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .artist-minutes-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+  .artist-flip-back {
+    background: linear-gradient(135deg, rgba(29, 185, 84, 0.9), rgba(124, 58, 237, 0.9));
+    transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 50%;
   }
 
-  .artist-img-wrapper:hover .artist-minutes-overlay {
-    opacity: 1;
+  /* Rank-based sizing */
+  .artist-circle[data-rank="1"] .artist-flip-card,
+  .artist-circle[data-rank="1"] .artist-flip-inner {
+    width: 100px;
+    height: 100px;
+  }
+
+  .artist-circle[data-rank="2"] .artist-flip-card,
+  .artist-circle[data-rank="2"] .artist-flip-inner {
+    width: 80px;
+    height: 80px;
+  }
+
+  .artist-circle[data-rank="3"] .artist-flip-card,
+  .artist-circle[data-rank="3"] .artist-flip-inner {
+    width: 70px;
+    height: 70px;
+  }
+
+  .artist-circle[data-rank="4"] .artist-flip-card,
+  .artist-circle[data-rank="4"] .artist-flip-inner,
+  .artist-circle[data-rank="5"] .artist-flip-card,
+  .artist-circle[data-rank="5"] .artist-flip-inner {
+    width: 60px;
+    height: 60px;
   }
 
   .minutes-value {
-    color: var(--color-spotify);
+    color: white;
     font-weight: 700;
     font-size: var(--text-lg);
   }
 
   .minutes-label {
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     font-size: var(--text-xs);
     text-transform: uppercase;
   }
 
   .artist-name {
+    font-family: var(--font-display);
     color: white;
     font-size: var(--text-sm);
-    font-weight: 600;
+    font-weight: 700;
     display: block;
     margin-top: 8px;
   }
@@ -151,7 +178,30 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
     display: block;
   }
 
-  /* Expanded variant */
+  .artist-minutes-bar {
+    width: 100%;
+    max-width: 80px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .artist-minutes-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  .artist-minutes-text {
+    font-size: 9px;
+    font-weight: 700;
+    display: block;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─── Expanded variant ──────────────────────────── */
   .artists-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -163,17 +213,15 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
     text-align: center;
   }
 
-  .artist-img-wrapper-card {
-    position: relative;
+  .artist-flip-card--small,
+  .artist-flip-card--small .artist-flip-inner {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
     margin: 0 auto 8px;
   }
 
-  .artist-img-wrapper-card:hover .artist-minutes-overlay {
-    opacity: 1;
+  .artist-flip-card--small .minutes-value {
+    font-size: var(--text-base);
   }
 
   .artist-card-img {
@@ -189,16 +237,99 @@ const allMinutesData = [2847, 1923, 1456, 987, 743, 682, 621, 589, 534, 498, 467
     font-weight: 700;
   }
 
+  /* ─── Mobile ──────────────────────────────── */
   @media (max-width: 767px) {
     .artists-row {
       overflow-x: auto;
       flex-wrap: nowrap;
       padding-bottom: 8px;
       scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     .artist-circle {
       scroll-snap-align: start;
     }
+
+    .artist-circle[data-rank="1"] .artist-flip-card,
+    .artist-circle[data-rank="1"] .artist-flip-inner {
+      width: 76px;
+      height: 76px;
+    }
+
+    .artist-circle[data-rank="2"] .artist-flip-card,
+    .artist-circle[data-rank="2"] .artist-flip-inner {
+      width: 64px;
+      height: 64px;
+    }
+
+    .artist-circle[data-rank="3"] .artist-flip-card,
+    .artist-circle[data-rank="3"] .artist-flip-inner {
+      width: 56px;
+      height: 56px;
+    }
+
+    .artist-circle[data-rank="4"] .artist-flip-card,
+    .artist-circle[data-rank="4"] .artist-flip-inner,
+    .artist-circle[data-rank="5"] .artist-flip-card,
+    .artist-circle[data-rank="5"] .artist-flip-inner {
+      width: 48px;
+      height: 48px;
+    }
+
+    .minutes-value {
+      font-size: var(--text-sm);
+    }
+
+    .minutes-label {
+      font-size: 8px;
+    }
+
+    .artist-name {
+      font-size: 10px;
+    }
+
+    .artist-genre {
+      font-size: 8px;
+    }
+
+    .artist-minutes-bar {
+      max-width: 56px;
+      height: 2px;
+    }
+
+    .artist-minutes-text {
+      font-size: 7px;
+    }
+
+    .artists-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+    }
+
+    .artist-card {
+      padding: 12px;
+    }
+  }
+
+  /* Touch devices: tap to flip */
+  @media (hover: none) {
+    .artist-flip-card {
+      cursor: pointer;
+    }
   }
 </style>
+
+<script>
+  // Touch devices: toggle flip on tap
+  if (window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.artist-flip-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const inner = card.querySelector('.artist-flip-inner') as HTMLElement;
+        if (!inner) return;
+        const isFlipped = inner.style.transform === 'rotateY(180deg)';
+        inner.style.transform = isFlipped ? '' : 'rotateY(180deg)';
+      });
+    });
+  }
+</script>

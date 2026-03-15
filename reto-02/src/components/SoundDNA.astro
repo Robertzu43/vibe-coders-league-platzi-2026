@@ -1,4 +1,5 @@
 ---
+import SectionInfo from './SectionInfo.astro';
 import audioFeatures from '../data/audio-features-short.json';
 
 interface Props {
@@ -29,8 +30,16 @@ const dataPoints = features.map(f => audioFeatures[f]);
 
 <section class="sound-dna glass-card" data-section="radar">
   <h2 class="section-heading">Your Sound DNA</h2>
+  <SectionInfo
+    sectionId="radar"
+    descriptions={{
+      short: "Your music's audio fingerprint based on the last 4 weeks of listening.",
+      medium: "Your music's audio fingerprint based on the last 6 months of listening.",
+      long: "Your music's audio fingerprint across your entire listening history.",
+    }}
+  />
   <div class="radar-container">
-    <svg viewBox="0 0 180 160" class={`radar-svg${variant === 'expanded' ? ' radar-svg--expanded' : ''}`} id="radar-svg">
+    <svg viewBox="-5 -10 200 190" class={`radar-svg${variant === 'expanded' ? ' radar-svg--expanded' : ''}`} id="radar-svg">
       <!-- Grid hexagons -->
       {gridScales.map(scale => (
         <polygon
@@ -84,16 +93,9 @@ const dataPoints = features.map(f => audioFeatures[f]);
   )}
 </section>
 
-<style>
-  .section-heading {
-    color: white;
-    font-size: var(--text-lg);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-
+<style is:global>
   .sound-dna {
-    padding: 20px;
+    padding: 24px;
   }
 
   .radar-container {
@@ -150,5 +152,29 @@ const dataPoints = features.map(f => audioFeatures[f]);
     color: var(--color-spotify);
     width: 40px;
     text-align: right;
+  }
+
+  @media (max-width: 767px) {
+    .sound-dna {
+      padding: 16px;
+    }
+
+    .radar-svg {
+      max-width: 160px;
+    }
+
+    .feature-label {
+      width: 55px;
+      font-size: 10px;
+    }
+
+    .feature-value {
+      width: 32px;
+      font-size: 10px;
+    }
+
+    .feature-track {
+      height: 16px;
+    }
   }
 </style>

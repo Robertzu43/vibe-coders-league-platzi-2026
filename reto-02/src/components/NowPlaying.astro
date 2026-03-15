@@ -1,0 +1,344 @@
+---
+---
+
+<div class="now-playing glass-card" id="now-playing">
+  <div class="np-disc-wrap">
+    <div class="np-disc" id="np-disc">
+      <div class="np-disc-inner">
+        <div class="np-disc-label">
+          <span class="np-disc-artist">BB</span>
+        </div>
+      </div>
+      <div class="np-disc-groove np-disc-groove--1"></div>
+      <div class="np-disc-groove np-disc-groove--2"></div>
+      <div class="np-disc-groove np-disc-groove--3"></div>
+    </div>
+  </div>
+
+  <div class="np-info">
+    <span class="np-eyebrow">Top Song</span>
+    <span class="np-title">Monaco</span>
+    <span class="np-artist">Bad Bunny</span>
+    <div class="np-progress-wrap">
+      <div class="np-progress-bar">
+        <div class="np-progress-fill" id="np-progress"></div>
+      </div>
+      <div class="np-time">
+        <span id="np-current">0:00</span>
+        <span id="np-duration">--:--</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="np-play-btn" id="np-play-btn" aria-label="Play Monaco by Bad Bunny" type="button">
+    <svg class="np-icon-play" id="np-icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg class="np-icon-pause" id="np-icon-pause" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none;">
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+    </svg>
+  </button>
+
+  <audio id="np-audio" preload="metadata" src="/top-song.mp3"></audio>
+</div>
+
+<style is:global>
+  .now-playing {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    margin-top: 20px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .now-playing::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-spotify), var(--color-accent-purple));
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .now-playing.is-playing::after {
+    opacity: 1;
+  }
+
+  /* ─── Vinyl Disc ──────────────────────────── */
+  .np-disc-wrap {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .np-disc {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #2a2a2a, #111 60%, #000);
+    position: relative;
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.15);
+    transition: box-shadow 0.3s;
+  }
+
+  .is-playing .np-disc {
+    animation: discSpin 3s linear infinite;
+    box-shadow: 0 0 30px rgba(29, 185, 84, 0.3);
+  }
+
+  @keyframes discSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  .np-disc-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-spotify), var(--color-accent-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .np-disc-label {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .np-disc-artist {
+    display: none;
+  }
+
+  .np-disc-groove {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .np-disc-groove--1 { width: 36px; height: 36px; }
+  .np-disc-groove--2 { width: 48px; height: 48px; }
+  .np-disc-groove--3 { width: 58px; height: 58px; }
+
+  /* ─── Info ──────────────────────────── */
+  .np-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .np-eyebrow {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-spotify);
+    font-weight: 700;
+    display: block;
+  }
+
+  .np-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    color: white;
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .np-artist {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    display: block;
+  }
+
+  .np-progress-wrap {
+    margin-top: 8px;
+  }
+
+  .np-progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .np-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-spotify), var(--color-accent-purple));
+    border-radius: 2px;
+    transition: width 0.2s linear;
+  }
+
+  .np-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─── Play Button ──────────────────────────── */
+  .np-play-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--color-spotify);
+    border: none;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+  }
+
+  .np-play-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(29, 185, 84, 0.5);
+    background: #1ed760;
+  }
+
+  .np-play-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Shift play icon slightly right for optical centering */
+  .np-icon-play {
+    margin-left: 2px;
+  }
+
+  /* ─── Mobile ──────────────────────────── */
+  @media (max-width: 767px) {
+    .now-playing {
+      padding: 12px 16px;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .np-disc-wrap,
+    .np-disc {
+      width: 48px;
+      height: 48px;
+    }
+
+    .np-disc-inner {
+      width: 16px;
+      height: 16px;
+    }
+
+    .np-disc-label {
+      width: 6px;
+      height: 6px;
+    }
+
+    .np-disc-groove--1 { width: 28px; height: 28px; }
+    .np-disc-groove--2 { width: 36px; height: 36px; }
+    .np-disc-groove--3 { width: 44px; height: 44px; }
+
+    .np-title {
+      font-size: var(--text-base);
+    }
+
+    .np-artist {
+      font-size: var(--text-xs);
+    }
+
+    .np-play-btn {
+      width: 44px;
+      height: 44px;
+    }
+
+    .np-play-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+
+<script>
+  const audio = document.getElementById('np-audio') as HTMLAudioElement;
+  const playBtn = document.getElementById('np-play-btn') as HTMLButtonElement;
+  const iconPlay = document.getElementById('np-icon-play') as HTMLElement;
+  const iconPause = document.getElementById('np-icon-pause') as HTMLElement;
+  const progress = document.getElementById('np-progress') as HTMLElement;
+  const currentTime = document.getElementById('np-current') as HTMLElement;
+  const durationEl = document.getElementById('np-duration') as HTMLElement;
+  const card = document.getElementById('now-playing') as HTMLElement;
+  const progressBar = progress?.parentElement as HTMLElement;
+
+  function formatTime(s: number): string {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  if (audio && playBtn) {
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', () => {
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+      card?.classList.add('is-playing');
+    });
+
+    audio.addEventListener('pause', () => {
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      card?.classList.remove('is-playing');
+    });
+
+    audio.addEventListener('ended', () => {
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      card?.classList.remove('is-playing');
+      progress.style.width = '0%';
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = `${pct}%`;
+      currentTime.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    // Click on progress bar to seek
+    progressBar?.addEventListener('click', (e: MouseEvent) => {
+      const rect = progressBar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    });
+  }
+</script>

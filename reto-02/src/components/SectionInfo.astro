@@ -1,0 +1,76 @@
+---
+interface Props {
+  sectionId: string;
+  descriptions: {
+    short: string;
+    medium: string;
+    long: string;
+  };
+}
+const { sectionId, descriptions } = Astro.props;
+---
+
+<div class="section-info" data-info-section={sectionId}>
+  <button class="info-toggle" aria-label="Toggle section description" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8 7v4M8 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <p class="info-text" data-info-short={descriptions.short} data-info-medium={descriptions.medium} data-info-long={descriptions.long}>
+    {descriptions.short}
+  </p>
+</div>
+
+<style>
+  .section-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .info-toggle {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 2px;
+    flex-shrink: 0;
+    transition: color var(--transition-fast);
+  }
+
+  .info-toggle:hover {
+    color: var(--color-spotify);
+  }
+
+  .info-toggle[aria-expanded="true"] {
+    color: var(--color-spotify);
+  }
+
+  .info-text {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .info-text.visible {
+    max-height: 60px;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.info-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const text = btn.nextElementSibling as HTMLElement;
+      if (text) text.classList.toggle('visible');
+    });
+  });
+</script>

@@ -1,48 +1,109 @@
 ---
 ---
 
-<div class="cta-banner">
-  <span class="cta-text">¿Quieres ver tu propio dashboard?</span>
-  <button class="cta-button">Conecta tus plataformas</button>
+<div class="cta-banner glass-card">
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <span class="cta-eyebrow">Your Music Awaits</span>
+    <span class="cta-heading">Ready to discover your own Music DNA?</span>
+    <button class="cta-button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+      Connect Your Platforms
+    </button>
+  </div>
 </div>
 
 <style>
   .cta-banner {
-    padding: 16px 24px;
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+    padding: 32px;
     margin-top: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
-  .cta-text {
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
+  .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cta-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--color-spotify);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+
+  .cta-heading {
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   .cta-button {
-    padding: 6px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
     background: var(--color-spotify);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-full);
     color: #000;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: var(--text-sm);
+    font-weight: 700;
     cursor: pointer;
-    font-family: inherit;
-    transition: transform var(--transition-fast);
+    font-family: var(--font-body);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
   }
 
   .cta-button:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 32px rgba(29, 185, 84, 0.5);
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
   }
 
   @media (max-width: 767px) {
     .cta-banner {
-      flex-direction: column;
-      gap: 8px;
+      padding: 24px 16px;
+      margin-top: 16px;
+    }
+
+    .cta-heading {
+      font-size: var(--text-lg);
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
     }
   }
 </style>
