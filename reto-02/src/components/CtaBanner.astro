@@ -1,4 +1,48 @@
 ---
 ---
 
-<div>CTA</div>
+<div class="cta-banner">
+  <span class="cta-text">¿Quieres ver tu propio dashboard?</span>
+  <button class="cta-button">Conecta tu Spotify</button>
+</div>
+
+<style>
+  .cta-banner {
+    padding: 16px 24px;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .cta-text {
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .cta-button {
+    padding: 6px 16px;
+    background: var(--color-spotify);
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform var(--transition-fast);
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 767px) {
+    .cta-banner {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
