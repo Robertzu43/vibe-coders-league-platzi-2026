@@ -1,4 +1,98 @@
 ---
+import artists from '../data/top-artists-short.json';
+
+const genreCounts: Record<string, number> = {};
+let totalTags = 0;
+artists.forEach(a => {
+  a.genres.forEach(g => {
+    genreCounts[g] = (genreCounts[g] || 0) + 1;
+    totalTags++;
+  });
+});
+const topGenres = Object.entries(genreCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 6)
+  .map(([name, count]) => ({ name, percent: Math.round((count / totalTags) * 100) }));
+
+const gradientColors = [
+  '#1DB954,#1ed760',
+  '#a855f7,#7c3aed',
+  '#f43f5e,#e11d48',
+  '#3b82f6,#2563eb',
+  '#f59e0b,#d97706',
+  '#06b6d4,#0891b2'
+];
 ---
 
-<section>GenreBreakdown</section>
+<section class="genre-breakdown glass-card" data-section="genres">
+  <h2 class="section-heading">Genre Breakdown</h2>
+  <div class="genre-bars" id="genre-bars">
+    {topGenres.map((genre, i) => (
+      <div class="genre-row">
+        <span class="genre-name">{genre.name}</span>
+        <div class="genre-track">
+          <div
+            class="genre-fill"
+            style={`--target-width: ${genre.percent}%; background: linear-gradient(90deg, ${gradientColors[i]});`}
+          ></div>
+        </div>
+        <span class="genre-percent" style={`color: ${gradientColors[i].split(',')[0]}`}>{genre.percent}%</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-heading {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .genre-breakdown {
+    padding: 20px;
+  }
+
+  .genre-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .genre-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .genre-name {
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    width: 70px;
+    text-align: right;
+    flex-shrink: 0;
+    text-transform: capitalize;
+  }
+
+  .genre-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .genre-fill {
+    height: 100%;
+    border-radius: 10px;
+    width: 0;
+  }
+
+  .genre-percent {
+    font-size: 11px;
+    font-weight: 600;
+    width: 40px;
+    text-align: right;
+  }
+</style>

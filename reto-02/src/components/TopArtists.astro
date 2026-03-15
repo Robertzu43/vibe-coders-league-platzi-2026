@@ -1,9 +1,139 @@
 ---
+import artists from '../data/top-artists-short.json';
+
 interface Props {
   variant?: 'compact' | 'expanded';
 }
-
 const { variant = 'compact' } = Astro.props;
+const glowColors = ['#e11d48', '#7c3aed', '#2563eb', '#f59e0b', '#1DB954'];
 ---
 
-<section data-variant={variant}>TopArtists</section>
+{variant === 'compact' && (
+  <section class="top-artists" data-section="artists">
+    <h2 class="section-heading">Top Artists</h2>
+    <div class="artists-row" id="artists-compact">
+      {artists.slice(0, 5).map((artist, i) => (
+        <div class="artist-circle" data-rank={i + 1} style={`--glow-color: ${glowColors[i]}`}>
+          <img src={artist.image} alt={artist.name} loading={i < 3 ? 'eager' : 'lazy'} />
+          <span class="artist-name">{artist.name}</span>
+          <span class="artist-genre">{artist.genres[0]}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{variant === 'expanded' && (
+  <section class="top-artists-expanded" data-section="artists-expanded">
+    <h2 class="section-heading">Top Artists</h2>
+    <div class="artists-grid" id="artists-expanded">
+      {artists.map((artist, i) => (
+        <div class="artist-card glass-card">
+          <span class="artist-rank">#{i + 1}</span>
+          <img src={artist.image} alt={artist.name} class="artist-card-img" loading="lazy" />
+          <span class="artist-name">{artist.name}</span>
+          <span class="artist-genre">{artist.genres[0]}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .section-heading {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .artists-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+  }
+
+  .artist-circle {
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .artist-circle img {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 30px var(--glow-color, rgba(255, 255, 255, 0.1));
+  }
+
+  .artist-circle[data-rank="1"] img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .artist-circle[data-rank="2"] img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .artist-circle[data-rank="3"] img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .artist-circle[data-rank="4"] img,
+  .artist-circle[data-rank="5"] img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .artist-name {
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .artist-genre {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    display: block;
+  }
+
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+  }
+
+  .artist-card {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .artist-card-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 8px;
+  }
+
+  .artist-rank {
+    color: var(--color-spotify);
+    font-size: var(--text-xs);
+    font-weight: 700;
+  }
+
+  @media (max-width: 767px) {
+    .artists-row {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .artist-circle {
+      scroll-snap-align: start;
+    }
+  }
+</style>
