@@ -152,6 +152,17 @@ body {
   }
 }
 
+/* ─── Image Fallback ─────────────────────────────────────────────────────── */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-accent-purple), var(--color-spotify));
+  color: white;
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
 /* ─── Responsive: Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   body {

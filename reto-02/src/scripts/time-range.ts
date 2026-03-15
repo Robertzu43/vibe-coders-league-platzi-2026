@@ -88,7 +88,7 @@ function updateArtistsExpanded(artists: SpotifyArtist[]) {
   grid.innerHTML = artists.map((a, i) => `
     <div class="artist-card glass-card">
       <span class="artist-rank">#${i + 1}</span>
-      <img src="${a.image}" alt="${a.name}" class="artist-card-img" loading="lazy" />
+      <img src="${a.image}" alt="${a.name}" class="artist-card-img" loading="lazy" onerror="this.style.display='none'" />
       <span class="artist-name">${a.name}</span>
       <span class="artist-genre">${a.genres[0] || ''}</span>
     </div>
@@ -160,7 +160,7 @@ function updateTracks(tracks: SpotifyTrack[]) {
   container.innerHTML = tracks.map((t, i) => `
     <div class="track-row">
       <span class="track-rank">${i + 1}</span>
-      <img src="${t.albumImage}" alt="${t.album} album art" class="track-album-art" loading="lazy" />
+      <img src="${t.albumImage}" alt="${t.album} album art" class="track-album-art" loading="lazy" onerror="this.style.display='none'" />
       <div class="track-info">
         <span class="track-name">${t.name}</span>
         <span class="track-artist">${t.artist}</span>
