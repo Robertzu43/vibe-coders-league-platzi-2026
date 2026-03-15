@@ -1,9 +1,114 @@
 ---
+import recentlyPlayed from '../data/recently-played.json';
+import topTracks from '../data/top-tracks-short.json';
+
 interface Props {
   variant?: 'recent' | 'full';
 }
-
 const { variant = 'recent' } = Astro.props;
+const tracks = variant === 'recent' ? recentlyPlayed : topTracks;
+
+function formatDuration(ms: number): string {
+  const min = Math.floor(ms / 60000);
+  const sec = Math.floor((ms % 60000) / 1000);
+  return `${min}:${sec.toString().padStart(2, '0')}`;
+}
 ---
 
-<section data-variant={variant}>TrackList</section>
+<section class="track-list" data-section="tracks">
+  <h2 class="section-heading">{variant === 'recent' ? 'Recently Played' : 'Top Tracks'}</h2>
+  <div class="tracks" id={variant === 'recent' ? 'recent-tracks' : 'top-tracks'}>
+    {tracks.map((track, i) => (
+      <div class="track-row">
+        {variant === 'full' && <span class="track-rank">{i + 1}</span>}
+        <img
+          src={track.albumImage}
+          alt={`${track.album} album art`}
+          class="track-album-art"
+          loading="lazy"
+        />
+        <div class="track-info">
+          <span class="track-name">{track.name}</span>
+          <span class="track-artist">{track.artist}</span>
+        </div>
+        <span class="track-duration">{formatDuration(track.duration_ms)}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-heading {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .tracks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .track-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+  }
+
+  .track-row:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .track-row:hover {
+    background: var(--color-surface-hover);
+  }
+
+  .track-rank {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  .track-album-art {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .track-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .track-name {
+    color: white;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .track-artist {
+    color: var(--color-text-secondary);
+    font-size: var(--text-xs);
+    display: block;
+  }
+
+  .track-duration {
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    flex-shrink: 0;
+  }
+</style>
