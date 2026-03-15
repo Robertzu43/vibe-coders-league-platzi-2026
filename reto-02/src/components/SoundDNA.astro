@@ -1,9 +1,154 @@
 ---
+import audioFeatures from '../data/audio-features-short.json';
+
 interface Props {
-  variant?: 'default' | 'expanded';
+  variant?: 'compact' | 'expanded';
+}
+const { variant = 'compact' } = Astro.props;
+
+const features = ['energy', 'danceability', 'valence', 'acousticness', 'liveness', 'tempo'] as const;
+const labels = ['Energy', 'Dance', 'Valence', 'Acoustic', 'Liveness', 'Tempo'];
+const cx = 90, cy = 80, r = 65;
+
+function polarToXY(angle: number, radius: number) {
+  const rad = (angle - 90) * (Math.PI / 180);
+  return { x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad) };
 }
 
-const { variant = 'default' } = Astro.props;
+function makePolygon(values: number[], maxR: number) {
+  return values.map((v, i) => {
+    const angle = (360 / 6) * i;
+    const { x, y } = polarToXY(angle, v * maxR);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+}
+
+const gridScales = [0.25, 0.5, 0.75, 1.0];
+const dataPoints = features.map(f => audioFeatures[f]);
 ---
 
-<section data-variant={variant}>SoundDNA</section>
+<section class="sound-dna glass-card" data-section="radar">
+  <h2 class="section-heading">Your Sound DNA</h2>
+  <div class="radar-container">
+    <svg viewBox="0 0 180 160" class={`radar-svg${variant === 'expanded' ? ' radar-svg--expanded' : ''}`} id="radar-svg">
+      <!-- Grid hexagons -->
+      {gridScales.map(scale => (
+        <polygon
+          points={makePolygon(Array(6).fill(scale), r)}
+          fill="none"
+          stroke="rgba(255,255,255,0.06)"
+          stroke-width="1"
+        />
+      ))}
+      <!-- Axis lines -->
+      {features.map((_, i) => {
+        const angle = (360 / 6) * i;
+        const end = polarToXY(angle, r);
+        return <line x1={cx} y1={cy} x2={end.x.toFixed(1)} y2={end.y.toFixed(1)} stroke="rgba(255,255,255,0.06)" stroke-width="1" />;
+      })}
+      <!-- Data polygon -->
+      <polygon
+        id="radar-polygon"
+        points={makePolygon(dataPoints, r)}
+        fill="rgba(29,185,84,0.15)"
+        stroke="#1DB954"
+        stroke-width="2"
+      />
+      <!-- Vertex dots -->
+      {dataPoints.map((v, i) => {
+        const angle = (360 / 6) * i;
+        const pos = polarToXY(angle, v * r);
+        return <circle cx={pos.x.toFixed(1)} cy={pos.y.toFixed(1)} r="3" fill="#1DB954" />;
+      })}
+      <!-- Labels -->
+      {labels.map((label, i) => {
+        const angle = (360 / 6) * i;
+        const pos = polarToXY(angle, r + 16);
+        return <text x={pos.x.toFixed(1)} y={pos.y.toFixed(1)} text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,0.5)" font-size="9">{label}</text>;
+      })}
+    </svg>
+  </div>
+
+  {variant === 'expanded' && (
+    <div class="feature-details">
+      {features.map((f, i) => (
+        <div class="feature-row">
+          <span class="feature-label">{labels[i]}</span>
+          <div class="feature-track">
+            <div class="feature-fill" style={`width: ${Math.round(audioFeatures[f] * 100)}%; background: linear-gradient(90deg, var(--color-spotify), var(--color-spotify-light));`}></div>
+          </div>
+          <span class="feature-value">{Math.round(audioFeatures[f] * 100)}%</span>
+        </div>
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  .section-heading {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .sound-dna {
+    padding: 20px;
+  }
+
+  .radar-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .radar-svg {
+    max-width: 200px;
+    width: 100%;
+  }
+
+  .radar-svg--expanded {
+    max-width: 320px;
+  }
+
+  .feature-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .feature-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feature-label {
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    width: 70px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .feature-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .feature-fill {
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .feature-value {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-spotify);
+    width: 40px;
+    text-align: right;
+  }
+</style>
