@@ -28,16 +28,15 @@ function initAnimations() {
     scale: 0, opacity: 0, duration: 0.5, stagger: 0.08,
   }, '-=0.2');
 
-  // 3. Genre bars: capture current (target) widths, reset to 0, animate back
+  // 3. Genre bars: animate from 0 to target width
   const genreFills = document.querySelectorAll<HTMLElement>('.genre-fill');
-  const savedWidths: string[] = [];
+  const targetWidths: string[] = [];
   genreFills.forEach(el => {
-    // The inline style width set by time-range.ts is the target
-    savedWidths.push(el.style.width || el.style.getPropertyValue('--target-width') || '0%');
-    el.style.width = '0px';
+    targetWidths.push(el.style.getPropertyValue('--target-width') || el.style.width || '0%');
+    el.style.width = '0';
   });
-  tl.to('.genre-fill', {
-    width: (_i: number, el: HTMLElement) => savedWidths[Array.from(genreFills).indexOf(el)] || '0%',
+  tl.to(genreFills, {
+    width: (i: number) => targetWidths[i],
     duration: 0.8,
     stagger: 0.08,
     ease: 'power2.out',
