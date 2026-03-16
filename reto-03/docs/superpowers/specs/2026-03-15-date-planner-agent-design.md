@@ -213,7 +213,7 @@ reto-03/
 
 1. El cron job se registra correctamente y aparece en `openclaw cron list`
 2. Al ejecutar manualmente (`openclaw cron run <jobId>`), el agente genera calendarios ficticios distintos a los de la semana anterior
-3. El mensaje llega a Telegram con el formato correcto (emojis, estructura, 3 sugerencias)
+3. El mensaje llega a Telegram con el formato correcto (emojis, estructura, hasta 3 sugerencias)
 4. Las sugerencias son específicas (nombre de película, tipo de restaurante, actividad concreta) — no genéricas
 5. El agente considera el horario para el tipo de plan (tarde → cine/museo, noche → cena/concierto)
 6. El cron se dispara automáticamente cada lunes sin intervención manual
