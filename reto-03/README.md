@@ -1,66 +1,35 @@
-# Reto 3 — Planificador de Citas para Parejas
+# Reto 3 — Date Planner con OpenClaw
 
 > Vibe Coders League Platzi 2026
 
-Un agente OpenClaw que cada lunes a las 8am genera calendarios ficticios para dos personas ocupadas, detecta los huecos libres en común durante la semana y envía sugerencias de citas específicas (película, restaurante, actividad alternativa) directamente por Telegram.
+---
 
-## ¿Qué automatiza?
+## El problema
 
-Sin que nadie se lo pida, cada lunes el agente:
+Tú y tu pareja están usualmente muy ocupados. Entre reuniones, el gym, compromisos sociales y el agotamiento del día a día, coordinar una cita se convierte en otra tarea más en la lista. Y cuando finalmente encuentran un hueco, ya no queda energía para pensar qué hacer.
 
-1. Inventa una semana típica de compromisos para dos personas (trabajo, gym, compromisos sociales)
-2. Encuentra los momentos donde los dos están libres por al menos 2 horas
-3. Sugiere hasta 3 planes concretos adaptados al horario (tarde → museo/café, noche → cine/cena)
-4. Envía el resumen formateado a Telegram
+**Date Planner** es un agente OpenClaw que resuelve exactamente eso. Cada lunes a las 8am, sin que nadie se lo pida, analiza las agendas de ambos, encuentra los momentos libres en común durante la semana y envía por Telegram sugerencias concretas: una película específica, un restaurante con ambiente, una alternativa si no hay ganas de salir. Todo listo. Solo tienen que elegir.
 
-## Stack
+---
 
-- **OpenClaw** — gateway self-hosted, cron scheduler, delivery Telegram nativo
-- **Skill `date-planner`** — instrucciones del agente en formato AgentSkills
-- **Modelo** — Claude (Anthropic) vía configuración de OpenClaw
+## Objetivo
 
-## Instalación
+Eliminar la fricción de planear citas cuando las dos personas están ocupadas, usando automatización inteligente para que la relación no quede en segundo plano por falta de tiempo o energía para organizarse.
 
-### Prerrequisitos
+---
 
-- OpenClaw instalado y gateway corriendo (`openclaw start`)
-- Claude configurado como modelo (`openclaw onboard` o `openclaw models set`)
-- Canal Telegram conectado en `~/.openclaw/openclaw.json`
+## Cómo funciona
 
-### Instalar
+Cada lunes a las 8am el agente:
 
-```bash
-cd reto-03
-bash setup.sh
-```
+1. **Genera las agendas de la semana** — eventos de trabajo, gym y compromisos sociales para ambas personas
+2. **Encuentra los huecos libres** — busca momentos donde los dos están disponibles por al menos 2 horas (11am–11pm)
+3. **Sugiere planes específicos por horario** — si es tarde: museo, café, actividad cultural. Si es noche: película con título real, restaurante con tipo de cocina y ambiente
+4. **Envía el resumen a Telegram** — directo al chat, formateado, listo para usar
 
-El script:
-1. Copia `skills/date-planner/` a `~/.openclaw/skills/`
-2. Registra el cron job en OpenClaw (idempotente — si ya existe, lo reemplaza)
+---
 
-### Verificar la instalación
-
-```bash
-# El skill debe aparecer en la lista
-openclaw skills list
-
-# El cron job debe aparecer en la lista
-openclaw cron list
-```
-
-### Probar ahora (sin esperar al lunes)
-
-```bash
-# Obtener el ID del job
-openclaw cron list
-
-# Ejecutar manualmente
-openclaw cron run <jobId>
-```
-
-El mensaje debe llegar a Telegram en segundos.
-
-## Ejemplo de output en Telegram
+## Ejemplo de output
 
 ```
 💑 Plan de Citas — Semana del 16 al 22 Mar
@@ -83,6 +52,40 @@ Encontré 3 momentos libres esta semana:
 🎯 Alternativa: clases de cerámica en La Arcilla
 ```
 
+---
+
+## Especificaciones técnicas
+
+| Componente | Tecnología |
+|------------|------------|
+| Gateway | OpenClaw (self-hosted, Node.js) |
+| Scheduler | OpenClaw Cron — `0 8 * * 1` (lunes 8am, America/Bogota) |
+| Skill | AgentSkills format (`SKILL.md`) |
+| Modelo | Google Gemini 2.5 Flash |
+| Delivery | Telegram bot nativo via OpenClaw |
+| Sesión | Isolated (sin contexto previo, resultados frescos cada semana) |
+| Datos | Generados dinámicamente por el agente en cada ejecución |
+
+**Sin APIs de calendario.** El agente inventa agendas realistas con variedad cada semana, lo que garantiza sugerencias siempre diferentes.
+
+---
+
+## Instalación
+
+```bash
+# Prerrequisitos: OpenClaw instalado, Gemini API key configurada, bot de Telegram conectado
+cd reto-03
+bash setup.sh
+```
+
+El script instala el skill y registra el cron job en un solo paso. Para probar sin esperar al lunes:
+
+```bash
+openclaw cron run <jobId>
+```
+
+---
+
 ## Estructura
 
 ```
@@ -94,7 +97,23 @@ reto-03/
 └── README.md
 ```
 
+---
+
+## Por qué esto importa
+
+La productividad personal ha sido el caso de uso dominante de la automatización: tareas, recordatorios, resúmenes de trabajo, reportes. Pero hay algo que también necesita atención y que dejamos para después: **las personas que más queremos**.
+
+No todo lo importante es urgente. Una cita no tiene deadline. No genera notificaciones. No aparece en el backlog. Y precisamente por eso se va postergando hasta que el tiempo libre existe pero ya no hay energía ni ideas para aprovecharlo.
+
+Este proyecto parte de una pregunta simple: **¿qué pasaría si aplicamos la misma lógica de automatización a algo tan humano como una cita?**
+
+No para reemplazar la conexión — sino para quitarle la fricción. Para que cuando llegue el lunes, la pregunta no sea "¿cuándo podemos vernos?" sino "¿a cuál de estas opciones vamos?".
+
+Automatizar no es deshumanizar. A veces es exactamente lo contrario: es crear las condiciones para que lo humano suceda.
+
+---
+
 ## Estado
 
 - [x] En progreso
-- [ ] Completado
+- [x] Completado
