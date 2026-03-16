@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ─── Prerequisitos ────────────────────────────────────────────────────────────
+command -v openclaw >/dev/null 2>&1 || {
+  echo "❌ Error: 'openclaw' no encontrado. ¿Está OpenClaw instalado?" >&2
+  exit 1
+}
+
 # ─── Configuración ────────────────────────────────────────────────────────────
 SKILL_NAME="date-planner"
 SKILL_SRC="$(cd "$(dirname "$0")/skills/date-planner" && pwd)"
 SKILL_DEST="$HOME/.openclaw/skills/$SKILL_NAME"
 CRON_NAME="Planificador de Citas Semanal"
+
+[ -f "$SKILL_SRC/SKILL.md" ] || {
+  echo "❌ Error: No se encontró $SKILL_SRC/SKILL.md" >&2
+  exit 1
+}
 
 # ─── 1. Instalar el skill ─────────────────────────────────────────────────────
 echo "📦 Instalando skill '$SKILL_NAME'..."
@@ -15,6 +26,7 @@ if [ -d "$SKILL_DEST" ]; then
   rm -rf "$SKILL_DEST"
 fi
 
+mkdir -p "$HOME/.openclaw/skills"
 cp -r "$SKILL_SRC" "$SKILL_DEST"
 echo "   ✅ Skill copiado a $SKILL_DEST"
 
