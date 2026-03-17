@@ -1,0 +1,221 @@
+{
+  "name": "🚍 Commute Buddy — PRODUCCION v2",
+  "flow": [
+    {
+      "id": 1,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": false,
+        "useNewZLibDecompression": true
+      },
+      "mapper": {
+        "url": "https://api.openweathermap.org/data/2.5/forecast",
+        "serializeUrl": true,
+        "method": "get",
+        "headers": [],
+        "qs": [
+          { "name": "lat", "value": "4.6534" },
+          { "name": "lon", "value": "-74.0836" },
+          { "name": "appid", "value": "your_openweathermap_api_key" },
+          { "name": "units", "value": "metric" },
+          { "name": "lang", "value": "es" },
+          { "name": "cnt", "value": "3" }
+        ],
+        "bodyType": "empty",
+        "shareCookies": false,
+        "rejectUnauthorized": true,
+        "followRedirect": true,
+        "followAllRedirects": false,
+        "useQuerystring": false,
+        "gzip": true,
+        "useMtls": false,
+        "parseResponse": true
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0 }
+      }
+    },
+    {
+      "id": 2,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": false,
+        "useNewZLibDecompression": true
+      },
+      "mapper": {
+        "url": "https://api.twitter.com/2/tweets/search/recent",
+        "serializeUrl": true,
+        "method": "get",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_X_BEARER_TOKEN"
+          }
+        ],
+        "qs": [
+          { "name": "query", "value": "from:TransMilenio #TMAhora (Calle72 OR Heroes OR Calle100)" },
+          { "name": "max_results", "value": "10" },
+          { "name": "tweet.fields", "value": "created_at,text" },
+          { "name": "start_time", "value": "{{formatDate(addMinutes(now; -120); \"YYYY-MM-DDTHH:mm:ssZ\")}}" }
+        ],
+        "bodyType": "empty",
+        "shareCookies": false,
+        "rejectUnauthorized": true,
+        "followRedirect": true,
+        "followAllRedirects": false,
+        "useQuerystring": false,
+        "gzip": true,
+        "useMtls": false,
+        "parseResponse": true
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0 }
+      }
+    },
+    {
+      "id": 7,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 600, "y": 0 }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 4,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "handleErrors": false,
+                "useNewZLibDecompression": true
+              },
+              "filter": {
+                "name": "Hay alerta de clima o estaciones",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{1.data.list[1].pop}}",
+                      "b": "0.6",
+                      "o": "number:greaterThan"
+                    },
+                    {
+                      "a": "{{1.data.list[1].weather[1].description}}",
+                      "b": "lluvia",
+                      "o": "text:contains"
+                    },
+                    {
+                      "a": "{{1.data.list[1].weather[1].description}}",
+                      "b": "tormenta",
+                      "o": "text:contains"
+                    },
+                    {
+                      "a": "{{2.data.meta.result_count}}",
+                      "b": "0",
+                      "o": "number:greaterThan"
+                    }
+                  ]
+                ]
+              },
+              "mapper": {
+                "url": "https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json",
+                "serializeUrl": false,
+                "method": "post",
+                "headers": [
+                  { "name": "Content-Type", "value": "application/json" }
+                ],
+                "qs": [],
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "data": "{\"MessagingServiceSid\":\"YOUR_MESSAGING_SERVICE_SID\",\"To\":\"+57XXXXXXXXXX\",\"Body\":\"🚍 Commute Buddy — Buenos días, Roberto\\n\\n🕐 Sales en 45 minutos\\n\\n{{if(1.data.list[1].pop > 0.6; \\\"🌧️ CLIMA:\\\\n\\\" & 1.data.list[1].weather[1].description & \\\" (\\\" & round(1.data.list[1].pop * 100; 0) & \\\"%)\\\"; \\\"✅ Clima despejado\\\")}}\\n\\n{{if(2.data.meta.result_count > 0; \\\"⚠️ TRANSMILENIO:\\\\n\\\" & 2.data.data[1].text; \\\"✅ Tus estaciones operando normal\\\")}}\\n\\n¡Buen viaje! 💪\"}",
+                "shareCookies": false,
+                "rejectUnauthorized": true,
+                "followRedirect": true,
+                "followAllRedirects": false,
+                "useQuerystring": false,
+                "gzip": true,
+                "useMtls": false,
+                "authUser": "YOUR_ACCOUNT_SID",
+                "authPass": "YOUR_AUTH_TOKEN",
+                "parseResponse": true
+              },
+              "metadata": {
+                "designer": { "x": 900, "y": -150 }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "http:ActionSendData",
+              "version": 3,
+              "parameters": {
+                "handleErrors": false,
+                "useNewZLibDecompression": true
+              },
+              "filter": {
+                "name": "[TEST] Activar manualmente — cambiar 1 > 2 por 1 > 0",
+                "conditions": [
+                  [
+                    {
+                      "a": "1",
+                      "b": "2",
+                      "o": "number:greaterThan"
+                    }
+                  ]
+                ]
+              },
+              "mapper": {
+                "url": "https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json",
+                "serializeUrl": false,
+                "method": "post",
+                "headers": [
+                  { "name": "Content-Type", "value": "application/json" }
+                ],
+                "qs": [],
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "data": "{\"MessagingServiceSid\":\"YOUR_MESSAGING_SERVICE_SID\",\"To\":\"+57XXXXXXXXXX\",\"Body\":\"[TEST] 🚍 Commute Buddy\\n\\n🌧️ CLIMA: lluvia ligera (72%)\\n🌡️ 13°C — Lleva paraguas\\n\\n⚠️ TRANSMILENIO:\\nDemoras en estación Calle 72 por manifestación ciudadana\\n\\n¡Buen viaje! 💪\"}",
+                "shareCookies": false,
+                "rejectUnauthorized": true,
+                "followRedirect": true,
+                "followAllRedirects": false,
+                "useQuerystring": false,
+                "gzip": true,
+                "useMtls": false,
+                "authUser": "YOUR_ACCOUNT_SID",
+                "authPass": "YOUR_AUTH_TOKEN",
+                "parseResponse": true
+              },
+              "metadata": {
+                "designer": { "x": 900, "y": 150 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com"
+  }
+}
