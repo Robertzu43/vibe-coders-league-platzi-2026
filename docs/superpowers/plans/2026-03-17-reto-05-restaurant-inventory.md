@@ -187,8 +187,8 @@
      - **Sheet Name:** `Inventario`
      - **Row Number:** mapear el número de fila devuelto por Search Rows (campo `Row Number`)
      - **Values:** solo el campo `current_stock`:
-       - Columna `current_stock` → fórmula: `{{3.current_stock - 1.quantity}}`
-       - (donde `3.` es el output de Search Rows y `1.quantity` es la cantidad vendida del Iterator)
+       - Columna `current_stock` → fórmula: `{{3.current_stock - 2.quantity}}`
+       - (donde `3.` es el output de Search Rows — módulo 3 — y `2.quantity` es la cantidad vendida del bundle del Iterator — módulo 2. Los campos de line items son emitidos por el Iterator, no por Square Watch Orders directamente)
   3. Click OK
 
 - [ ] **Step 3.6: Probar Escenario 1**
@@ -220,7 +220,7 @@
 
 ## Task 4: Construir Escenario 2 en Make — Detección, Alerta y Auto-Orden
 
-**Flujo:** Schedule → Google Sheets: Get All Rows → Filter → Text Aggregator → Email (manager) → Iterator → Google Sheets: Search Rows → Claude → Email (proveedor) → WhatsApp
+**Flujo:** Schedule → Get All Rows → Filter → Text Aggregator → Email (manager) → Get All Rows (2ª vez) → Filter (2ª vez) → Google Sheets: Search Rows (proveedor) → Claude → Email (proveedor) → WhatsApp
 
 > **Nota sobre el filtro de inventario:** Make's **Search Rows** solo permite comparar una columna contra un valor literal, no contra otra columna de la misma fila. Para comparar `current_stock ≤ min_threshold` (ambos valores dinámicos por fila), se usa **Get All Rows** para traer todas las filas y luego un módulo **Filter** independiente que compara los dos campos mapeados del mismo bundle.
 
@@ -302,44 +302,57 @@
 
   > `{{4.text}}` es el output del Text Aggregator (módulo 4), que contiene la lista consolidada de productos bajo stock.
 
-- [ ] **Step 4.7: Módulo 6 — Iterator (re-iterar productos para contactar proveedores)**
+- [ ] **Step 4.7: Módulo 6 — Google Sheets: Get All Rows (segunda pasada para proveedor loop)**
 
-  1. Click **+** → `Flow Control` → **Iterator**
-  2. En **Array**, seleccionar el output del Text Aggregator (módulo 4) — esto re-descompone los bundles de productos bajo stock para procesarlos individualmente
-
-  > **Alternativa si el Iterator del Text Aggregator no funciona:** Agregar un segundo Google Sheets: Get All Rows + Filter después del email del manager para re-obtener los productos bajo stock. Esto añade 2 módulos extra pero es más explícito.
-
+  1. Click **+** → `Google Sheets` → **Get all rows**
+  2. Misma configuración que el módulo 2:
+     - **Spreadsheet ID:** mismo ID
+     - **Sheet Name:** `Inventario`
+     - **Column with headers:** `Yes — Row 1`
   3. Click OK
 
-- [ ] **Step 4.8: Módulo 7 — Google Sheets: Search Rows (buscar proveedor)**
+  > **Por qué una segunda pasada:** El Text Aggregator (módulo 4) produce un string de texto, no un array estructurado. No se puede iterar sobre él para obtener `product_id` y contactar proveedores. La solución correcta es volver a leer el inventario desde cero y re-aplicar el mismo filtro de bajo stock para obtener bundles con datos estructurados.
+
+- [ ] **Step 4.8: Módulo 7 — Filter (segunda pasada — solo productos bajo stock)**
+
+  1. Click **+** → `Flow Control` → **Filter**
+  2. Misma configuración que el módulo 3:
+     - Campo izquierdo: mapear `current_stock` del módulo 6
+     - Operador: `Less than or equal to`
+     - Campo derecho: mapear `min_threshold` del módulo 6
+  3. Click OK
+
+  > Solo pasan los productos cuyo `current_stock ≤ min_threshold`. Los módulos siguientes se ejecutan una vez por cada producto bajo stock.
+
+- [ ] **Step 4.9: Módulo 8 — Google Sheets: Search Rows (buscar proveedor)**
 
   1. Click **+** → `Google Sheets` → **Search Rows**
   2. Configurar:
      - **Spreadsheet ID:** mismo ID
      - **Sheet Name:** `Proveedores`
-     - **Filter:** Column `product_id` | Operator `Equal to` | Value: mapear `product_id` del módulo 2 (Google Sheets Inventario, accesible desde el Iterator)
+     - **Filter:** Column `product_id` | Operator `Equal to` | Value: mapear `product_id` del módulo 6 (Get All Rows — Inventario)
      - **Limit:** `1`
   3. Click OK
 
-  > **Si no se encuentra proveedor:** Make devuelve cero bundles para ese producto — los módulos 8, 9 y 10 no se ejecutan para ese producto. El manager ya fue alertado en el módulo 5 con una nota indicando que productos sin proveedor configurado deben verificarse manualmente.
+  > **Si no se encuentra proveedor:** Make devuelve cero bundles para ese producto — los módulos 9, 10 y 11 no se ejecutan para ese producto específico. El manager ya fue alertado en el módulo 5 con una nota indicando que productos sin proveedor configurado deben verificarse manualmente.
 
-- [ ] **Step 4.9: Módulo 8 — Anthropic Claude: Create a Message (generar email de pedido)**
+- [ ] **Step 4.10: Módulo 9 — Anthropic Claude: Create a Message (generar email de pedido)**
 
   1. Click **+** → `Anthropic Claude` → **Create a Message**
   2. Crear Connection → pegar Anthropic API Key
   3. Configurar:
-     - **Model:** seleccionar `claude-3-5-haiku-20241022` en el dropdown (suficiente para generación de texto simple, más económico que Sonnet)
+     - **Model:** seleccionar `claude-3-5-haiku-20241022` en el dropdown
      - **Max tokens:** `500`
      - **Messages — Role:** `user`
-     - **Messages — Content:** (mapear los campos del módulo 7 — Google Sheets Proveedores)
+     - **Messages — Content:** (mapear campos del módulo 6 — Inventario, y módulo 8 — Proveedores)
 
   ```
   Eres un asistente para un restaurante. Redacta un correo formal y profesional en español para solicitar reabastecimiento de un producto a un proveedor.
 
   Detalles:
-  - Proveedor: {{7.supplier_name}}
-  - Producto solicitado: {{2.product_name}}
-  - Cantidad requerida: {{7.reorder_quantity}}
+  - Proveedor: {{8.supplier_name}}
+  - Producto solicitado: {{6.product_name}}
+  - Cantidad requerida: {{8.reorder_quantity}}
   - Motivo: stock bajo, se requiere reposición urgente
 
   Instrucciones:
@@ -350,42 +363,42 @@
   - No incluir placeholders como [Nombre del Remitente] — usar "El equipo de cocina del restaurante" como firmante
   ```
 
-  > `{{7.supplier_name}}` y `{{7.reorder_quantity}}` vienen del módulo 7 (Proveedores). `{{2.product_name}}` viene del módulo 2 (Inventario), accesible desde el contexto del Iterator.
+  > `{{8.supplier_name}}` y `{{8.reorder_quantity}}` vienen del módulo 8 (Proveedores). `{{6.product_name}}` viene del módulo 6 (segunda pasada de Inventario).
 
   4. Click OK
 
-- [ ] **Step 4.10: Módulo 9 — Email: Send an Email (enviar pedido al proveedor)**
+- [ ] **Step 4.11: Módulo 10 — Email: Send an Email (enviar pedido al proveedor)**
 
   1. Click **+** → `Email` (o `Gmail`) → **Send an Email**
   2. Usar la Connection de email ya creada
   3. Configurar:
-     - **To:** mapear `supplier_email` del módulo 7 (Google Sheets Proveedores)
-     - **Subject:** `Pedido de reabastecimiento — {{2.product_name}}`
+     - **To:** mapear `supplier_email` del módulo 8 (Google Sheets Proveedores)
+     - **Subject:** `Pedido de reabastecimiento — {{6.product_name}}`
      - **Content type:** `Plain text`
-     - **Content:** mapear el campo `content[].text` del output de Claude (módulo 8)
+     - **Content:** mapear el campo `content[].text` del output de Claude (módulo 9)
   4. Click OK
 
-- [ ] **Step 4.11: Módulo 10 — WhatsApp Business Cloud: Send a Text Message**
+- [ ] **Step 4.12: Módulo 11 — WhatsApp Business Cloud: Send a Text Message**
 
   1. Click **+** → `WhatsApp Business Cloud` → **Send a Text Message**
   2. Crear Connection:
      - **Phone Number ID:** tu WhatsApp Business Phone Number ID (obtener en Meta for Developers → Tu App → WhatsApp → API Setup)
      - **Access Token:** tu token de WhatsApp Business (formato: token permanente del sistema de Meta)
   3. Configurar:
-     - **To:** mapear `supplier_whatsapp` del módulo 7 (formato E.164: `+521234567890` — sin prefijo `whatsapp:`)
+     - **To:** mapear `supplier_whatsapp` del módulo 8 (formato E.164: `+521234567890` — sin prefijo `whatsapp:`)
      - **Message:**
 
   ```
-  Hola {{7.supplier_name}} 👋
+  Hola {{8.supplier_name}} 👋
 
-  Te escribimos del restaurante para informarte que acabas de recibir un correo formal con un pedido de reabastecimiento de *{{2.product_name}}* ({{7.reorder_quantity}}).
+  Te escribimos del restaurante para informarte que acabas de recibir un correo formal con un pedido de reabastecimiento de *{{6.product_name}}* ({{8.reorder_quantity}}).
 
   Por favor confirma la disponibilidad respondiendo a ese correo. ¡Gracias!
   ```
 
   4. Click OK
 
-- [ ] **Step 4.12: Probar Escenario 2**
+- [ ] **Step 4.13: Probar Escenario 2**
 
   1. En la hoja Inventario, modificar manualmente el `current_stock` de 1-2 productos para que sea ≤ al `min_threshold` (ej. cambiar Carne de res de 8 a 5, que está por debajo del umbral de 15)
   2. En Make → Escenario 2 → click **Run once**
@@ -396,12 +409,12 @@
   4. Revisar historial de ejecución en Make — todos los módulos deben ser verdes
   5. Si algún módulo falla, revisar la sección de Notas de Implementación al final del plan
 
-- [ ] **Step 4.13: Activar Escenario 2**
+- [ ] **Step 4.14: Activar Escenario 2**
 
   1. Toggle **Active** en el escenario
   2. Verificar que el próximo trigger programado (en 6 horas) aparece en el panel del escenario
 
-- [ ] **Step 4.14: Exportar blueprint y commit**
+- [ ] **Step 4.15: Exportar blueprint y commit**
 
   1. Make → `⋯` → **Export Blueprint** → guardar como `scenario-2-low-stock-alert.json`
   2. Mover a `reto-05/blueprints/scenario-2-low-stock-alert.json`
