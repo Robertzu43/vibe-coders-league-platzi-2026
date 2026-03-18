@@ -10,7 +10,7 @@ Repositorio con los 13 retos del Vibe Coders League de Platzi 2026.
 | 02 | [Music DNA Dashboard](./reto-02) | Completado |
 | 03 | [Date Planner](./reto-03) | Completado |
 | 04 | [Commute Buddy](./reto-04) | Completado |
-| 05 | [Reto 5](./reto-05) | Pendiente |
+| 05 | [Restaurant Inventory Automation](./reto-05) | Completado |
 | 06 | [Reto 6](./reto-06) | Pendiente |
 | 07 | [Reto 7](./reto-07) | Pendiente |
 | 08 | [Reto 8](./reto-08) | Pendiente |
