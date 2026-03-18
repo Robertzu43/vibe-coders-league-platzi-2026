@@ -1,0 +1,6 @@
+product_id,product_name,supplier_name,supplier_email,supplier_whatsapp,reorder_quantity
+P001,Pollo,Avícola del Norte,pedidos@avicola-norte.com,+521234567890,50 kg
+P002,Carne de res,Carnes Premium SA,ventas@carnespremium.com,+521234567891,30 kg
+P003,Aceite de oliva,Distribuidora Mediterránea,contacto@distmediterranea.com,+521234567892,20 litros
+P004,Arroz,Arrocera Central,pedidos@arroceracentral.com,+521234567893,100 kg
+P005,Tomate,Verduras Frescas MX,pedidos@verdurasfrescas.com,+521234567894,25 kg

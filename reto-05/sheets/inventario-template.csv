@@ -1,0 +1,6 @@
+product_id,product_name,current_stock,min_threshold,unit
+P001,Pollo,15,10,kg
+P002,Carne de res,8,15,kg
+P003,Aceite de oliva,3,5,litros
+P004,Arroz,25,20,kg
+P005,Tomate,6,8,kg
