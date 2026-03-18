@@ -488,3 +488,8 @@
 **Zona Horaria en Make**
 - Verificar en Make → Settings del escenario que la zona horaria esté configurada en `America/Mexico_City` o la del restaurante
 - El Schedule de 6h debe considerar horario de operación real del restaurante
+
+**Estado vacío en Escenario 2 — sin productos bajo stock**
+- Si en el momento de ejecución ningún producto está bajo el umbral mínimo, el Filter (módulo 3) pasa cero bundles
+- En este caso, el Text Aggregator produce un string vacío y Make puede ejecutar igualmente el Email del manager con un cuerpo vacío
+- Verificar durante la prueba (Step 4.13) cuál es el comportamiento real: si el email llega vacío, agregar un Router antes del módulo 4 con la condición `total bundles > 0` para evitar alertas vacías. Make Community tiene ejemplos de este patrón bajo "empty aggregator guard"
