@@ -1,0 +1,82 @@
+{
+  "name": "[Reto-05] Escenario 1 — Actualizar Inventario",
+  "flow": [
+    {
+      "id": 1,
+      "module": "square:searchOrders",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "stateFilter": "COMPLETED",
+        "limit": "10"
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0 }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": "{{1.orders[]}}"
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0 }
+      }
+    },
+    {
+      "id": 3,
+      "module": "google-sheets:filterRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "spreadsheetId": "1nh0uqTMEna89GyKUbMm-fH-czBi1sKNojaRheFZRSoU",
+        "sheetId": "Inventario",
+        "from": "1",
+        "limit": "1",
+        "filter": "{{2.catalog_object_id}}"
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0 }
+      }
+    },
+    {
+      "id": 4,
+      "module": "google-sheets:ActionUpdateRow",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "spreadsheetId": "1nh0uqTMEna89GyKUbMm-fH-czBi1sKNojaRheFZRSoU",
+        "sheetId": "Inventario",
+        "rowNumber": "{{3.__ROW_NUMBER__}}",
+        "values": {
+          "current_stock": "{{3.current_stock - 2.quantity}}"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0 }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com"
+  }
+}

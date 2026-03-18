@@ -1,0 +1,192 @@
+{
+  "name": "[Reto-05] Escenario 2 — Detección Bajo Stock y Auto-Orden",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:filterRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "spreadsheetId": "1nh0uqTMEna89GyKUbMm-fH-czBi1sKNojaRheFZRSoU",
+        "sheetId": "Inventario",
+        "from": "1",
+        "limit": "500"
+      },
+      "metadata": {
+        "designer": { "x": 0, "y": 0 },
+        "notes": "1ra pasada — trae TODAS las filas de Inventario sin filtro"
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicAggregator",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "sourceModule": 1,
+        "type": "text",
+        "separator": "\n",
+        "fields": [
+          {
+            "name": "text",
+            "value": "- {{1.product_name}}: {{1.current_stock}} {{1.unit}} (mínimo: {{1.min_threshold}} {{1.unit}})"
+          }
+        ]
+      },
+      "filter": {
+        "name": "Solo productos bajo stock (1ra pasada)",
+        "conditions": [
+          [
+            {
+              "a": "{{1.current_stock}}",
+              "b": "{{1.min_threshold}}",
+              "o": "number:lessThanOrEqual"
+            }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 300, "y": 0 },
+        "notes": "Text Aggregator — construye lista de bajo stock para email al manager"
+      }
+    },
+    {
+      "id": 3,
+      "module": "google-email:ActionSendEmail",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "to": "manager@restaurante.com",
+        "subject": "⚠️ Alerta de inventario bajo — {{formatDate(now; \"DD/MM/YYYY HH:mm\")}}",
+        "content": "⚠️ ALERTA DE INVENTARIO BAJO\n\nLos siguientes productos han alcanzado o superado su umbral mínimo de stock:\n\n{{2.text}}\n\nSe están enviando pedidos automáticos a los proveedores correspondientes.\nLos productos sin proveedor configurado en la hoja Proveedores no recibirán pedido automático — verificar manualmente.\n\nFecha y hora: {{formatDate(now; \"DD/MM/YYYY HH:mm\")}}"
+      },
+      "metadata": {
+        "designer": { "x": 600, "y": 0 },
+        "notes": "Email consolidado al manager con lista de bajo stock"
+      }
+    },
+    {
+      "id": 4,
+      "module": "google-sheets:filterRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "spreadsheetId": "1nh0uqTMEna89GyKUbMm-fH-czBi1sKNojaRheFZRSoU",
+        "sheetId": "Inventario",
+        "from": "1",
+        "limit": "500"
+      },
+      "metadata": {
+        "designer": { "x": 900, "y": 0 },
+        "notes": "2da pasada — vuelve a leer Inventario para iterar por producto y contactar proveedores"
+      }
+    },
+    {
+      "id": 5,
+      "module": "google-sheets:filterRows",
+      "version": 2,
+      "parameters": {},
+      "mapper": {
+        "spreadsheetId": "1nh0uqTMEna89GyKUbMm-fH-czBi1sKNojaRheFZRSoU",
+        "sheetId": "Proveedores",
+        "from": "1",
+        "limit": "1",
+        "filter": "{{4.product_id}}"
+      },
+      "filter": {
+        "name": "Solo productos bajo stock (2da pasada)",
+        "conditions": [
+          [
+            {
+              "a": "{{4.current_stock}}",
+              "b": "{{4.min_threshold}}",
+              "o": "number:lessThanOrEqual"
+            }
+          ]
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 1200, "y": 0 },
+        "notes": "Busca proveedor en hoja Proveedores por product_id. Si no hay proveedor, cero bundles → módulos 6-8 se saltan."
+      }
+    },
+    {
+      "id": 6,
+      "module": "anthropic-claude:createAMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "model": "claude-3-5-haiku-20241022",
+        "max_tokens": 500,
+        "messages": [
+          {
+            "role": "user",
+            "content": "Eres un asistente para un restaurante. Redacta un correo formal y profesional en español para solicitar reabastecimiento de un producto a un proveedor.\n\nDetalles:\n- Proveedor: {{5.supplier_name}}\n- Producto solicitado: {{4.product_name}}\n- Cantidad requerida: {{5.reorder_quantity}}\n- Motivo: stock bajo, se requiere reposición urgente\n\nInstrucciones:\n- Escribe solo el cuerpo del correo (sin asunto, sin \"Asunto:\", sin línea de destinatario)\n- Tono formal y cortés\n- Máximo 4 párrafos\n- Incluir saludo, cuerpo con la solicitud, datos del pedido, y despedida\n- No incluir placeholders como [Nombre del Remitente] — usar \"El equipo de cocina del restaurante\" como firmante"
+          }
+        ]
+      },
+      "metadata": {
+        "designer": { "x": 1500, "y": 0 },
+        "notes": "Claude genera email formal de pedido en español. product_name de módulo 4, supplier_name y reorder_quantity de módulo 5."
+      }
+    },
+    {
+      "id": 7,
+      "module": "google-email:ActionSendEmail",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "to": "{{5.supplier_email}}",
+        "subject": "Pedido de reabastecimiento — {{4.product_name}}",
+        "content": "{{6.content[].text}}"
+      },
+      "metadata": {
+        "designer": { "x": 1800, "y": 0 },
+        "notes": "Envía email de pedido al proveedor con cuerpo generado por Claude"
+      }
+    },
+    {
+      "id": 8,
+      "module": "whatsapp-business-cloud:sendMessage",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "to": "{{5.supplier_whatsapp}}",
+        "type": "text",
+        "text": {
+          "body": "Hola {{5.supplier_name}} 👋\n\nTe escribimos del restaurante para informarte que acabas de recibir un correo formal con un pedido de reabastecimiento de *{{4.product_name}}* ({{5.reorder_quantity}}).\n\nPor favor confirma la disponibilidad respondiendo a ese correo. ¡Gracias!"
+        }
+      },
+      "metadata": {
+        "designer": { "x": 2100, "y": 0 },
+        "notes": "WhatsApp al proveedor — to en formato E.164 (+521234567890), sin prefijo whatsapp:"
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us2.make.com",
+    "notes": [
+      "Schedule: configurar manualmente en Make → cada 6 horas",
+      "Filtro de bajo stock: filter property en módulos 2 y 5 (compara current_stock <= min_threshold)",
+      "Text Aggregator (módulo 2): construye cuerpo consolidado para el email del manager",
+      "2da pasada de Inventario (módulo 4): necesaria porque el Text Aggregator produce un string, no bundles iterables",
+      "Si no hay proveedor configurado en Proveedores para un product_id: cero bundles → módulos 6-8 se saltan automáticamente"
+    ]
+  }
+}
