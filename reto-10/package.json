@@ -12,7 +12,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
     "@astrojs/cloudflare": "^13.0.0",
     "@astrojs/react": "^5.0.0",
     "astro": "^6.0.4",
