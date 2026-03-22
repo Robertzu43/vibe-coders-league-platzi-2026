@@ -1,0 +1,27 @@
+{
+  "name": "bytenest-chat-agent",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@astrojs/cloudflare": "^13.0.0",
+    "@astrojs/react": "^5.0.0",
+    "astro": "^6.0.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "wrangler": "^4.61.1"
+  }
+}
