@@ -6,7 +6,7 @@
 
 **Architecture:** Single Astro 6 app with React chat component and server-side API route that calls Claude API. System prompt defines Nex's personality, store info, catalog, and intent rules. Conversation history maintained in React state.
 
-**Tech Stack:** Astro 6, React 19, TypeScript, Anthropic SDK (`@anthropic-ai/sdk`), Node adapter (`@astrojs/node`)
+**Tech Stack:** Astro 6, React 19, TypeScript, Anthropic SDK (`@anthropic-ai/sdk`), Cloudflare adapter (`@astrojs/cloudflare`)
 
 **Spec:** `reto-10/docs/superpowers/specs/2026-03-22-bytenest-chat-agent-design.md`
 
@@ -16,10 +16,11 @@
 
 | File | Responsibility |
 |------|---------------|
-| `reto-10/package.json` | Dependencies: astro, react, anthropic SDK, node adapter |
-| `reto-10/astro.config.mjs` | Astro config: React integration, Node adapter, `output: 'server'` |
+| `reto-10/package.json` | Dependencies: astro, react, anthropic SDK, cloudflare adapter |
+| `reto-10/astro.config.mjs` | Astro config: React integration, Cloudflare adapter, `output: 'server'` |
+| `reto-10/wrangler.toml` | Cloudflare Workers config for deploy |
 | `reto-10/tsconfig.json` | TypeScript strict config |
-| `reto-10/.env.example` | `ANTHROPIC_API_KEY=` placeholder |
+| `reto-10/.env.example` | `ANTHROPIC_API_KEY=` placeholder (local dev) |
 | `reto-10/src/lib/catalog.ts` | Hardcoded product catalog (10 products) |
 | `reto-10/src/lib/system-prompt.ts` | Builds system prompt from catalog + store info + personality + intent rules |
 | `reto-10/src/pages/api/chat.ts` | POST endpoint: receives messages, calls Claude API, returns response |
@@ -30,11 +31,12 @@
 
 ---
 
-### Task 1: Scaffold Astro project with React and Node adapter
+### Task 1: Scaffold Astro project with React and Cloudflare adapter
 
 **Files:**
 - Create: `reto-10/package.json`
 - Create: `reto-10/astro.config.mjs`
+- Create: `reto-10/wrangler.toml`
 - Create: `reto-10/tsconfig.json`
 - Create: `reto-10/.env.example`
 
@@ -49,26 +51,38 @@ npm create astro@latest . -- --template minimal --no-install --typescript strict
 
 ```bash
 cd reto-10
-npm install @astrojs/react @astrojs/node react react-dom @anthropic-ai/sdk
+npm install @astrojs/react @astrojs/cloudflare react react-dom @anthropic-ai/sdk
 npm install -D @types/react @types/react-dom
 ```
 
-- [ ] **Step 3: Configure Astro with React and Node adapter**
+- [ ] **Step 3: Configure Astro with React and Cloudflare adapter**
 
 `reto-10/astro.config.mjs`:
 ```js
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  adapter: cloudflare(),
   integrations: [react()],
 });
 ```
 
-- [ ] **Step 4: Update tsconfig.json**
+- [ ] **Step 4: Create wrangler.toml**
+
+`reto-10/wrangler.toml`:
+```toml
+name = "bytenest-chat"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist/client"
+```
+
+- [ ] **Step 5: Update tsconfig.json**
 
 `reto-10/tsconfig.json`:
 ```json
@@ -82,14 +96,14 @@ export default defineConfig({
 }
 ```
 
-- [ ] **Step 5: Create .env.example**
+- [ ] **Step 6: Create .env.example**
 
 `reto-10/.env.example`:
 ```
 ANTHROPIC_API_KEY=sk-ant-your-key-here
 ```
 
-- [ ] **Step 6: Verify project builds**
+- [ ] **Step 7: Verify project builds**
 
 ```bash
 cd reto-10
@@ -98,7 +112,7 @@ npx astro check
 
 Expected: No errors
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
 git add reto-10/package.json reto-10/package-lock.json reto-10/astro.config.mjs reto-10/tsconfig.json reto-10/.env.example reto-10/src/
@@ -276,9 +290,7 @@ import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { systemPrompt } from '../../lib/system-prompt';
 
-const client = new Anthropic();
-
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const { messages } = await request.json();
 
@@ -288,6 +300,10 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    const apiKey = (locals as any).runtime?.env?.ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY;
+
+    const client = new Anthropic({ apiKey });
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -822,7 +838,7 @@ Una web app con chat en tiempo real donde **Nex**, el asesor tech de ByteNest, a
 
 - **Astro 6** + React — Frontend con chat interactivo
 - **Claude API** (claude-sonnet-4-6) — Cerebro del agente
-- **Node adapter** — Server-side rendering para API route
+- **Cloudflare Workers** — Deploy y SSR
 
 ---
 
@@ -860,6 +876,7 @@ npm run dev
 | React | Componente de chat interactivo |
 | Claude API | Procesamiento de lenguaje natural |
 | @anthropic-ai/sdk | SDK oficial de Anthropic |
+| Cloudflare Workers | Hosting y deploy |
 ```
 
 - [ ] **Step 7: Final commit**
@@ -868,6 +885,34 @@ npm run dev
 git add reto-10/README.md
 git commit -m "docs(reto-10): add README with setup instructions"
 ```
+
+---
+
+### Task 8: Deploy to Cloudflare Workers
+
+- [ ] **Step 1: Set secret in Cloudflare**
+
+```bash
+cd reto-10
+npx wrangler secret put ANTHROPIC_API_KEY
+# Paste your API key when prompted
+```
+
+- [ ] **Step 2: Build and deploy**
+
+```bash
+cd reto-10
+npx astro build
+npx wrangler deploy
+```
+
+- [ ] **Step 3: Verify live site**
+
+Open the URL returned by wrangler deploy. Test:
+1. "Hola" → greeting
+2. "Quiero comprar un compu" → recommendation flow
+
+- [ ] **Step 4: Commit any deploy config changes if needed**
 
 ---
 
@@ -882,3 +927,4 @@ git commit -m "docs(reto-10): add README with setup instructions"
 - [ ] Input disabled while loading
 - [ ] Responsive on mobile
 - [ ] Dark theme renders correctly
+- [ ] Deployed to Cloudflare Workers and accessible via URL
