@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
-import Anthropic from '@anthropic-ai/sdk';
+import { env } from 'cloudflare:workers';
 import { systemPrompt } from '../../lib/system-prompt';
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
     const { messages } = await request.json();
 
@@ -13,30 +13,25 @@ export const POST: APIRoute = async ({ request, locals }) => {
       });
     }
 
-    const apiKey =
-      (locals as any).runtime?.env?.ANTHROPIC_API_KEY ??
-      import.meta.env.ANTHROPIC_API_KEY;
+    const ai = (env as any).AI;
 
-    const client = new Anthropic({ apiKey });
+    const aiMessages = [
+      { role: 'system', content: systemPrompt },
+      ...messages,
+    ];
 
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+    const response = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+      messages: aiMessages,
       max_tokens: 500,
-      system: systemPrompt,
-      messages,
     });
 
-    const text = response.content
-      .filter((block): block is Anthropic.TextBlock => block.type === 'text')
-      .map((block) => block.text)
-      .join('');
-
-    return new Response(JSON.stringify({ response: text }), {
+    return new Response(JSON.stringify({ response: response.response }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Chat API error:', error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error('Chat API error:', errMsg);
     return new Response(
       JSON.stringify({
         error: 'Lo siento, tuve un problema. ¿Puedes intentar de nuevo?',
