@@ -1,13 +1,16 @@
 ---
+import Chat from '../components/Chat';
+import '../styles/chat.css';
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>ByteNest Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ByteNest — Tu nido tecnológico</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
   </head>
   <body>
-    <h1>ByteNest Chat Agent</h1>
+    <Chat client:load />
   </body>
 </html>
