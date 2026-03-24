@@ -185,3 +185,81 @@ RESTRICTIONS:
 | Restricciones | Restrictions (6 reglas) | Si |
 | Formato de respuesta | Response Format + Formatting Rules | Si |
 | Ejemplos de interaccion | Seccion 5 del README | Si |
+
+---
+
+## 5. Conversaciones de ejemplo
+
+Las siguientes conversaciones demuestran como responde la Gema cuando recibe el system prompt. Cada respuesta sigue la estructura de cinco secciones definida en el prompt.
+
+### Conversacion 1: Explicacion de concepto
+
+**Pregunta:** What is LoRA and how does it compare to full fine-tuning?
+
+**Respuesta:**
+
+> ## Definition / Overview
+> LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique that freezes the pre-trained model weights and injects small trainable rank-decomposition matrices into each transformer layer. Instead of updating all parameters, LoRA trains only these low-rank matrices, drastically reducing the computational cost of adaptation.
+>
+> ## How It Works
+> - The original weight matrix W (d x d) remains frozen
+> - Two small matrices A (d x r) and B (r x d) are added, where r << d
+> - The forward pass computes: output = Wx + BAx
+> - Only A and B are trained — typically 0.1%-1% of total parameters
+> - At inference, BA can be merged into W with zero additional latency
+>
+> ## Key Distinctions
+>
+> | Aspect | Full Fine-Tuning | LoRA |
+> |--------|-----------------|------|
+> | Trainable params | 100% | 0.1%-1% |
+> | GPU memory | Very high (full model) | Low (adapters only) |
+> | Training time | Hours to days | Minutes to hours |
+> | Risk of catastrophic forgetting | Higher | Lower |
+> | Expressiveness | Maximum | Slightly constrained by rank r |
+>
+> ## Practical Implications
+> - Enables fine-tuning of 70B+ models on consumer GPUs (24GB VRAM)
+> - You can maintain multiple LoRA adapters for different tasks and swap them at inference time without reloading the base model
+> - Libraries: Hugging Face PEFT, Unsloth, Axolotl
+>
+> ## Further Reading
+> - Hu et al., "LoRA: Low-Rank Adaptation of Large Language Models" (2021)
+> - Hugging Face PEFT documentation
+> - Unsloth library for optimized LoRA training
+
+### Conversacion 2: Comparacion de herramientas
+
+**Pregunta:** What's the difference between Claude and GPT-4 for code generation?
+
+**Respuesta:**
+
+> ## Definition / Overview
+> Claude (Anthropic) and GPT-4 (OpenAI) are both frontier large language models with strong code generation capabilities. They differ in architecture philosophy, context window handling, and practical strengths for developer workflows.
+>
+> ## How It Works
+> Both models use transformer-based architectures trained on large corpora that include code. The key differences lie in:
+> - **Context window**: Claude offers up to 200K tokens; GPT-4 offers 128K tokens
+> - **Training approach**: Claude emphasizes Constitutional AI (RLHF with AI-generated feedback); GPT-4 uses standard RLHF
+> - **Tool use**: Both support function calling, but implementation differs
+>
+> ## Key Distinctions
+>
+> | Aspect | Claude | GPT-4 |
+> |--------|--------|-------|
+> | Max context | 200K tokens | 128K tokens |
+> | Code strengths | Long-file editing, refactoring, explaining | Generation, debugging, multi-language |
+> | API pricing | Competitive, per-token | Per-token, higher for 128K |
+> | IDE integration | Claude Code (CLI) | GitHub Copilot, Cursor |
+> | Agentic use | Claude Code, Agent SDK | Assistants API, GPTs |
+>
+> ## Practical Implications
+> - For large codebase refactoring: Claude's larger context window is advantageous
+> - For IDE-integrated autocomplete: GPT-4 via Copilot has deeper integration
+> - For agentic coding workflows: both are viable; choice depends on your stack
+> - Neither is universally "better" — evaluate on your specific use case
+>
+> ## Further Reading
+> - Anthropic Claude documentation
+> - OpenAI GPT-4 technical report (2023)
+> - Independent code benchmarks: BigCodeBench, HumanEval+
