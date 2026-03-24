@@ -4,7 +4,7 @@
 
 Diseno de un system prompt completo para una Gema de Gemini que actua como tutor academico especializado en LLMs e IA generativa. El documento incluye el prompt, su razonamiento de diseno, anatomia por componentes y conversaciones de prueba que demuestran su funcionamiento.
 
-**Estado:** En progreso
+**Estado:** Completado
 
 ---
 
@@ -263,3 +263,46 @@ Las siguientes conversaciones demuestran como responde la Gema cuando recibe el 
 > - Anthropic Claude documentation
 > - OpenAI GPT-4 technical report (2023)
 > - Independent code benchmarks: BigCodeBench, HumanEval+
+
+---
+
+## 6. Analisis
+
+### Cumplimiento de requisitos
+
+| Requisito | Cumplido | Donde se demuestra |
+|---|---|---|
+| Rol definido | Si | Parrafos 1-2 del prompt: "You are Professor AI..." |
+| Tono | Si | Seccion TONE AND LANGUAGE: 6 reglas de estilo |
+| Restricciones | Si | Seccion RESTRICTIONS: 6 reglas de limites |
+| Formato de respuesta | Si | Seccion RESPONSE FORMAT: estructura de 5 secciones |
+| Ejemplos de interaccion (min. 2) | Si | Conversaciones 1 y 2 en seccion 5 |
+| Conversacion de prueba | Si | Ambas conversaciones muestran el prompt funcionando |
+
+### Observaciones
+
+El system prompt produce respuestas que cumplen consistentemente con la estructura de cinco secciones. Los aspectos mas efectivos son:
+
+1. **La estructura fija** — obliga al modelo a cubrir definicion, mecanismo, comparacion, practica y lecturas en cada respuesta, sin importar el tipo de pregunta.
+2. **La calibracion de nivel** — al especificar "intermediate-level practitioner" y listar conceptos que ya conoce, el modelo evita sobre-explicar lo basico sin asumir expertise avanzada.
+3. **Las restricciones de honestidad** — la regla de no fabricar datos y declarar incertidumbre explicitamente reduce alucinaciones y respuestas inventadas.
+
+---
+
+## 7. Conclusiones
+
+### Un buen system prompt es un contrato
+
+El system prompt no es una sugerencia — es un contrato entre el disenador y el modelo. Cada seccion del prompt (rol, tono, formato, restricciones) elimina una categoria de comportamiento no deseado. Sin rol, el modelo no sabe que voz usar. Sin formato, cada respuesta tiene una estructura distinta. Sin restricciones, el modelo dice lo que sea con tal de sonar util.
+
+### La especificidad es el mayor diferenciador
+
+La diferencia entre un prompt generico ("eres un asistente de IA") y uno efectivo esta en los detalles concretos: que nivel tiene el usuario, que estructura debe seguir cada respuesta, que hacer cuando no sabe algo. Cada detalle especifico elimina una decision que el modelo tendria que improvisar.
+
+### El idioma importa
+
+Elegir ingles para las respuestas del chatbot no es una preferencia estetica — es una decision tecnica. Los modelos tienen significativamente mas datos de entrenamiento en ingles, especialmente en dominios tecnicos, lo que resulta en terminologia mas precisa y menos alucinaciones.
+
+---
+
+**Estado:** Completado
