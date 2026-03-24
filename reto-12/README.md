@@ -155,3 +155,42 @@ Escribe un correo de seguimiento después de una reunión
 El resultado es genérico porque el modelo no tiene restricciones, no tiene identidad y no tiene información con la que trabajar. La salida es técnicamente correcta —es un correo de seguimiento— pero completamente inútil en la práctica: podría corresponder a cualquier reunión, con cualquier persona, en cualquier industria. No menciona a Carlos Méndez, no hace referencia a ManufacturaPro, no habla de digitalización ni de la fase piloto, y no propone ningún siguiente paso concreto. El modelo hizo lo que pudo con una instrucción vacía.
 
 ---
+
+## 6. Prompt Intermedio
+
+### El prompt
+
+```
+Eres un consultor de transformación digital. Redacta un correo de seguimiento
+profesional después de una reunión con un potencial cliente empresarial.
+El correo debe transmitir profesionalismo y mantener el interés del cliente.
+```
+
+### Resultado simulado
+
+> Estimado/a,
+>
+> Me dirijo a usted para agradecer el tiempo que nos dedicó durante nuestra reunión y reafirmar el interés de nuestro equipo en acompañar a su organización en su proceso de transformación digital.
+>
+> Como consultor especializado en esta área, considero que los temas abordados representan una oportunidad concreta para mejorar la eficiencia operativa de su empresa. Estamos convencidos de que un enfoque estratégico y progresivo puede generar un impacto medible en el corto y mediano plazo.
+>
+> Quedo a su disposición para responder cualquier pregunta, ampliar la información compartida o coordinar una próxima reunión en el momento que sea conveniente para usted.
+>
+> Agradezco su confianza y espero que podamos avanzar juntos en esta dirección.
+>
+> Atentamente,
+> [Nombre]
+> Consultor de Transformación Digital
+
+### Análisis
+
+| Elemento | ¿Presente? | Detalle |
+|----------|-----------|---------|
+| Rol      | Sí        | Consultor de transformación digital |
+| Enfoque  | Sí        | Redactar follow-up profesional para cliente empresarial |
+| Límites  | No        | Sin restricciones de formato, tono específico ni extensión |
+| Contexto | No        | Sin datos de la reunión, nombres ni detalles específicos |
+
+### Veredicto
+
+El rol le da al correo una voz profesional y consultiva que el prompt básico no tenía. El enfoque precisa la acción — queda claro que es un seguimiento empresarial y no cualquier tipo de correo. Sin embargo, sin límites, la estructura y extensión del correo son arbitrarias: el modelo decide solo cuánto escribir y en qué formato. Y sin contexto, el resultado sigue siendo impersonal — podría enviarse a cualquier cliente potencial en cualquier industria. La mejora respecto al prompt básico es real pero insuficiente para un correo listo para enviar.
