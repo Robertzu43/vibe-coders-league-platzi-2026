@@ -2,7 +2,30 @@
 
 > 13 retos. 13 proyectos. Un camino completo por el mundo de la IA aplicada al desarrollo.
 
-Este repositorio es la evidencia, el portafolio y el aporte de un participante de la **Vibe Coders League de Platzi 2026** — la liga donde los developers aprenden a construir con IA como herramienta central de su flujo de trabajo.
+## Para la Comunidad Platzi
+
+Este repositorio queda abierto como **evidencia, referencia y punto de partida** para toda la comunidad de Platzi. La **Vibe Coders League 2026** es la liga donde los developers aprenden a construir con IA como herramienta central de su flujo de trabajo — y este repo documenta ese proceso completo.
+
+**Si eres participante de la Vibe Coders League:**
+- Explora los retos para ver enfoques distintos al tuyo
+- Cada README documenta las decisiones de diseno y las herramientas usadas
+- Usa lo que te sirva como inspiracion para tus propios proyectos
+
+**Si quieres colaborar:**
+- Haz fork del repo y mejora cualquier reto
+- Abre un issue si encuentras algo que se pueda mejorar
+- Comparte tu propia version de los retos
+
+**Si estas aprendiendo sobre IA aplicada al desarrollo:**
+- Los retos van de lo simple a lo complejo — son un buen recorrido de aprendizaje
+- Cada proyecto muestra un caso de uso real de IA distinto
+- La documentacion de los retos 12 y 13 es especialmente util para entender prompt engineering y system prompt design
+
+La liga de vibecoders de Platzi 2026 es de todos. Construyamos juntos.
+
+---
+
+## Y asi fue como hice los retos
 
 Cada reto explora una dimension distinta de la IA aplicada: desde landing pages con animaciones hasta agentes conversacionales, desde automatizaciones empresariales hasta generacion de video e imagen con IA, desde prompt engineering hasta diseno de system prompts para chatbots personalizados.
 
@@ -99,29 +122,6 @@ Vibe-Coders-League-Platzi-2026/
 ```
 
 Cada carpeta es un proyecto independiente con su propio README, stack y documentacion.
-
----
-
-## Para la Comunidad Platzi
-
-Este repositorio queda abierto como **evidencia, referencia y punto de partida** para toda la comunidad de Platzi.
-
-**Si eres participante de la Vibe Coders League:**
-- Explora los retos para ver enfoques distintos al tuyo
-- Cada README documenta las decisiones de diseno y las herramientas usadas
-- Usa lo que te sirva como inspiracion para tus propios proyectos
-
-**Si quieres colaborar:**
-- Haz fork del repo y mejora cualquier reto
-- Abre un issue si encuentras algo que se pueda mejorar
-- Comparte tu propia version de los retos
-
-**Si estas aprendiendo sobre IA aplicada al desarrollo:**
-- Los retos van de lo simple a lo complejo — son un buen recorrido de aprendizaje
-- Cada proyecto muestra un caso de uso real de IA distinto
-- La documentacion de los retos 12 y 13 es especialmente util para entender prompt engineering y system prompt design
-
-La liga de vibecoders de Platzi 2026 es de todos. Construyamos juntos.
 
 ---
 
