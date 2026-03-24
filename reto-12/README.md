@@ -194,3 +194,68 @@ El correo debe transmitir profesionalismo y mantener el interés del cliente.
 ### Veredicto
 
 El rol le da al correo una voz profesional y consultiva que el prompt básico no tenía. El enfoque precisa la acción — queda claro que es un seguimiento empresarial y no cualquier tipo de correo. Sin embargo, sin límites, la estructura y extensión del correo son arbitrarias: el modelo decide solo cuánto escribir y en qué formato. Y sin contexto, el resultado sigue siendo impersonal — podría enviarse a cualquier cliente potencial en cualquier industria. La mejora respecto al prompt básico es real pero insuficiente para un correo listo para enviar.
+
+---
+
+## 7. Prompt Avanzado
+
+### El prompt
+
+```
+[ROL]
+Eres un consultor senior de transformación digital con 10 años de experiencia
+en el sector manufacturero.
+
+[ENFOQUE]
+Redacta un correo de seguimiento después de una reunión de negocios con un
+potencial cliente.
+
+[LÍMITES]
+- Máximo 200 palabras
+- Tono profesional pero cercano
+- Incluye un CTA (call to action) claro
+- Estructura: saludo > agradecimiento > resumen de lo discutido > próximos pasos > cierre
+- No uses jerga técnica excesiva
+
+[CONTEXTO]
+- Reunión con Carlos Méndez, Director de Operaciones de ManufacturaPro
+- Se discutió la digitalización de su línea de producción
+- Mostró interés en una fase piloto de 3 meses
+- El próximo paso es enviar una propuesta formal esta semana
+- La reunión fue en las oficinas de ManufacturaPro y el ambiente fue positivo
+```
+
+### Resultado simulado
+
+> Estimado Carlos,
+>
+> Quiero agradecerte el tiempo que nos dedicaste ayer en las oficinas de ManufacturaPro. Fue una conversación muy enriquecedora y salí con la convicción de que hay una oportunidad real para transformar tu operación.
+>
+> Como comentamos, la digitalización de tu línea de producción tiene un potencial claro para reducir tiempos de respuesta y aumentar la visibilidad operativa. Me alegró mucho escuchar tu apertura hacia una fase piloto de 3 meses: es exactamente el enfoque que recomiendo para validar resultados antes de escalar.
+>
+> Para mantener el impulso de la reunión, te enviaré la propuesta formal el miércoles. En ella detallaré el alcance del piloto, los entregables por etapa y una estimación de los beneficios esperados.
+>
+> Quedo atento a cualquier pregunta que surja antes de entonces.
+>
+> Un cordial saludo,
+> Alejandro Ríos
+> Consultor Senior de Transformación Digital
+
+### Análisis
+
+| Elemento | ¿Presente? | Detalle |
+|----------|-----------|---------|
+| Rol      | Sí        | Consultor senior, 10 años de experiencia, sector manufacturero |
+| Enfoque  | Sí        | Correo de follow-up post-reunión con cliente potencial |
+| Límites  | Sí        | 200 palabras máx., tono cercano, CTA, estructura definida, sin jerga |
+| Contexto | Sí        | Carlos Méndez, ManufacturaPro, digitalización, piloto 3 meses, propuesta |
+
+### Veredicto
+
+Con los cuatro componentes RELC presentes, el modelo produce un correo listo para enviar. Cada elemento contribuyó de forma distinta:
+- **Rol** aportó experiencia y calibró el tono al sector manufacturero
+- **Enfoque** definió con exactitud qué tipo de correo redactar
+- **Límites** moldearon el formato, la extensión y la estructura de la respuesta
+- **Contexto** proporcionó la sustancia que hace el correo personal y accionable
+
+El salto de intermedio a avanzado es mayor que el de básico a intermedio: el contexto es el diferenciador más poderoso. Sin él, el rol y el enfoque producen un texto profesional pero impersonal. Con él, el correo nombra a Carlos, menciona ManufacturaPro, referencia la digitalización de la línea de producción, propone el piloto de tres meses y establece un CTA concreto con fecha. Esa especificidad es lo que convierte un borrador genérico en una comunicación real.
