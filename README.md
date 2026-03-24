@@ -11,12 +11,12 @@ Repositorio con los 13 retos del Vibe Coders League de Platzi 2026.
 | 03 | [Date Planner](./reto-03) | Completado |
 | 04 | [Commute Buddy](./reto-04) | Completado |
 | 05 | [Restaurant Inventory Automation](./reto-05) | Completado |
-| 06 | [Reto 6](./reto-06) | Pendiente |
-| 07 | [Reto 7](./reto-07) | Pendiente |
-| 08 | [Reto 8](./reto-08) | Pendiente |
-| 09 | [Reto 9](./reto-09) | Pendiente |
-| 10 | [Reto 10](./reto-10) | Pendiente |
-| 11 | [Reto 11](./reto-11) | Pendiente |
+| 06 | [AI Video Generation con HeyGen](./reto-06) | Completado |
+| 07 | [AI Image Generation con Nano Banana](./reto-07) | Completado |
+| 08 | [AI Product Photography con Nano Banana](./reto-08) | Completado |
+| 09 | [AI Video Generation: Trailer Cinematografico con HeyGen](./reto-09) | Completado |
+| 10 | [ByteNest Chat Agent](./reto-10) | Completado |
+| 11 | [Agente Interno Sierra Dorada Coffee](./reto-11) | Completado |
 | 12 | [Prompt Engineering: De genérico a preciso](./reto-12) | Completado |
 | 13 | [System Prompt Design: Professor AI](./reto-13) | Completado |
 
