@@ -1,10 +1,106 @@
-# Reto 12
+# Reto 12 — Prompt Engineering: De genérico a preciso
 
 > Vibe Coders League Platzi 2026
 
-Descripción del reto pendiente.
+Documentación del proceso de diseño de prompts progresivos aplicando técnicas de ingeniería de prompts: desde una instrucción vaga hasta una instrucción precisa y estructurada, con resultados comparables y análisis de cada técnica empleada.
 
-## Estado
+**Estado:** Completado
 
-- [ ] En progreso
-- [ ] Completado
+---
+
+## 1. El reto
+
+El reto consiste en elegir un objetivo concreto y escribir **tres versiones de un prompt** — básico, intermedio y avanzado — para ese mismo objetivo. Por cada versión se muestra el resultado obtenido y se explican las técnicas aplicadas.
+
+Las cinco técnicas que el reto pide demostrar son:
+
+| # | Técnica | Descripción breve |
+|---|---|---|
+| 1 | **Contexto** | Proporcionar información específica que da sustancia al prompt |
+| 2 | **Ejemplos** | Incluir muestras de entrada/salida esperada (few-shot) |
+| 3 | **Formato** | Indicar la estructura de la respuesta (lista, tabla, párrafo, etc.) |
+| 4 | **Rol** | Asignar una identidad experta al modelo |
+| 5 | **Restricciones** | Definir límites de tono, extensión o contenido a evitar |
+
+Cada versión del prompt incorpora técnicas adicionales respecto a la anterior, de modo que el lector puede observar cómo cada capa de instrucción mejora la calidad y utilidad de la respuesta.
+
+---
+
+## 2. La metodología
+
+### La fórmula RELC
+
+Para construir los prompts de forma sistemática se utiliza la fórmula **RELC**, que descompone cualquier prompt en cuatro componentes ortogonales:
+
+```
+Prompt = Rol + Enfoque + Límites + Contexto
+```
+
+Cada componente responde a una pregunta distinta y aporta un tipo diferente de precisión:
+
+#### Rol
+**¿Quién responde?** Da identidad experta al modelo.
+
+Ejemplo: "Eres un especialista en marketing B2B con diez años de experiencia en SaaS."
+
+Beneficios:
+- Profesionalismo en el lenguaje y el enfoque
+- Consistencia en criterios y perspectiva
+- Mejor calibración del nivel de detalle técnico
+
+#### Enfoque
+**¿Qué debe hacer?** Define la acción concreta que se espera del modelo.
+
+Ejemplo: "Redacta un correo de prospección en frío para un director de operaciones."
+
+Consejo: usa verbos de acción precisos como crear, redactar, clasificar, resumir, comparar, evaluar.
+
+#### Límites
+**¿Cómo debe hacerlo?** Marcan el formato, el tono y la extensión de la respuesta.
+
+Ejemplo: "Usa un tono profesional pero cercano. Máximo 150 palabras. Sin tecnicismos de ingeniería."
+
+Efecto: claridad en la forma de entrega + precisión en el alcance de la respuesta.
+
+#### Contexto
+**¿Con qué información cuenta?** Da sustancia y referencia al prompt.
+
+Ejemplo: "El producto es una plataforma de gestión de inventario. El prospecto trabaja en una empresa de distribución de 200 empleados que actualmente usa hojas de cálculo."
+
+Efecto: evita respuestas genéricas al anclar al modelo a datos específicos y relevantes.
+
+---
+
+### Diagrama de la fórmula
+
+```mermaid
+graph LR
+    A["Prompt vago"] --> B["+ Rol"]
+    B --> C["+ Enfoque"]
+    C --> D["+ Límites"]
+    D --> E["+ Contexto"]
+    E --> F["Resultado preciso"]
+
+    B -.- G["¿Quién responde?<br/>Identidad experta"]
+    C -.- H["¿Qué debe hacer?<br/>Acción concreta"]
+    D -.- I["¿Cómo debe hacerlo?<br/>Formato, tono, extensión"]
+    E -.- J["¿Con qué info?<br/>Datos específicos"]
+```
+
+---
+
+### Mapeo: técnicas del reto vs. componentes RELC
+
+Las cinco técnicas que el reto exige no son ajenas a RELC; la mayoría son instancias directas de sus componentes:
+
+| Técnica del reto | Componente RELC | Notas |
+|---|---|---|
+| Rol | **Rol** | Directo — asignar identidad experta |
+| Contexto | **Contexto** | Directo — proporcionar información específica |
+| Formato | **Límites** | El formato es un tipo de límite (estructura, extensión) |
+| Restricciones | **Límites** | Tono, extensión máxima, qué evitar |
+| Ejemplos (few-shot) | Técnica complementaria | No forma parte de RELC, pero se aborda en Tips adicionales |
+
+La única técnica que RELC no cubre de forma nativa es **los ejemplos** (few-shot prompting). Esta técnica actúa como un mecanismo de calibración adicional: en lugar de describir el resultado esperado, se muestra directamente. Se aborda en la sección de Tips adicionales.
+
+---
