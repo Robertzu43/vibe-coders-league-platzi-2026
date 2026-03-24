@@ -1,4 +1,4 @@
-import { Bot, webhookCallback } from 'grammy';
+import { webhookCallback } from 'grammy';
 import type { Env } from './types.js';
 import { createBot, handleMessage } from './bot.js';
 
@@ -17,11 +17,27 @@ export default {
     const bot = createBot(env.TELEGRAM_BOT_TOKEN);
 
     bot.on('message:text', async (ctx) => {
-      await handleMessage(ctx, env);
+      try {
+        await handleMessage(ctx, env);
+      } catch (error) {
+        console.error('Message handler error:', error);
+      }
     });
 
-    const handleWebhook = webhookCallback(bot, 'cloudflare-mod');
+    bot.catch((err) => {
+      console.error('Bot error:', err);
+    });
 
-    return handleWebhook(request);
+    const handleWebhook = webhookCallback(bot, 'cloudflare-mod', {
+      onTimeout: 'return',
+      timeoutMilliseconds: 55000,
+    });
+
+    try {
+      return await handleWebhook(request);
+    } catch (error) {
+      console.error('Webhook error:', error);
+      return new Response('OK', { status: 200 });
+    }
   },
 };
