@@ -291,3 +291,43 @@ graph TD
 ```
 
 El diagrama muestra la progresión de los tres niveles de prompt a lo largo del eje de calidad. La secuencia de colores —rojo, amarillo, verde— representa la mejora en la utilidad del resultado: de un correo genérico e inutilizable a uno listo para enviar sin edición. Cada flecha indica qué componentes RELC se agregaron en ese paso: la primera flecha suma Rol y Enfoque, lo que eleva el tono pero no elimina la impersonalidad; la segunda flecha suma Límites y Contexto, lo que ancla el correo a una situación real y le da forma, extensión y dirección concretas.
+
+---
+
+## 10. Tips adicionales
+
+### 1. Divide problemas complejos en pasos
+
+Si necesitas múltiples salidas —un correo, una propuesta y una presentación—, escribe un prompt específico para cada paso en lugar de un mega-prompt que lo intente todo a la vez. Cada sub-tarea recibe su propio prompt enfocado con el nivel de RELC adecuado para esa acción concreta. Esto reduce alucinaciones y mantiene los resultados manejables.
+
+### 2. Creatividad vs. precisión
+
+Para tareas creativas —brainstorming, copywriting, ideación—, da más libertad: menos Límites, Enfoque más abierto. Para tareas precisas —correos, documentos legales, código—, añade más límites: formato específico, tono definido, extensión máxima. El balance depende de la tarea, no de una receta fija.
+
+### 3. Elige modelo y enfoque según la tarea
+
+Distintas tareas se benefician de distintas configuraciones. La síntesis necesita precisión (más Límites). El brainstorming necesita creatividad (más libertad). La clasificación necesita ejemplos (few-shot). Adapta el enfoque al tipo de tarea, no al revés.
+
+### 4. Ejemplos (few-shot prompting)
+
+Cuándo incluir ejemplos en el prompt: para tareas de clasificación, formateo o imitación de estilo, proporcionar dos o tres ejemplos de entrada y salida es extremadamente poderoso. En el escenario del correo, el contexto específico fue más valioso que ejemplos genéricos de correos, pero para una tarea como "clasifica quejas de clientes en categorías", los ejemplos few-shot serían indispensables.
+
+---
+
+## 11. Conclusiones
+
+### La fórmula reduce ambigüedad progresivamente
+
+Cada elemento de RELC elimina una categoría de respuestas genéricas. El Rol elimina la incertidumbre de tono. El Enfoque elimina la ambigüedad de tarea. Los Límites eliminan las suposiciones de formato. El Contexto elimina la vaguedad de contenido. El resultado: menos espacio para que el modelo recurra a patrones genéricos.
+
+### Cada elemento tiene un rol específico
+
+El Rol establece la experiencia y calibra el lenguaje. El Enfoque define qué hacer. Los Límites dan forma a la salida. El Contexto aporta la sustancia. Ningún elemento es redundante: eliminar cualquiera degrada el resultado de forma predecible.
+
+### El contexto es el mayor diferenciador
+
+El salto de intermedio a avanzado fue la mejora más grande. El Rol y el Enfoque ayudan, pero es el contexto lo que transforma una plantilla genérica en un resultado utilizable y personalizado. Cuando haya dudas, añade más contexto.
+
+---
+
+Un buen prompt no es largo por ser largo — es preciso porque cada palabra cumple una función.
