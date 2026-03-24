@@ -8,6 +8,8 @@ Documento Markdown que demuestra la metodología **Rol + Enfoque + Límites + Co
 
 Un único `README.md` en `reto-12/` — sin código de aplicación, sin dependencias.
 
+**Idioma:** Español.
+
 ## Escenario
 
 Un consultor de transformación digital tuvo una reunión con el director de operaciones de una empresa manufacturera. Quiere hacer follow-up para avanzar con la propuesta de digitalización.
@@ -71,15 +73,53 @@ Un consultor de transformación digital tuvo una reunión con el director de ope
 - Resolver problemas complejos: dividir en pasos
 - Creatividad vs. precisión: cuándo dar más libertad vs. más restricciones
 - Elegir modelo y enfoque según la tarea
+- Ejemplos (few-shot): cuándo usar ejemplos en el prompt y por qué en este caso el contexto específico fue más efectivo
 
 ### 11. Conclusiones
 - La fórmula funciona porque reduce ambigüedad progresivamente
 - Cada elemento cumple un rol específico en la calidad del output
 - El contexto es el diferenciador más grande entre un resultado genérico y uno útil
 
-## Resultados simulados
+## Mapeo de técnicas del reto a la fórmula RELC
 
-Los resultados de cada prompt serán textos representativos de lo que un LLM produciría, no llamadas reales a un modelo. Esto es intencional: el reto es sobre prompt engineering (la técnica), no sobre ejecutar prompts.
+El reto pide explicar 5 técnicas: contexto, ejemplos, formato, rol, restricciones. La fórmula RELC tiene 4 componentes. Mapeo:
+
+| Técnica del reto | Componente RELC | Notas |
+|---|---|---|
+| Rol | **Rol** | Directo |
+| Contexto | **Contexto** | Directo |
+| Formato | **Límites** | Formato es un tipo de límite (estructura, extensión) |
+| Restricciones | **Límites** | Tono, extensión máxima, qué evitar |
+| Ejemplos (few-shot) | No está en RELC | Se menciona como técnica complementaria en Tips adicionales. El prompt avanzado incluye un ejemplo implícito al dar contexto detallado de la reunión, pero no usa few-shot explícito. Se explica por qué: para un correo único, el contexto específico es más valioso que ejemplos genéricos. |
+
+## Esbozo de resultados simulados
+
+Los resultados son textos representativos, no llamadas reales a un LLM. Esto es intencional: el reto es sobre la técnica de prompt engineering.
+
+### Resultado básico (esperado)
+- Saludo genérico ("Estimado/a")
+- Referencia vaga a "nuestra reunión reciente"
+- Sin nombres, sin datos específicos
+- Sin próximos pasos concretos
+- Tono plano y formulaico
+- ~80 palabras
+
+### Resultado intermedio (esperado)
+- Tono más profesional y consultivo
+- Mención de "transformación digital" como tema
+- Referencia a ser consultor
+- Aún sin nombres propios ni detalles de la reunión
+- Próximos pasos genéricos ("quedo a su disposición")
+- ~120 palabras
+
+### Resultado avanzado (esperado)
+- Usa "Carlos" y "ManufacturaPro" por nombre
+- Referencia específica a la digitalización de línea de producción
+- Menciona la fase piloto de 3 meses
+- CTA claro: "enviaré la propuesta formal el miércoles"
+- Estructura: saludo → agradecimiento → resumen de lo discutido → próximos pasos → cierre
+- Tono profesional pero cercano
+- ~150-200 palabras
 
 ## Diagramas
 
