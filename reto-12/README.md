@@ -104,3 +104,54 @@ Las cinco técnicas que el reto exige no son ajenas a RELC; la mayoría son inst
 La única técnica que RELC no cubre de forma nativa es **los ejemplos** (few-shot prompting). Esta técnica actúa como un mecanismo de calibración adicional: en lugar de describir el resultado esperado, se muestra directamente. Se aborda en la sección de Tips adicionales.
 
 ---
+
+## 4. El objetivo elegido
+
+**Tarea:** redactar un correo profesional de seguimiento después de una reunión de negocios.
+
+**Escenario:** Un consultor en transformación digital tuvo una reunión con Carlos Méndez, Director de Operaciones de ManufacturaPro, una empresa del sector manufacturero. Durante la reunión se discutió la digitalización de su línea de producción. Carlos mostró interés en una fase piloto de tres meses. El siguiente paso acordado es enviar una propuesta formal esta semana. La reunión tuvo lugar en las oficinas de ManufacturaPro y el ambiente fue positivo.
+
+Este escenario es ideal para el ejercicio porque:
+
+- Tiene nombres, cargos y empresa reales que el modelo puede aprovechar.
+- Existe un siguiente paso concreto que debe reflejarse en el correo.
+- El tono debe ser profesional pero cordial, lo que permite demostrar el efecto de las restricciones.
+- Un prompt vago produce un correo inútil; un prompt preciso produce uno que se puede enviar sin edición.
+
+---
+
+## 5. Prompt Básico
+
+### El prompt
+
+```
+Escribe un correo de seguimiento después de una reunión
+```
+
+### Resultado simulado
+
+> Estimado/a,
+>
+> Me pongo en contacto para hacer seguimiento de nuestra reunión reciente. Fue un placer conversar con usted y explorar posibles áreas de colaboración.
+>
+> Quedo a su disposición para continuar avanzando en los temas que discutimos. Si tiene alguna pregunta o requiere información adicional, no dude en contactarme.
+>
+> Espero que podamos continuar con los próximos pasos en el futuro cercano.
+>
+> Saludos cordiales,
+> [Nombre]
+
+### Análisis
+
+| Elemento | ¿Presente? | Detalle |
+|----------|-----------|---------|
+| Rol      | No        | No se asigna identidad experta |
+| Enfoque  | Implícito | Solo dice "escribe un correo", sin definir tipo ni propósito |
+| Límites  | No        | Sin restricciones de formato, tono ni extensión |
+| Contexto | No        | Sin datos de la reunión, personas ni empresa |
+
+### Veredicto
+
+El resultado es genérico porque el modelo no tiene restricciones, no tiene identidad y no tiene información con la que trabajar. La salida es técnicamente correcta —es un correo de seguimiento— pero completamente inútil en la práctica: podría corresponder a cualquier reunión, con cualquier persona, en cualquier industria. No menciona a Carlos Méndez, no hace referencia a ManufacturaPro, no habla de digitalización ni de la fase piloto, y no propone ningún siguiente paso concreto. El modelo hizo lo que pudo con una instrucción vacía.
+
+---
