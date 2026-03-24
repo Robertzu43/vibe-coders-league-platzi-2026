@@ -1,0 +1,10 @@
+name = "sierra-dorada-agent"
+main = "src/index.ts"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+[ai]
+binding = "AI"
+
+[vars]
+BOT_NAME = "Sierra Dorada Assistant"
