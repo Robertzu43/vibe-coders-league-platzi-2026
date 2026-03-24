@@ -47,5 +47,9 @@ export async function handleMessage(ctx: Context, env: Env): Promise<void> {
 
   addMessage(chatId, 'assistant', response);
 
-  await ctx.reply(response, { parse_mode: 'Markdown' });
+  try {
+    await ctx.reply(response, { parse_mode: 'Markdown' });
+  } catch {
+    await ctx.reply(response);
+  }
 }
