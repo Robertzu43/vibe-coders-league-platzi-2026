@@ -259,3 +259,35 @@ Con los cuatro componentes RELC presentes, el modelo produce un correo listo par
 - **Contexto** proporcionó la sustancia que hace el correo personal y accionable
 
 El salto de intermedio a avanzado es mayor que el de básico a intermedio: el contexto es el diferenciador más poderoso. Sin él, el rol y el enfoque producen un texto profesional pero impersonal. Con él, el correo nombra a Carlos, menciona ManufacturaPro, referencia la digitalización de la línea de producción, propone el piloto de tres meses y establece un CTA concreto con fecha. Esa especificidad es lo que convierte un borrador genérico en una comunicación real.
+
+---
+
+## 8. Comparativa general
+
+| Nivel | Rol | Enfoque | Límites | Contexto | Calidad del resultado |
+|-------|-----|---------|---------|----------|-----------------------|
+| Básico | -- | Implícito | -- | -- | Genérico, no utilizable tal cual |
+| Intermedio | Consultor de transformación digital | Follow-up profesional para cliente | -- | -- | Profesional pero impersonal |
+| Avanzado | Consultor senior, 10 años, sector manufacturero | Follow-up post-reunión con cliente potencial | 200 palabras, tono cercano, CTA, estructura, sin jerga | Carlos Méndez, ManufacturaPro, digitalización, piloto 3 meses | Preciso, personalizado, listo para enviar |
+
+Cada fila de la tabla muestra cómo la incorporación progresiva de los componentes RELC transforma la calidad del resultado. El prompt básico produce algo técnicamente correcto pero inútil en la práctica: es un correo que podría haber escrito cualquier persona para cualquier reunión. La versión intermedia gana voz profesional gracias al rol y al enfoque, pero sigue siendo impersonal porque no tiene información con qué trabajar. La versión avanzada, con los cuatro componentes presentes, se convierte en un correo real y accionable: tiene destinatario, tema, tono, estructura y un siguiente paso concreto.
+
+---
+
+## 9. Diagrama de evolución
+
+```mermaid
+graph TD
+    A["Prompt Básico<br/>'Escribe un correo de seguimiento'"] -->|"+ Rol + Enfoque"| B["Prompt Intermedio<br/>Consultor + acción concreta"]
+    B -->|"+ Límites + Contexto"| C["Prompt Avanzado<br/>Fórmula RELC completa"]
+
+    A --> RA["Resultado: genérico, ~80 palabras"]
+    B --> RB["Resultado: profesional pero impersonal, ~120 palabras"]
+    C --> RC["Resultado: preciso y listo para enviar, ~180 palabras"]
+
+    style A fill:#ff6b6b,color:#fff
+    style B fill:#ffd93d,color:#333
+    style C fill:#6bcb77,color:#fff
+```
+
+El diagrama muestra la progresión de los tres niveles de prompt a lo largo del eje de calidad. La secuencia de colores —rojo, amarillo, verde— representa la mejora en la utilidad del resultado: de un correo genérico e inutilizable a uno listo para enviar sin edición. Cada flecha indica qué componentes RELC se agregaron en ese paso: la primera flecha suma Rol y Enfoque, lo que eleva el tono pero no elimina la impersonalidad; la segunda flecha suma Límites y Contexto, lo que ancla el correo a una situación real y le da forma, extensión y dirección concretas.
