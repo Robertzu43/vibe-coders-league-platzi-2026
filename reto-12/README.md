@@ -128,15 +128,15 @@ Este escenario es ideal para el ejercicio porque:
 Escribe un correo de seguimiento después de una reunión
 ```
 
-### Resultado simulado
+### Resultado real
 
 > Estimado/a,
 >
-> Me pongo en contacto para hacer seguimiento de nuestra reunión reciente. Fue un placer conversar con usted y explorar posibles áreas de colaboración.
+> Espero que se encuentre bien. Le escribo para dar seguimiento a nuestra reunión reciente. Fue un gusto poder conversar y compartir ideas sobre los temas que abordamos.
 >
-> Quedo a su disposición para continuar avanzando en los temas que discutimos. Si tiene alguna pregunta o requiere información adicional, no dude en contactarme.
+> Me gustaría saber si ha tenido oportunidad de revisar los puntos que discutimos y si tiene alguna pregunta o comentario al respecto. Estoy a su disposición para ampliar cualquier tema que considere necesario.
 >
-> Espero que podamos continuar con los próximos pasos en el futuro cercano.
+> Quedo atento/a a sus comentarios y espero que podamos continuar avanzando juntos.
 >
 > Saludos cordiales,
 > [Nombre]
@@ -166,17 +166,19 @@ profesional después de una reunión con un potencial cliente empresarial.
 El correo debe transmitir profesionalismo y mantener el interés del cliente.
 ```
 
-### Resultado simulado
+### Resultado real
 
 > Estimado/a,
 >
-> Me dirijo a usted para agradecer el tiempo que nos dedicó durante nuestra reunión y reafirmar el interés de nuestro equipo en acompañar a su organización en su proceso de transformación digital.
+> Agradezco sinceramente el tiempo que dedicó a nuestra reunión. Fue muy valioso conocer de primera mano los retos y oportunidades que enfrenta su organización en materia de operaciones y procesos.
 >
-> Como consultor especializado en esta área, considero que los temas abordados representan una oportunidad concreta para mejorar la eficiencia operativa de su empresa. Estamos convencidos de que un enfoque estratégico y progresivo puede generar un impacto medible en el corto y mediano plazo.
+> Desde nuestra experiencia acompañando empresas en su camino hacia la transformación digital, estoy convencido de que existe un potencial significativo para optimizar sus flujos de trabajo, reducir costos operativos y ganar visibilidad sobre indicadores clave de rendimiento.
 >
-> Quedo a su disposición para responder cualquier pregunta, ampliar la información compartida o coordinar una próxima reunión en el momento que sea conveniente para usted.
+> Me encantaría profundizar en los temas que conversamos y explorar juntos cómo un enfoque estratégico y por fases podría generar resultados tangibles para su equipo en el corto plazo.
 >
-> Agradezco su confianza y espero que podamos avanzar juntos en esta dirección.
+> ¿Le parece si agendamos una siguiente reunión para revisar una propuesta preliminar adaptada a su contexto? Estoy disponible la próxima semana en el horario que le resulte más conveniente.
+>
+> Quedo a su disposición para cualquier consulta.
 >
 > Atentamente,
 > [Nombre]
@@ -225,21 +227,21 @@ potencial cliente.
 - La reunión fue en las oficinas de ManufacturaPro y el ambiente fue positivo
 ```
 
-### Resultado simulado
+### Resultado real
 
-> Estimado Carlos,
+> Carlos, buen día.
 >
-> Quiero agradecerte el tiempo que nos dedicaste ayer en las oficinas de ManufacturaPro. Fue una conversación muy enriquecedora y salí con la convicción de que hay una oportunidad real para transformar tu operación.
+> Quiero agradecerte por recibirnos ayer en las oficinas de ManufacturaPro. La conversación fue muy productiva y me dio una visión clara de los desafíos y el potencial que tiene su línea de producción.
 >
-> Como comentamos, la digitalización de tu línea de producción tiene un potencial claro para reducir tiempos de respuesta y aumentar la visibilidad operativa. Me alegró mucho escuchar tu apertura hacia una fase piloto de 3 meses: es exactamente el enfoque que recomiendo para validar resultados antes de escalar.
+> Me entusiasma especialmente lo que discutimos sobre la digitalización de los procesos operativos. Coincido contigo en que una fase piloto de tres meses es el camino más inteligente: permite medir resultados reales sin comprometer la operación diaria.
 >
-> Para mantener el impulso de la reunión, te enviaré la propuesta formal el miércoles. En ella detallaré el alcance del piloto, los entregables por etapa y una estimación de los beneficios esperados.
+> Como siguiente paso, te enviaré la propuesta formal este miércoles con el alcance detallado del piloto, los entregables por etapa y una proyección de los beneficios esperados. Si necesitas que incluya algún punto adicional, no dudes en decirme.
 >
-> Quedo atento a cualquier pregunta que surja antes de entonces.
+> Fue un gusto conocer al equipo. Estoy convencido de que podemos lograr algo muy valioso juntos.
 >
-> Un cordial saludo,
+> Un abrazo,
 > Alejandro Ríos
-> Consultor Senior de Transformación Digital
+> Consultor Senior — Transformación Digital
 
 ### Análisis
 
