@@ -18,7 +18,7 @@ Repositorio con los 13 retos del Vibe Coders League de Platzi 2026.
 | 10 | [Reto 10](./reto-10) | Pendiente |
 | 11 | [Reto 11](./reto-11) | Pendiente |
 | 12 | [Prompt Engineering: De genérico a preciso](./reto-12) | Completado |
-| 13 | [Reto 13](./reto-13) | Pendiente |
+| 13 | [System Prompt Design: Professor AI](./reto-13) | Completado |
 
 ## Estructura
 
