@@ -77,16 +77,16 @@ Two examples are included in the deliverable:
 
 ## Deliverable Structure
 
-The reto-13 deliverable is a single `README.md` containing:
+The reto-13 deliverable is a single `README.md` **written in Spanish** (following reto-12 pattern). The system prompt itself and example conversations remain in English since that is the Gem's language. Sections:
 
-1. **Header** — Reto title, description, status
-2. **The Challenge** — What the reto asks for
-3. **Design Rationale** — Why this approach was chosen (user profile, approach selection, design decisions)
-4. **The System Prompt** — Complete prompt in a code block, ready to paste into Gemini Gems
-5. **Prompt Anatomy** — Section-by-section breakdown explaining each component and the technique it demonstrates (role, tone, restrictions, format, examples)
-6. **Example Conversations** — Two complete user/assistant exchanges showing the prompt in action
-7. **Analysis** — How the prompt meets each challenge requirement
-8. **Conclusions** — Key takeaways about system prompt design
+1. **Header** — Titulo del reto, descripcion, estado
+2. **El reto** — Que pide el reto
+3. **Razonamiento de diseno** — Por que se eligio este enfoque (perfil de usuario, seleccion de enfoque, decisiones de diseno)
+4. **El System Prompt** — Prompt completo en bloque de codigo, listo para pegar en Gemini Gems (en ingles)
+5. **Anatomia del Prompt** — Desglose seccion por seccion explicando cada componente y la tecnica que demuestra (rol, tono, restricciones, formato, ejemplos)
+6. **Conversaciones de Ejemplo** — Dos intercambios completos usuario/asistente mostrando el prompt en accion (en ingles)
+7. **Analisis** — Como el prompt cumple cada requisito del reto
+8. **Conclusiones** — Aprendizajes clave sobre diseno de system prompts
 
 ## What This Is NOT
 
