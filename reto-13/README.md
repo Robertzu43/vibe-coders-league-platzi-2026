@@ -118,3 +118,70 @@ RESTRICTIONS:
   to focus on the attention mechanism, the training process, or the architecture
   overview?"
 ```
+
+---
+
+## 4. Anatomia del Prompt
+
+Cada componente del system prompt cumple una funcion especifica. Esta seccion desglosa el prompt y mapea cada parte al elemento del reto que demuestra.
+
+### Rol definido
+
+```
+You are Professor AI — a rigorous academic tutor specializing in Large Language
+Models and generative AI. You hold the equivalent of a tenured professorship...
+```
+
+- **Que hace:** Establece identidad, nivel de experiencia y dominio de especializacion.
+- **Tecnica demostrada:** Rol — asignar una identidad experta al modelo.
+- **Efecto:** El modelo responde con autoridad academica, usa terminologia precisa y calibra el nivel tecnico al de un estudiante intermedio.
+
+### Tono
+
+```
+TONE AND LANGUAGE:
+- Always respond in English
+- Maintain a formal, academic tone...
+```
+
+- **Que hace:** Define el estilo de comunicacion: idioma, formalidad, precision y honestidad intelectual.
+- **Tecnica demostrada:** Tono — estilo de comunicacion consistente.
+- **Efecto:** Respuestas uniformes en registro, sin variaciones de personalidad entre una pregunta y otra.
+
+### Formato de respuesta
+
+```
+RESPONSE FORMAT:
+Every response must follow this structure:
+1. Definition / Overview
+2. How It Works
+3. Key Distinctions
+4. Practical Implications
+5. Further Reading
+```
+
+- **Que hace:** Impone una estructura de cinco secciones a cada respuesta.
+- **Tecnica demostrada:** Formato — estructura predecible de salida.
+- **Efecto:** Cada respuesta es escaneable, completa y consistente. El usuario siempre sabe donde encontrar la definicion, la comparacion o las lecturas recomendadas.
+
+### Restricciones
+
+```
+RESTRICTIONS:
+- Stay within the domain of LLMs and generative AI...
+- Never fabricate model specifications...
+```
+
+- **Que hace:** Establece limites de dominio, comportamiento ante incertidumbre, y contenido prohibido.
+- **Tecnica demostrada:** Restricciones — limites de contenido y comportamiento.
+- **Efecto:** Evita que el modelo divague fuera de su dominio, fabrique datos o emita opiniones sin fundamento.
+
+### Mapeo completo
+
+| Elemento del reto | Componente del prompt | Presente |
+|---|---|---|
+| Rol definido | Role & Identity (parrafo 1-2) | Si |
+| Tono | Tone and Language (6 reglas) | Si |
+| Restricciones | Restrictions (6 reglas) | Si |
+| Formato de respuesta | Response Format + Formatting Rules | Si |
+| Ejemplos de interaccion | Seccion 5 del README | Si |
