@@ -59,7 +59,7 @@ Cada reto explora una dimension distinta de la IA aplicada: desde landing pages 
 |---|------|-----------|
 | 01 | [LicitaPro](./reto-en-vivo-1) | Landing Page / Lovable |
 | 02 | [Commute Buddy v3 Multi-usuario](./reto-en-vivo-2) | Automation / Make.com |
-| 03 | Proximo | - |
+| 03 | [Configuracion de Agente OpenClaw](./reto-en-vivo-3) | AI Agent / OpenClaw |
 
 ---
 
@@ -133,7 +133,7 @@ Vibe-Coders-League-Platzi-2026/
   reto-13/     System Prompt Design (Documentacion, Gemini Gem)
   reto-en-vivo-1/  LicitaPro (Lovable, Landing Page)
   reto-en-vivo-2/  Commute Buddy v3 Multi-usuario (Make.com, Twilio SMS)
-  reto-en-vivo-3/  Proximo
+  reto-en-vivo-3/  Configuracion de Agente OpenClaw (OpenClaw, Gemini, Telegram)
 ```
 
 Cada carpeta es un proyecto independiente con su propio README, stack y documentacion.
