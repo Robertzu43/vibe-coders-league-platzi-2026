@@ -103,15 +103,16 @@ Mapeo tratamiento → productos sugeridos con precios y dónde comprar:
 7. Registra en memory/ como urgencia
 
 ### 6.2 Protocolo de Autenticación Dra. Martínez
-**Contraseña:** `colmillo2026` (almacenada en AGENTS.md)
+**Contraseña:** Almacenada como variable de entorno `ADMIN_PASSWORD` en `~/.openclaw/.env`. AGENTS.md instruye a Pérez a validar contra esta variable. No se escribe la contraseña en archivos markdown del workspace para evitar filtración vía prompt injection.
 
 1. Si alguien dice ser la Dra. Martínez o pide acceso administrativo → pide contraseña
-2. Tras autenticación exitosa puede solicitar:
+2. Pérez compara la respuesta contra `$ADMIN_PASSWORD`
+3. Tras autenticación exitosa puede solicitar:
    - Resumen de citas de hoy
    - Resumen semanal
    - Reporte de ingresos del mes
    - Reenviar información de un paciente a su email
-3. Sesión autenticada expira al cerrar la conversación
+4. Sesión autenticada expira al cerrar la conversación
 
 ### 6.3 Protocolo de Memoria por Cita
 Cada cita agendada se registra en `memory/YYYY-MM-DD.md`:
@@ -119,15 +120,23 @@ Cada cita agendada se registra en `memory/YYYY-MM-DD.md`:
 ## Cita Agendada
 - Paciente: [nombre]
 - Telegram: @[usuario]
+- Telegram Chat ID: [chat_id numérico]
 - Servicio: [servicio]
 - Precio: $[precio]
 - Doctor: [doctor]
 - Fecha/Hora: [fecha hora]
+- Estado: agendada | completada | cancelada
 - Notas: [detalles mencionados por el paciente]
 ```
 
+**Chat ID:** El Telegram chat ID numérico es obligatorio para enviar mensajes proactivos (recordatorios, follow-ups). Se obtiene automáticamente cuando el paciente escribe al bot.
+
+**Estado de citas:** Las citas se registran como `agendada`. Cuando la fecha/hora de la cita pasa, el cron de follow-up la trata como `completada` (proxy por fecha). Si el paciente cancela, se marca como `cancelada`.
+
+**Registro en MEMORY.md:** Además del log diario, Pérez mantiene un registro de pacientes conocidos en MEMORY.md con: nombre, Telegram chat ID, historial de servicios y fechas. Esto permite saludar por nombre y recordar visitas previas.
+
 ### 6.4 Protocolo de Productos Post-Tratamiento
-Después de confirmar que una cita se completó (vía follow-up de 7 días), Pérez sugiere productos de PRODUCTOS.md relacionados al tratamiento realizado.
+Implementado dentro del cron job `post-treatment-followup` (sección 8.3). En el mismo mensaje de follow-up a los 7 días, Pérez incluye las recomendaciones de PRODUCTOS.md según el tratamiento realizado. No es un mecanismo separado.
 
 ### 6.5 Regla de Disponibilidad
 Pérez SIEMPRE revisa Google Calendar antes de proponer un horario. Nunca inventa disponibilidad. Si no puede acceder al calendar: "Déjame tu nombre y número, y te confirmo en cuanto pueda revisar la agenda."
@@ -186,7 +195,7 @@ Pérez SIEMPRE revisa Google Calendar antes de proponer un horario. Nunca invent
 - **Schedule:** Todos los días a las 11:00 AM
 - **Sesión:** isolated
 - **Acción:**
-  1. Revisa memory/ buscando citas completadas hace 7 días
+  1. Revisa memory/ buscando citas agendadas cuya fecha/hora fue hace 7 días (proxy: si la fecha pasó y no fue cancelada, se considera completada)
   2. Envía por Telegram:
      "¡Hola [nombre]! 🐭 Ya pasó una semana desde tu [servicio]. ¿Cómo te has sentido? ¿Alguna molestia? Si todo está bien y tuviste una buena experiencia, nos ayudaría mucho tu reseña en Google: [link]. ¡Tu opinión nos ayuda a seguir cuidando sonrisas! ⭐"
   3. Sugiere productos de PRODUCTOS.md según el tratamiento
@@ -211,7 +220,7 @@ Pérez SIEMPRE revisa Google Calendar antes de proponer un horario. Nunca invent
   SOUL.md            → Personalidad, protocolos (urgencia, auth, conversación)
   USER.md            → Datos de la Dra. Martínez como operadora
   AGENTS.md          → Reglas operativas, contraseña admin, protocolo de memoria
-  TOOLS.md           → Config de entorno (Telegram bot, email SMTP)
+  TOOLS.md           → Config de entorno (Telegram bot, notas locales)
   HEARTBEAT.md       → Vacío (usamos cron jobs)
   CLINICA.md         → Catálogo: doctores, servicios, precios, horarios
   PRODUCTOS.md       → Recomendaciones post-tratamiento
@@ -223,9 +232,9 @@ Pérez SIEMPRE revisa Google Calendar antes de proponer un horario. Nunca invent
 
 | Dependencia | Tipo | Detalle |
 |-------------|------|---------|
-| Skill GOG | Marketplace skill | Google Calendar + Gmail via `dramartinezcolmillo@gmail.com` |
+| Skill GOG | Marketplace skill | Google Calendar (agendar/consultar/cancelar citas) + Gmail API (enviar emails a la Dra.) — todo via cuenta `dramartinezcolmillo@gmail.com`. Email se envía exclusivamente por Gmail API a través de GOG, no por SMTP. |
 | Telegram Bot | Canal OpenClaw | Bot ya configurado en el gateway |
-| Google Reviews | Link externo | URL estática a la página de reseñas de la clínica |
+| Google Reviews | Link externo | URL estática a la página de reseñas de la clínica (configurar en TOOLS.md como `GOOGLE_REVIEWS_URL`) |
 
 ## 11. Modelo LLM
 
