@@ -1,6 +1,6 @@
 # Vibe Coders League - Platzi 2026
 
-> 13 retos. 13 proyectos. Un camino completo por el mundo de la IA aplicada al desarrollo.
+> 13 retos + 3 retos en vivo. 16 proyectos. Un camino completo por el mundo de la IA aplicada al desarrollo.
 
 ## Para la Comunidad Platzi
 
@@ -27,7 +27,7 @@ La liga de vibecoders de Platzi 2026 es de todos. Construyamos juntos.
 
 ## Y asi fue como hice los retos
 
-Cada reto explora una dimension distinta de la IA aplicada: desde landing pages con animaciones hasta agentes conversacionales, desde automatizaciones empresariales hasta generacion de video e imagen con IA, desde prompt engineering hasta diseno de system prompts para chatbots personalizados.
+Cada reto explora una dimension distinta de la IA aplicada: desde landing pages con animaciones hasta agentes conversacionales, desde automatizaciones empresariales hasta generacion de video e imagen con IA, desde prompt engineering hasta diseno de system prompts para chatbots personalizados. Los **retos en vivo** extienden el recorrido con desafios resueltos en tiempo real durante sesiones de la liga.
 
 **Todo fue construido principalmente con [Claude Code](https://claude.ai/claude-code)** como copiloto de desarrollo — planeacion, arquitectura, implementacion, revision y documentacion. Este repo demuestra que el vibe coding no es solo escribir codigo con IA: es pensar, disenar y construir con ella.
 
@@ -50,6 +50,16 @@ Cada reto explora una dimension distinta de la IA aplicada: desde landing pages 
 | 11 | [Agente Interno Sierra Dorada Coffee](./reto-11) | AI Chatbot / Telegram Bot |
 | 12 | [Prompt Engineering: De generico a preciso](./reto-12) | Documentacion / Prompt Engineering |
 | 13 | [System Prompt Design: Professor AI](./reto-13) | Documentacion / System Prompt Design |
+
+---
+
+## Retos en Vivo
+
+| # | Reto | Categoria |
+|---|------|-----------|
+| 01 | [LicitaPro](./reto-en-vivo-1) | Landing Page / Lovable |
+| 02 | [Commute Buddy v3 Multi-usuario](./reto-en-vivo-2) | Automation / Make.com |
+| 03 | Proximo | - |
 
 ---
 
@@ -85,20 +95,22 @@ Cada reto explora una dimension distinta de la IA aplicada: desde landing pages 
 
 | Herramienta | Que hace | Retos |
 |---|---|---|
-| **Make.com** | Orquestacion de automatizaciones no-code | 04, 05 |
+| **Make.com** | Orquestacion de automatizaciones no-code | 04, 05, En Vivo 2 |
 | **OpenClaw** | Gateway de agentes autonomos con cron | 03 |
 | **grammY** | Framework para bots de Telegram | 11 |
 | **Telegram Bot API** | Entrega de mensajes y webhooks | 03, 11 |
-| **Twilio / WhatsApp Business** | Notificaciones por WhatsApp | 04, 05 |
+| **Twilio / WhatsApp Business** | Notificaciones por WhatsApp y SMS | 04, 05, En Vivo 2 |
 
 ### APIs y Servicios Externos
 
 | Herramienta | Que hace | Retos |
 |---|---|---|
 | **Square POS** | Webhooks de ordenes de venta | 05 |
-| **Google Sheets** | Almacenamiento de inventario y datos | 05 |
-| **OpenWeatherMap** | Pronostico de lluvia | 04 |
+| **Google Sheets** | Almacenamiento de inventario y datos | 05, En Vivo 2 |
+| **Google Forms** | Registro de usuarios | En Vivo 2 |
+| **OpenWeatherMap** | Pronostico de lluvia | 04, En Vivo 2 |
 | **X / Twitter API** | Monitoreo de tweets de TransMilenio | 04 |
+| **Lovable** | Generacion de landing pages con IA | En Vivo 1 |
 
 ---
 
@@ -119,6 +131,9 @@ Vibe-Coders-League-Platzi-2026/
   reto-11/     Sierra Dorada Coffee Bot (grammY, Cloudflare Workers AI)
   reto-12/     Prompt Engineering (Documentacion)
   reto-13/     System Prompt Design (Documentacion, Gemini Gem)
+  reto-en-vivo-1/  LicitaPro (Lovable, Landing Page)
+  reto-en-vivo-2/  Commute Buddy v3 Multi-usuario (Make.com, Twilio SMS)
+  reto-en-vivo-3/  Proximo
 ```
 
 Cada carpeta es un proyecto independiente con su propio README, stack y documentacion.
