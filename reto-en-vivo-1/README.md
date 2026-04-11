@@ -57,6 +57,16 @@ Inspirada en un proyecto real del autor ([CostaRica_Tenders](https://github.com/
 - Matching por IA con 94% de precision
 - Escaneo cada 2 horas
 
+## Conversation Log
+
+El archivo [`LicitaPro_Conversation.txt`](./LicitaPro_Conversation.txt) contiene el chat completo de brainstorming con Claude donde se definio:
+
+- La idea de la startup y el nombre "LicitaPro"
+- Las decisiones de diseno (estilo SaaS, bilingue, secciones)
+- El prompt final enviado a Lovable para generar la landing
+- El pitch de 2 minutos
+- La conexion con el proyecto real CostaRica_Tenders
+
 ## Contexto del reto
 
 Este fue el primer reto en vivo de la Vibe Coders League. El objetivo era crear una landing page en Lovable para una startup ficticia que resolviera un problema real, acompanada de un pitch de 2 minutos.
