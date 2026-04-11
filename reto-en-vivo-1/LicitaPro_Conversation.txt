@@ -1,0 +1,95 @@
+===============================================
+LICITAPRO — CONVERSATION LOG
+===============================================
+
+--- BRAINSTORMING ---
+
+User: Quiero crear una app en Lovable y necesito un prompt.
+User: Corrección — debe ser una landing, no una app.
+User: Debe ser de una startup ficticia que resuelva un problema real.
+User: Quiere una startup de búsqueda de licitaciones en distintos países de LATAM.
+      Inspirada en su proyecto: CostaRica_Tenders (sistema de monitoreo de licitaciones
+      gubernamentales de Costa Rica con web scrapper sobre SICOP y API REST).
+
+Decisiones:
+- Nombre: LicitaPro
+- Estilo: Moderno/SaaS (estilo Stripe, Linear)
+- Secciones: Todas (Hero, Problema, Cómo funciona, Features, Países, Pricing, Testimonios, FAQ, CTA, Footer)
+- Idioma: Bilingüe (toggle español/inglés)
+- Países cubiertos: México, Colombia, Chile, Perú, Argentina, Brasil, Costa Rica
+
+===============================================
+PROMPT PARA LOVABLE
+===============================================
+
+Create a modern SaaS-style landing page for "LicitaPro", a startup that monitors government tenders (licitaciones) across Latin America and matches them to companies automatically using AI.
+
+LANGUAGE: The entire landing must support bilingual toggle (Spanish/English). Default language: Spanish. Add a language switcher in the navbar.
+
+STYLE: Modern SaaS aesthetic inspired by Stripe and Linear. Clean, minimalist, with subtle gradients (blues, purples, teals). Use a sans-serif font like Inter or similar. Light mode by default. Smooth scroll animations and micro-interactions.
+
+SECTIONS (in order):
+
+1. **Navbar** — Logo "LicitaPro", nav links to each section, language toggle (ES/EN), and a CTA button "Comenzar gratis / Start free".
+
+2. **Hero** — Bold headline: "Nunca más pierdas una licitación relevante" / "Never miss a relevant tender again". Subheadline: "Monitoreamos licitaciones gubernamentales en 7 países de Latinoamérica y te alertamos cuando hay una oportunidad para tu empresa." / "We monitor government tenders in 7 Latin American countries and alert you when there's an opportunity for your business." Two CTA buttons: "Comenzar gratis / Start free" (primary) and "Ver demo / Watch demo" (secondary outline). Add an abstract dashboard mockup or illustration on the right side.
+
+3. **Problem section** — Title: "El problema / The problem". Show 3 cards with pain points: (1) "Miles de licitaciones publicadas cada día en portales dispersos" / "Thousands of tenders published daily across scattered portals", (2) "Revisión manual consume horas sin garantía de encontrar oportunidades" / "Manual review takes hours with no guarantee of finding opportunities", (3) "Plazos cortos: si te enterás tarde, ya perdiste" / "Tight deadlines: if you find out late, you already lost". Use icons for each card.
+
+4. **How it works** — Title: "Cómo funciona / How it works". Three steps with icons and connecting lines: Step 1: "Registrá tu empresa y configurá tus productos y palabras clave" / "Register your company and set up your products and keywords". Step 2: "Nuestro sistema escanea portales gubernamentales cada 2 horas" / "Our system scans government portals every 2 hours". Step 3: "Recibí alertas por email con las licitaciones que te interesan" / "Receive email alerts with the tenders that matter to you".
+
+5. **Features** — Title: "Todo lo que necesitás / Everything you need". Grid of 6 feature cards with icons: (1) "Monitoreo automático 24/7" / "24/7 automatic monitoring", (2) "Matching por productos y palabras clave" / "Matching by products and keywords", (3) "Alertas por email en tiempo real" / "Real-time email alerts", (4) "Búsqueda avanzada con filtros" / "Advanced search with filters", (5) "API REST para integración" / "REST API for integration", (6) "Dashboard con métricas y estadísticas" / "Dashboard with metrics and statistics".
+
+6. **Countries covered** — Title: "Cobertura regional / Regional coverage". Show a stylized map or visual of Latin America highlighting 7 countries: México, Colombia, Chile, Perú, Argentina, Brasil, Costa Rica. Each country should have a small flag icon and the number of tenders monitored (use fictional numbers like "12,400+ licitaciones activas"). Add a subtle note: "Próximamente más países / More countries coming soon".
+
+7. **Pricing** — Title: "Planes / Plans". Three pricing cards: (1) "Starter" — Free, 1 user, 3 keywords, 5 products, email alerts, 1 country. (2) "Pro" — $49/month, 5 users, unlimited keywords and products, all countries, API access, priority support. (3) "Enterprise" — Custom pricing, unlimited everything, dedicated support, custom integrations, SLA. Highlight the "Pro" plan as most popular. Each plan has a CTA button.
+
+8. **Testimonials** — Title: "Lo que dicen nuestros clientes / What our clients say". Three testimonial cards with fictional quotes, names, roles, and company names from different LATAM countries. Use avatar placeholders.
+
+9. **FAQ** — Title: "Preguntas frecuentes / FAQ". Accordion-style with 5 questions: (1) What tender sources do you monitor?, (2) How often is data updated?, (3) Can I integrate with my existing systems?, (4) Which countries are available?, (5) Is there a free trial?.
+
+10. **Final CTA** — Dark background section with bold text: "Empezá a ganar licitaciones hoy / Start winning tenders today". Email input field + "Comenzar gratis / Start free" button. Below: "No requiere tarjeta de crédito / No credit card required".
+
+11. **Footer** — Logo, links organized in columns (Producto, Compañía, Legal, Soporte / Product, Company, Legal, Support), social media icons, and copyright text.
+
+Make the page fully responsive (mobile, tablet, desktop). Add smooth scroll-to-section behavior for navbar links. Use Framer Motion or similar for subtle entrance animations on scroll.
+
+===============================================
+PITCH — LICITAPRO (2 MINUTOS)
+===============================================
+
+[1. APERTURA | 15s]
+
+"¿Sabían que las compras públicas representan entre el 15% y 20% del PIB en Latinoamérica? Son billones de dólares en contratos que se publican cada día. Y la mayoría de las empresas los están perdiendo. No porque no sean capaces de ganarlos, sino porque ni siquiera se enteran a tiempo. Eso es lo que resuelve LicitaPro."
+
+[2. EL PROBLEMA | 30s]
+
+"Hoy el proceso de encontrar licitaciones relevantes está completamente roto. Miles se publican cada día en portales dispersos de distintos países — cada uno con su propia plataforma, su propio formato. Los equipos comerciales pierden hasta 20 horas a la semana buscando manualmente, leyendo pliegos y filtrando anexos. Eso es un tercio de la jornada laboral. Y lo peor: los plazos son cortos. En licitaciones abreviadas pueden ser menos de 7 días. Si te enteraste tarde, ya perdiste."
+
+[3. CÓMO FUNCIONA | 30s]
+
+"LicitaPro lo resuelve en tres pasos. Primero, registras tu empresa y configuras tus productos y palabras clave — le dices al sistema qué vendes y qué te interesa. Segundo, nuestro sistema escanea automáticamente los portales gubernamentales cada 2 horas, 24/7, sin intervención manual. Tercero, recibes alertas por email, WhatsApp o Slack únicamente con las licitaciones que hacen match con tu perfil. Sin ruido. Sin búsqueda manual. Solo oportunidades reales."
+
+[4. TODO LO QUE NECESITAS | 25s]
+
+"Pero LicitaPro no es solo alertas. Es una plataforma completa. Tenemos matching por IA con un 94% de precisión que empareja licitaciones con tu perfil. Búsqueda avanzada con filtros por país, categoría, monto y fecha límite. Un dashboard analítico con métricas de oportunidades y tendencias. Y una API REST para que integres las licitaciones directamente en tu CRM o sistema interno. Todo lo que tu equipo necesita para ganar más licitaciones."
+
+[5. COBERTURA REGIONAL Y PLANES | 20s]
+
+"Hoy monitoreamos más de 55,000 licitaciones activas en 7 países: México, Colombia, Chile, Perú, Argentina, Brasil y Costa Rica — y seguimos expandiéndonos. Para empezar, ofrecemos un plan gratuito. El plan Pro cuesta $49 al mes con acceso a todos los países, palabras clave ilimitadas y API. Y para grandes empresas, un plan Enterprise a la medida. Pueden probar LicitaPro hoy, sin tarjeta de crédito. Gracias."
+
+===============================================
+INFORMACIÓN DEL PROYECTO ORIGINAL — CostaRica_Tenders
+===============================================
+
+Sistema de monitoreo automático de licitaciones gubernamentales de Costa Rica.
+Compuesto por un web scrapper sobre SICOP y una API REST (Node.js) para consulta
+y gestión de alertas por empresa.
+
+Funcionalidades clave:
+- Scraping automático de SICOP cada 2 horas
+- Filtrado por tipos de licitación: [LN], [LI], [LA], [LY], [LE], [LD]
+- Matching automático por productos y palabras clave
+- Notificaciones por email
+- API REST con autenticación JWT
+- Endpoints para gestión de empresas, productos, palabras clave y licitaciones
