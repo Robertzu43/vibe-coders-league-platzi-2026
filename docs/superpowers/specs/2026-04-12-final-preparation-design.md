@@ -124,7 +124,7 @@ The final deliverable includes a **time-boxed superpowers protocol** — the exa
 ## Challenge Prompt Design Constraints
 
 All prompts across all three phases must:
-- **Avoid past reto en vivo categories:** No landing pages, no-code automations, or Telegram AI agents
+- **Avoid past reto en vivo categories:** no-code automations with Make.com, no use of openclaw and this sort of gateways
 - **Be realistic for Platzi:** Grounded in the kind of challenge a Latin American tech education platform would set
 - **Be ambiguous enough to reward creativity:** The prompt should allow 5+ valid interpretations
 - **Be buildable in 90 minutes:** No prompt should require more than what's achievable with modern tools under time pressure
@@ -157,3 +157,15 @@ Roberto is ready for the final when:
 
 ### Not ready threshold
 If any Phase 3 simulation fails to produce a demo-ready product in 90 minutes, diagnose the bottleneck and run an additional targeted simulation before declaring readiness.
+
+
+## Possible challenges
+
+Roberto thinks some possible challenges may include this sort of conditionals or criteria, or could be around: 
+
+1. create a landing page for the vibe corders league - like make a really impresive page aout the league, including certain criteria, citings to platzi courses, other challengers. 
+2. create a personal landing page for what I have done across the whole challenge 
+3. make a challenge that include as a part of it the generation of images or videos with nano banana or heygen 
+4. make a challenge what requires the use of at least 3 different tools, for example: make an app but use at least 3 different vibe coding tools that are visible 
+5. a completely free challenge, develop what you want but with certain conditions or tools 
+6. build the most impressive thing that you can within 90 minutes 
