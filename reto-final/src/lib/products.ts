@@ -205,7 +205,7 @@ export const products: Product[] = [
     slug: "platzi-playbook",
     description: "The radical guide to mastering your life, your future, and your wealth. This is not a self-help book to feel good. It's the manual to build, grow, and find calm without lying to yourself. Dedicated to ambitious people who feel suffocated by their environment or their origins.",
     descriptionEs: "La gu\u00eda radical para dominar tu vida, tu futuro y tu riqueza. Este no es un libro de autoayuda para sentirse bien. Es el manual para construir, crecer y encontrar calma sin mentirte. Est\u00e1 dedicado a las personas ambiciosas que se sienten asfixiadas por su entorno o por su origen.",
-    price: 34.99,
+    price: 17.95,
     image: `${IMG}/book.png`,
     images: [`${IMG}/book.png`],
     collection: "premium",
