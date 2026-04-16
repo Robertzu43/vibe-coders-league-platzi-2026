@@ -15,20 +15,20 @@ export function Footer() {
 
   const footerLinks = {
     shop: [
-      { label: t.footer.allProducts, href: '/catalog' },
-      { label: t.footer.premiumCollection, href: '/catalog?collection=premium' },
-      { label: t.footer.funCollection, href: '/catalog?collection=fun' },
-      { label: t.footer.limitedEdition, href: '/catalog?collection=limited' },
+      { label: t.footer.allProducts, href: '/catalog', external: false },
+      { label: t.footer.premiumCollection, href: '/catalog?collection=premium', external: false },
+      { label: t.footer.funCollection, href: '/catalog?collection=fun', external: false },
+      { label: t.footer.limitedEdition, href: '/catalog?collection=limited', external: false },
     ],
     company: [
-      { label: t.footer.aboutUs, href: '#' },
-      { label: t.footer.contactLink, href: '/contact' },
-      { label: t.footer.careers, href: '#' },
+      { label: t.footer.aboutUs, href: 'https://platzi.com/about/', external: true },
+      { label: t.footer.contactLink, href: '/contact', external: false },
+      { label: t.footer.careers, href: 'https://platzi.com/empleos/', external: true },
     ],
     support: [
-      { label: t.footer.faq, href: '#' },
-      { label: t.footer.shipping, href: '#' },
-      { label: t.footer.returns, href: '#' },
+      { label: t.footer.faq, href: '/contact', external: false },
+      { label: t.footer.shipping, href: '/contact', external: false },
+      { label: t.footer.returns, href: '/contact', external: false },
     ],
   }
 
@@ -52,6 +52,8 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-xl bg-secondary hover:bg-primary hover:text-primary-foreground flex items-center justify-center text-muted-foreground transition-all duration-200"
                   aria-label={social.label}
                 >
@@ -69,12 +71,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.shop.map(link => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.external ? (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</a>
+                  ) : (
+                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -88,12 +89,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map(link => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.external ? (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</a>
+                  ) : (
+                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -107,12 +107,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.support.map(link => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.external ? (
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</a>
+                  ) : (
+                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
