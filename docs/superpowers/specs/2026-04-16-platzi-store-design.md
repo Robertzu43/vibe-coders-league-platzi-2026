@@ -165,8 +165,11 @@ Pre-loaded with:
 Webhook (always listening) at a Make.com URL.
 
 ### Flow
-1. User clicks "Place Order" in cart
-2. Next.js API route `POST /api/order` sends payload to Make.com webhook
+1. User clicks "Place Order" in cart modal
+2. Next.js API route `POST /api/order`:
+   a. Validates discount code (if provided) against Supabase `discount_codes` table
+   b. Saves order to Supabase `orders` table
+   c. Sends payload to Make.com webhook
 3. Make.com scenario receives order data
 4. Formats HTML confirmation email with Platzi branding
 5. Sends email via Gmail/SMTP module to customer
