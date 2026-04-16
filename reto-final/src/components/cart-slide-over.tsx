@@ -329,7 +329,7 @@ export function CartSlideOver() {
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
-        onClick={() => !isProcessing && setIsOpen(false)}
+        onClick={() => setIsOpen(false)}
       />
 
       {/* Slide-over panel */}
@@ -350,15 +350,13 @@ export function CartSlideOver() {
                 </span>
               )}
             </div>
-            {!isProcessing && (
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 rounded-xl hover:bg-secondary transition-colors"
-                aria-label={t.cart.closeCart}
-              >
-                <X className="w-5 h-5 text-muted-foreground" />
-              </button>
-            )}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-2 rounded-xl hover:bg-secondary transition-colors"
+              aria-label={t.cart.closeCart}
+            >
+              <X className="w-5 h-5 text-muted-foreground" />
+            </button>
           </div>
 
           {/* Processing Screen */}
