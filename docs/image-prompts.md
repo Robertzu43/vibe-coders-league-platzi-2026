@@ -11,62 +11,82 @@
 
 ### 1. Hoodie — $89.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a dark charcoal-black hoodie for an e-commerce store. The hoodie is displayed on an invisible mannequin, slightly angled, on a dark background (#141414). It has a small embroidered logo on the left chest — two interlocking diamond shapes in emerald green (#0AE88A). Clean minimal design, heavyweight premium fabric with visible texture. Subtle emerald green accent lighting from the left side creates a soft glow along the fabric edges. Studio lighting, high-end fashion e-commerce product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a dark charcoal-black hoodie for an e-commerce store. The hoodie is displayed on an invisible mannequin, slightly angled, on a dark background (#141414). It has a small embroidered logo on the left chest — use the provided Platzi logo reference image exactly as shown, in emerald green (#0AE88A). Clean minimal design, heavyweight premium fabric with visible texture. Subtle emerald green accent lighting from the left side creates a soft glow along the fabric edges. Studio lighting, high-end fashion e-commerce product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 2. T-Shirt — $39.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a black premium fitted t-shirt for an e-commerce store. The t-shirt has a subtle embroidered logo on the left chest — two small interlocking diamond shapes in emerald green (#0AE88A). Soft premium cotton fabric with a modern slim fit. Displayed flat-lay style at a slight angle on a dark matte surface, dark background (#141414). Subtle emerald green rim lighting highlights the shirt's silhouette. Clean, minimalist composition. Studio lighting, luxury streetwear e-commerce product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a black premium fitted t-shirt for an e-commerce store. The t-shirt has a subtle embroidered logo on the left chest — use the provided Platzi logo reference image exactly as shown, in emerald green (#0AE88A). Soft premium cotton fabric with a modern slim fit. Displayed flat-lay style at a slight angle on a dark matte surface, dark background (#141414). Subtle emerald green rim lighting highlights the shirt's silhouette. Clean, minimalist composition. Studio lighting, luxury streetwear e-commerce product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 3. Laptop Sleeve — $49.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a sleek dark black padded laptop sleeve for an e-commerce store. The sleeve has an embossed logo — two interlocking diamond shapes — with an emerald green (#0AE88A) fill on the front center. Clean zipper edge, protective padded design. Positioned at a 30-degree angle on a dark matte surface, dark background (#141414), with a laptop partially sliding out. Soft emerald green accent light reflects off the surface. Minimalist tech accessory product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a sleek dark black padded laptop sleeve for an e-commerce store. The sleeve has the provided Platzi logo embossed on the front center in emerald green (#0AE88A). Clean zipper edge, protective padded design. Positioned at a 30-degree angle on a dark matte surface, dark background (#141414), with a laptop partially sliding out. Soft emerald green accent light reflects off the surface. Minimalist tech accessory product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 4. Water Bottle — $29.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a matte black stainless steel water bottle for an e-commerce store. The bottle has a minimalist logo — two interlocking diamond shapes — laser-engraved in emerald green (#0AE88A) on the center. Sleek cylindrical design with a matte finish and a dark cap. Small water droplets on the surface for freshness. Positioned upright on a dark reflective surface, dark background (#141414), with subtle emerald green accent lighting from behind creating a rim glow. Premium lifestyle brand product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a matte black stainless steel water bottle for an e-commerce store. The bottle has the provided Platzi logo laser-engraved in emerald green (#0AE88A) on the center. Sleek cylindrical design with a matte finish and a dark cap. Small water droplets on the surface for freshness. Positioned upright on a dark reflective surface, dark background (#141414), with subtle emerald green accent lighting from behind creating a rim glow. Premium lifestyle brand product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 5. Notebook — $24.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a hardcover black notebook for an e-commerce store. The notebook has an emerald green (#0AE88A) accent stripe along the spine and a small debossed logo — two interlocking diamond shapes — on the front cover in emerald green. Dot grid pages slightly visible with the cover partially open. A dark pen rests beside it. Positioned at a slight angle on a dark matte surface, dark background (#141414). Soft directional lighting with emerald green accent glow from the spine. Minimalist stationery product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a hardcover black notebook for an e-commerce store. The notebook has an emerald green (#0AE88A) accent stripe along the spine and the provided Platzi logo debossed on the front cover in emerald green. Dot grid pages slightly visible with the cover partially open. A dark pen rests beside it. Positioned at a slight angle on a dark matte surface, dark background (#141414). Soft directional lighting with emerald green accent glow from the spine. Minimalist stationery product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 6. Socks — $14.99
 
+> **Reference images:** Upload Platzi logo + Freddy Vega face photo
+
 ```
-Generate a high-resolution photorealistic image of a pair of fun crew socks for an e-commerce store. The socks are black with colorful patterns — emerald green (#0AE88A) geometric shapes, small code bracket symbols "{ }", and tiny interlocking diamond logos scattered throughout the design. Playful but premium feel. Styled as a flat-lay pair, one slightly overlapping the other, on a dark surface, dark background (#141414). Pops of emerald green and subtle neon accents. Fun developer culture vibe. Studio lighting, e-commerce product shot with personality. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a pair of fun crew socks for an e-commerce store. The socks are black with a playful repeating pattern featuring the face of the person shown in the reference photo (Freddy Vega, Platzi CEO) — his face illustrated in a fun cartoonish style in emerald green (#0AE88A) and white, alternating with small code bracket symbols "{ }" and tiny interlocking diamond logos from the provided logo reference. Playful but premium feel. Styled as a flat-lay pair, one slightly overlapping the other, on a dark surface, dark background (#141414). Pops of emerald green and subtle neon accents. Fun developer culture vibe. Studio lighting, e-commerce product shot with personality. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 7. Stickers Pack — $9.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a vinyl sticker pack spread out for an e-commerce store. 10+ stickers scattered artfully on a dark matte surface, dark background (#141414). Stickers include: an interlocking diamond logo in emerald green (#0AE88A), coding symbols "< / >", a terminal window icon, a coffee cup with code steam, "Nunca Pares" text sticker, a pixel heart, a bug with a cross through it (debugging humor), curly braces "{ }", a rocket ship, and dev culture meme designs. All stickers use emerald green, white, and dark tones. Dynamic scattered flat-lay layout. Fun, community-driven product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a vinyl sticker pack spread out for an e-commerce store. 10+ stickers scattered artfully on a dark matte surface, dark background (#141414). Stickers include: the provided Platzi logo as a sticker in emerald green (#0AE88A), coding symbols "< / >", a terminal window icon, a coffee cup with code steam, "Nunca Pares" text sticker, a pixel heart, a bug with a cross through it (debugging humor), curly braces "{ }", a rocket ship, and dev culture meme designs. All stickers use emerald green, white, and dark tones. Dynamic scattered flat-lay layout. Fun, community-driven product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 8. Slippers — $34.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a pair of cozy dark black house slippers for an e-commerce store. The slippers have soft plush lining visible inside and an embroidered logo — two interlocking diamond shapes in emerald green (#0AE88A) — on the top of each slipper. Comfortable, cushioned sole design. Positioned as a pair slightly angled on a dark soft fabric surface, dark background (#141414), suggesting comfort and coding sessions at home. Warm, inviting lighting with subtle emerald green accent highlights. Cozy lifestyle product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a pair of cozy dark black house slippers for an e-commerce store. The slippers have soft plush lining visible inside and the provided Platzi logo embroidered in emerald green (#0AE88A) on the top of each slipper. Comfortable, cushioned sole design. Positioned as a pair slightly angled on a dark soft fabric surface, dark background (#141414), suggesting comfort and coding sessions at home. Warm, inviting lighting with subtle emerald green accent highlights. Cozy lifestyle product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 9. Giant Enter Key Plushie — $44.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of an oversized Enter key plushie toy for an e-commerce store. The plushie is a large, soft, pillow-sized replica of a keyboard Enter/Return key — dark charcoal gray with the "Enter" text and arrow symbol in emerald green (#0AE88A). A small interlocking diamond logo tag in emerald green is sewn on the side. The plushie looks squeezable and satisfying. Positioned at an angle on a dark surface, dark background (#141414), slightly compressed as if just slammed. Dramatic fun lighting with emerald green accent glow. Playful tech culture product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of an oversized Enter key plushie toy for an e-commerce store. The plushie is a large, soft, pillow-sized replica of a keyboard Enter/Return key — dark charcoal gray with the "Enter" text and arrow symbol in emerald green (#0AE88A). A small sewn tag on the side shows the provided Platzi logo in emerald green. The plushie looks squeezable and satisfying. Positioned at an angle on a dark surface, dark background (#141414), slightly compressed as if just slammed. Dramatic fun lighting with emerald green accent glow. Playful tech culture product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 10. Coffee Mug — $19.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a matte black ceramic coffee mug for an e-commerce store. The mug features the text "Nunca Pares de Codear" in a bold playful font in emerald green (#0AE88A) with small coding icons (brackets, semicolons, a tiny terminal) scattered around the text. The interlocking diamond logo appears small near the handle. Coffee steam rises from the top. Positioned on a dark surface, dark background (#141414), with a few coffee beans scattered around. Warm, inviting lighting with emerald green accents. Developer culture lifestyle product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a matte black ceramic coffee mug for an e-commerce store. The mug features the text "Nunca Pares de Codear" in a bold playful font in emerald green (#0AE88A) with small coding icons (brackets, semicolons, a tiny terminal) scattered around the text. The provided Platzi logo appears small near the handle in emerald green. Coffee steam rises from the top. Positioned on a dark surface, dark background (#141414), with a few coffee beans scattered around. Warm, inviting lighting with emerald green accents. Developer culture lifestyle product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 11. Vibe Coders League Cap — $54.99 (Limited Edition)
