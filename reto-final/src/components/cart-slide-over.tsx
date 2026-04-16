@@ -415,6 +415,22 @@ export function CartSlideOver() {
                   </div>
                 </div>
               )}
+
+              {/* Cancel button */}
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setIsProcessing(false)
+                  setProcessingStep(0)
+                  setProcessingSnapshot(null)
+                  setOrderLoading(false)
+                  apiResultRef.current = null
+                  apiDoneRef.current = false
+                }}
+                className="w-full max-w-xs mt-6 h-10 text-sm font-medium text-muted-foreground border-border hover:text-foreground"
+              >
+                {t.cart.cancelOrder}
+              </Button>
             </div>
           ) : orderSuccess ? (
             /* Order Success Screen */

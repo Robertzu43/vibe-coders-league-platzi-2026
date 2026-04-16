@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { ShoppingBag, Menu, X, Globe } from 'lucide-react'
 import { useState } from 'react'
@@ -32,9 +33,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">P</span>
-              </div>
+              <Image src="/platzi-logo.png" alt="Platzi" width={40} height={40} className="w-10 h-10 rounded-xl" />
               <span className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                 Platzi Store
               </span>

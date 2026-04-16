@@ -76,6 +76,7 @@ export const translations = {
       stepSendingConfirmation: "Sending confirmation",
       orderSummary: "Order Summary",
       items: "items",
+      cancelOrder: "Cancel",
     },
     catalog: {
       allProducts: "All Products",
@@ -242,6 +243,7 @@ export const translations = {
       stepSendingConfirmation: "Enviando confirmaci\u00f3n",
       orderSummary: "Resumen del Pedido",
       items: "art\u00edculos",
+      cancelOrder: "Cancelar",
     },
     catalog: {
       allProducts: "Todos los Productos",
