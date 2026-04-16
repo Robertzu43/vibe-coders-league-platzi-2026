@@ -47,25 +47,34 @@ export function ChatbotPanel({ onClose }: ChatbotPanelProps) {
     setIsLoading(true)
 
     try {
+      // Skip the initial greeting message — only send actual conversation
+      const apiMessages = updatedMessages.slice(1).map((msg) => ({
+        role: msg.role === "assistant" ? "assistant" : "user",
+        content: msg.content,
+      }))
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        body: JSON.stringify({ messages: apiMessages }),
       })
 
-      if (res.ok) {
-        const data = await res.json()
+      const data = await res.json()
+
+      if (res.ok && data.message) {
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: data.message },
         ])
       } else {
+        console.error("Chat API error response:", data)
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: t.chatbot.defaultAnswer },
+          { role: "assistant", content: data.error || t.chatbot.defaultAnswer },
         ])
       }
-    } catch {
+    } catch (err) {
+      console.error("Chat fetch error:", err)
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: t.chatbot.defaultAnswer },
