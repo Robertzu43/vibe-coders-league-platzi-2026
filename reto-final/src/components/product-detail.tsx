@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ShoppingBag, Check, Truck, Shield, RotateCcw } from 'lucide-react'
 import { Product, getLocalizedName, getLocalizedDescription, getLocalizedBadge } from '@/lib/products'
+import { BinaryImageReveal } from '@/components/binary-image-reveal'
 import { useCart } from '@/lib/cart-context'
 import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
@@ -69,7 +70,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <div className="space-y-4">
           {/* Main Image */}
           <div className="relative aspect-square bg-card rounded-3xl overflow-hidden border border-border">
-            <Image
+            <BinaryImageReveal
               src={product.images[selectedImage]}
               alt={getLocalizedName(product, locale)}
               fill
