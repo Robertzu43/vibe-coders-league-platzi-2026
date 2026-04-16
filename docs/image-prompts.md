@@ -115,7 +115,7 @@ Generate a high-resolution photorealistic image of the book shown in the provide
 
 ---
 
-## Social Media Images (5)
+## Social Media Images (6)
 
 ### SM-1: Store Launch Announcement
 
@@ -155,6 +155,62 @@ Generate a high-resolution dramatic social media image (1080x1080 square format)
 
 ```
 Generate a high-resolution elegant social media image (1080x1080 square format). Dark background (#141414). A beautifully designed digital gift card floats at the center — dark card with "Nunca Pares de Aprender" in elegant white script typography and the provided Platzi logo prominently in emerald green (#0AE88A). The card is surrounded by a soft emerald green glow and floating sparkle particles. A gift ribbon or bow element in emerald green accents the composition. Text at the top: "Give the Gift of Learning" in clean white sans-serif font. Below the card: "1-Month Platzi Subscription" in light gray. Premium, thoughtful, and inspiring mood. Soft warm lighting mixed with emerald green accent glow. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
+```
+
+### SM-6: Expectation vs. Reality — Platzi Store
+
+> **Reference images:** Upload Platzi logo
+
+```
+Generate a high-resolution humorous social media meme image (1080x1080 square format). Split-screen layout divided in half. Left side labeled "EXPECTATION" in bold white uppercase text at the top: shows a developer sitting at a perfectly clean minimalist desk, calm expression, single monitor with clean code on screen, a cup of coffee, serene lighting, everything in order — idealized work-from-home scene. Right side labeled "REALITY" in bold emerald green (#0AE88A) uppercase text at the top: shows the same developer surrounded by chaos — multiple monitors with error messages and Stack Overflow tabs, empty coffee cups everywhere, snack wrappers, messy cables, a cat on the keyboard, sticky notes all over the monitor, dark eye circles, still coding at 3am with a clock showing the time. The developer on the reality side is wearing Platzi merch — a black hoodie with the provided Platzi logo in emerald green. Dark background (#141414) on both sides. The provided Platzi logo appears centered at the bottom between both panels in emerald green with small text below: "At least you look good while debugging" in light gray. Fun, relatable developer humor, clean graphic design, Instagram meme aesthetic. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
+```
+
+---
+
+## HeyGen Promo Video
+
+### Avatar: Platzi Axolotl Mascot
+
+**Google AI Studio prompt to generate the avatar image for HeyGen:**
+
+> **Reference images:** Upload Platzi logo
+
+```
+Generate a high-resolution image of a cute and friendly cartoon axolotl mascot character for a tech education brand. The axolotl is standing upright on two legs in a confident, welcoming pose with one hand waving. It has the classic axolotl features — wide smile, external gills, round head — but stylized in a modern 3D cartoon style (Pixar/Nintendo quality). The axolotl's skin color is emerald green (#0AE88A) with lighter green (#4FF7AD) highlights on the belly and gills. It is wearing a small black hoodie with the provided Platzi logo on the chest in emerald green. Its eyes are large, expressive, and friendly with a spark of curiosity. The character has a fun, approachable personality — like a mascot that would host a coding tutorial. Clean solid dark background (#141414). Full body visible, centered composition. Character design style, suitable for animation and video use. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
+```
+
+### Video: Platzi Store Launch — 30-60 seconds
+
+**Script / Prompt for HeyGen:**
+
+```
+Create a 30-60 second promotional video for the Platzi Store launch. The presenter is the Platzi Axolotl mascot (upload the generated avatar image). Friendly, energetic, casual tone, speaking in Spanish.
+
+INTRO (0-10s):
+Axolotl avatar appears on screen with a dark background (#141414) and emerald green (#0AE88A) accent lighting. Axolotl says: "¡Hola comunidad Platzi! Tenemos algo increíble para ustedes..."
+
+REVEAL (10-20s):
+Transition to "PLATZI STORE" title card in bold white text with the Platzi logo in emerald green. Axolotl continues: "Les presentamos la primera tienda oficial de merch de Platzi."
+
+PREMIUM COLLECTION (20-30s):
+Showcase Premium/Minimalist products (hoodie, t-shirt, laptop sleeve, water bottle, notebook). Axolotl says: "Nuestra colección Premium — diseño minimalista, calidad premium. Desde hoodies hasta libretas, todo con el sello Platzi."
+
+FUN COLLECTION (30-40s):
+Showcase Fun/Community products (socks, stickers, slippers, Enter key plushie, mug). Axolotl says: "Y la colección Fun — medias con la cara de Freddy, stickers de dev culture, un plushie de Enter key para cuando el código no compila, y más."
+
+SPECIAL EDITION (40-50s):
+Spotlight VCL Cap, Gift Subscription, and El Libro Real. Axolotl says: "Edición limitada: la gorra Vibe Coders League solo disponible hasta abril 2026, El Libro Real de Freddy Vega, y suscripciones de regalo."
+
+CTA (50-60s):
+Axolotl returns on screen, Platzi logo and store URL appear. Axolotl says: "Visita la Platzi Store ahora. Nunca pares de aprender... y nunca pares de lucir bien mientras codeas."
+
+STYLE NOTES:
+- Dark theme throughout (#141414 background)
+- Emerald green (#0AE88A) accents, transitions, and lower thirds
+- Platzi logo visible in corner throughout
+- Upbeat background music, tech/startup energy
+- Transitions between sections: smooth emerald green wipe or fade
+- End card: Platzi logo + store URL + "Nunca Pares de Aprender"
 ```
 
 ---

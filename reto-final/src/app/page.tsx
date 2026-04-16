@@ -2,6 +2,7 @@
 
 import { HeroSection } from '@/components/hero-section'
 import { CollectionSection } from '@/components/collection-section'
+import { CtaBanner } from '@/components/cta-banner'
 import { getProductsByCollection, getFeaturedProducts } from '@/lib/products'
 import { useLanguage } from '@/lib/language-context'
 
@@ -37,6 +38,8 @@ export default function HomePage() {
         products={funProducts}
         collectionSlug="fun"
       />
+
+      <CtaBanner />
     </div>
   )
 }
