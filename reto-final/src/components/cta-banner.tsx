@@ -24,8 +24,8 @@ export function CtaBanner() {
 
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-6">
           {locale === 'es'
-            ? 'Viste Tu Pasión Por El Código'
-            : 'Wear Your Passion For Code'}
+            ? 'Viste tu pasión por aprender'
+            : 'Wear your passion for learning'}
         </h2>
 
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
