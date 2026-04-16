@@ -1,24 +1,83 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-@theme inline {
-  --color-platzi-green: #0AE88A;
-  --color-platzi-green-hover: #4FF7AD;
-  --color-platzi-green-strong: #05824D;
-  --color-platzi-bg: #141414;
-  --color-platzi-bg-secondary: #1C1C1C;
-  --color-platzi-bg-tertiary: #292929;
-  --color-platzi-text: #F7FAF7;
-  --color-platzi-text-secondary: #919996;
-  --color-platzi-text-on-button: #141414;
-  --color-platzi-error: #E63357;
-  --color-platzi-info: #0AB5E8;
-  --color-platzi-warning: #F5D400;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #141414;
+  --foreground: #F7FAF7;
+  --card: #1C1C1C;
+  --card-foreground: #F7FAF7;
+  --popover: #1C1C1C;
+  --popover-foreground: #F7FAF7;
+  --primary: #0AE88A;
+  --primary-foreground: #141414;
+  --secondary: #1C1C1C;
+  --secondary-foreground: #F7FAF7;
+  --muted: #1C1C1C;
+  --muted-foreground: #919996;
+  --accent: #0AE88A;
+  --accent-foreground: #141414;
+  --destructive: #ef4444;
+  --destructive-foreground: #F7FAF7;
+  --border: #2A2A2A;
+  --input: #2A2A2A;
+  --ring: #0AE88A;
+  --radius: 0.75rem;
 }
 
-body {
+@theme inline {
+  --font-sans: 'Inter', 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: #141414;
-  color: #F7FAF7;
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A3A;
 }
