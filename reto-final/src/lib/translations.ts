@@ -125,7 +125,7 @@ export const translations = {
       emailLabel: "Email",
       responseTime: "Response Time",
       responseTimeValue: "Within 24 hours",
-      assistantName: "Platzi Assistant",
+      assistantName: "Asistente Platzi Store",
       online: "Online",
       greeting:
         "Hi! I'm your Platzi Store assistant. How can I help you today?",
@@ -292,7 +292,7 @@ export const translations = {
       emailLabel: "Correo",
       responseTime: "Tiempo de Respuesta",
       responseTimeValue: "Dentro de 24 horas",
-      assistantName: "Asistente Platzi",
+      assistantName: "Asistente Platzi Store",
       online: "En l\u00ednea",
       greeting:
         "\u00a1Hola! Soy tu asistente de Platzi Store. \u00bfC\u00f3mo puedo ayudarte hoy?",
