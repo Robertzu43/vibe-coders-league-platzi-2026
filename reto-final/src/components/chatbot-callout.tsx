@@ -22,25 +22,35 @@ export function ChatbotCallout() {
     t.chatbot.orderStatus,
   ]
 
-  const handleSend = (message: string) => {
-    if (!message.trim()) return
+  const [isLoading, setIsLoading] = useState(false)
 
-    setMessages(prev => [...prev, { role: 'user', content: message }])
+  const handleSend = async (message: string) => {
+    if (!message.trim() || isLoading) return
+
+    const userMessage = { role: 'user' as const, content: message }
+    setMessages(prev => [...prev, userMessage])
     setInput('')
+    setIsLoading(true)
 
-    // Simulate bot response
-    setTimeout(() => {
-      const responses: Record<string, string> = {
-        [t.chatbot.returnPolicy]: t.chatbot.returnPolicyAnswer,
-        [t.chatbot.shippingTime]: t.chatbot.shippingTimeAnswer,
-        [t.chatbot.international]: t.chatbot.internationalAnswer,
-        [t.chatbot.orderStatus]: t.chatbot.orderStatusAnswer,
-      }
+    try {
+      const apiMessages = [...messages, userMessage].map(msg => ({
+        role: msg.role === 'bot' ? 'assistant' : 'user',
+        content: msg.content,
+      }))
 
-      const botResponse = responses[message] || t.chatbot.defaultAnswer
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: apiMessages }),
+      })
 
-      setMessages(prev => [...prev, { role: 'bot', content: botResponse }])
-    }, 1000)
+      const data = await res.json()
+      setMessages(prev => [...prev, { role: 'bot', content: data.message || data.error || t.chatbot.defaultAnswer }])
+    } catch {
+      setMessages(prev => [...prev, { role: 'bot', content: t.chatbot.defaultAnswer }])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -149,6 +159,15 @@ export function ChatbotCallout() {
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-secondary px-4 py-3 rounded-2xl rounded-tl-none flex gap-1">
+                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Quick Responses */}
