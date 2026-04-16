@@ -4,6 +4,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { CartProvider } from '@/lib/cart-context'
 import { LanguageProvider } from '@/lib/language-context'
+import { ChatbotWidget } from '@/components/chatbot-widget'
 import './globals.css'
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <ChatbotWidget />
           </LanguageProvider>
         </CartProvider>
       </body>
