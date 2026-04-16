@@ -15,6 +15,7 @@ Build the Platzi Store — a fully functional online merch store for Platzi's fi
 
 - **Framework:** Next.js (TypeScript), generated via v0
 - **Styling:** Tailwind CSS
+- **Database:** Supabase (PostgreSQL) — products, images, orders
 - **Deployment:** Vercel
 - **Chatbot:** Gemini API
 - **Automation:** Make.com (webhook + email)
@@ -43,30 +44,30 @@ The Platzi logo (interlocking diamond mark) appears in the navbar.
 
 ### Premium/Minimalist Collection (5)
 
-| # | Product | Description |
-|---|---------|-------------|
-| 1 | Hoodie | Clean, minimal Platzi logo embroidered, dark tones |
-| 2 | T-Shirt | Soft fabric, subtle Platzi branding, premium fit |
-| 3 | Laptop Sleeve | Padded sleeve with embossed Platzi logo |
-| 4 | Water Bottle | Matte finish, minimalist Platzi mark |
-| 5 | Notebook | Hardcover, Platzi green accent spine, dot grid |
+| # | Product | Price (USD) | Description | Variants |
+|---|---------|-------------|-------------|----------|
+| 1 | Hoodie | $89.99 | Clean, minimal Platzi logo embroidered, dark tones | S, M, L, XL, XXL |
+| 2 | T-Shirt | $39.99 | Soft fabric, subtle Platzi branding, premium fit | S, M, L, XL, XXL |
+| 3 | Laptop Sleeve | $49.99 | Padded sleeve with embossed Platzi logo | 13", 15", 16" |
+| 4 | Water Bottle | $29.99 | Matte finish, minimalist Platzi mark | — |
+| 5 | Notebook | $24.99 | Hardcover, Platzi green accent spine, dot grid | — |
 
 ### Fun/Community Collection (5)
 
-| # | Product | Description |
-|---|---------|-------------|
-| 6 | Socks | Colorful patterns with Platzi icons and coding motifs |
-| 7 | Stickers Pack | Set of 10+ stickers with Platzi memes and dev culture references |
-| 8 | Slippers | Cozy Platzi-branded slippers for coding sessions |
-| 9 | Giant Enter Key Plushie | Oversized Enter key you can slam — a debugging stress reliever |
-| 10 | Coffee Mug | Fun illustrations, "Nunca Pares de Codear" or similar tagline |
+| # | Product | Price (USD) | Description | Variants |
+|---|---------|-------------|-------------|----------|
+| 6 | Socks | $14.99 | Colorful patterns with Platzi icons and coding motifs | S/M, L/XL |
+| 7 | Stickers Pack | $9.99 | Set of 10+ stickers with Platzi memes and dev culture references | — |
+| 8 | Slippers | $34.99 | Cozy Platzi-branded slippers for coding sessions | S, M, L, XL |
+| 9 | Giant Enter Key Plushie | $44.99 | Oversized Enter key you can slam — a debugging stress reliever | — |
+| 10 | Coffee Mug | $19.99 | Fun illustrations, "Nunca Pares de Codear" or similar tagline | — |
 
 ### Special / Limited Edition (2)
 
-| # | Product | Description |
-|---|---------|-------------|
-| 11 | Vibe Coders League Cap | Limited edition, March-April 2026 only. Premium embroidered VCL logo, structured cap. Badge: "Limited Edition" |
-| 12 | "Nunca Pares de Aprender" Gift Subscription | Buy a 1-month Platzi subscription as a gift. Beautifully designed gift card/voucher visual |
+| # | Product | Price (USD) | Description | Variants |
+|---|---------|-------------|-------------|----------|
+| 11 | Vibe Coders League Cap | $54.99 | Limited edition, March-April 2026 only. Premium embroidered VCL logo, structured cap. Badge: "Limited Edition" | One Size |
+| 12 | "Nunca Pares de Aprender" Gift Subscription | $49.99 | Buy a 1-month Platzi subscription as a gift. Beautifully designed gift card/voucher visual | — |
 
 ## Pages
 
@@ -90,10 +91,16 @@ The Platzi logo (interlocking diamond mark) appears in the navbar.
 - Related products section
 - Limited edition badge + availability note (for VCL Cap)
 
-### Cart Page
-- List of added items with images
+### Cart (Slide-Over Modal)
+The cart is NOT a separate page — it's a slide-over modal panel that opens from the right side of the screen when the user clicks the cart icon in the navbar. Accessible from any page.
+
+**Contents:**
+- Product list with thumbnail images, name, variant, unit price
 - Quantity controls (+/-)
-- Item subtotals and order total
+- Item subtotals and order total (running sum)
+- **Employee Discount section:** Input field for a discount code. Valid codes apply a percentage discount (e.g., `PLATZI-TEAM-20` for 20% off). Discount reflected in the total.
+- **Order Summary:** Subtotal, discount (if applied), total
+- **Payment Methods:** Visual selector showing accepted methods — Credit Card, PayPal, Platzi Credits (all simulated, no real payment processing)
 - Customer info form (name, email) for order confirmation
 - "Place Order" button (triggers Make.com webhook)
 - Success screen after order: "Your order is confirmed! Check your email."
@@ -105,10 +112,25 @@ The Platzi logo (interlocking diamond mark) appears in the navbar.
 
 ## Data Architecture
 
-- **Products:** Static JSON file with all 12 products (id, name, description, price, collection, image path, variants, badges)
-- **Cart State:** React Context with `useReducer` — add, remove, update quantity, clear
-- **No database** — demo store, no persistent backend state
-- **No real payments** — "Place Order" simulates a purchase
+### Database: Supabase (PostgreSQL)
+
+**Why a database:** High-resolution product images need reliable hosting and fast CDN delivery. Supabase provides both a database for product/order data and Storage (S3-compatible) for HD images with automatic CDN.
+
+**Tables:**
+
+| Table | Columns | Purpose |
+|-------|---------|---------|
+| `products` | id, name, slug, description, price, collection, variants (jsonb), badges (jsonb), image_url, created_at | All 12 products |
+| `orders` | id, order_number, customer_name, customer_email, items (jsonb), subtotal, discount_code, discount_percent, total, payment_method, status, created_at | Order records |
+| `discount_codes` | id, code, percent_off, active, description | Employee discount codes |
+
+**Supabase Storage:**
+- Bucket `product-images` — HD product images (Midjourney output uploaded here)
+- Public URLs served via Supabase CDN for fast loading
+
+**Cart State:** React Context with `useReducer` — add, remove, update quantity, clear. Client-side only.
+
+**No real payments** — "Place Order" simulates a purchase. Payment method is recorded but not processed.
 
 ## Chatbot (Gemini API)
 
@@ -157,12 +179,17 @@ Webhook (always listening) at a Make.com URL.
   "items": [
     {
       "name": "string",
+      "variant": "string | null",
       "quantity": 1,
       "price": 29.99,
       "image": "string"
     }
   ],
-  "total": 59.98,
+  "subtotal": 69.98,
+  "discountCode": "string | null",
+  "discountPercent": 20,
+  "total": 55.98,
+  "paymentMethod": "credit_card | paypal | platzi_credits",
   "orderNumber": "PLATZI-XXXX",
   "timestamp": "ISO 8601"
 }
@@ -215,8 +242,11 @@ Key: Midjourney and HeyGen run in parallel with coding. Never block on asset gen
 ## Success Criteria
 
 - Store is live on Vercel with a public URL
-- All 12 products displayed with HD AI-generated images
-- Cart works: add, remove, update quantity, place order
+- All 12 products displayed with HD AI-generated images served from Supabase Storage CDN
+- Products, orders, and discount codes stored in Supabase PostgreSQL
+- Cart modal works: add, remove, update quantity, apply employee discount, select payment method, place order
+- Order summary shows subtotal, discount, and total with running price calculations
+- Employee discount codes validate and apply correctly
 - Place order triggers Make.com webhook and sends confirmation email
 - Gemini chatbot answers product questions and recommends Platzi courses
 - VCL Cap shows as limited edition with urgency elements
