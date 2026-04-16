@@ -30,3 +30,4 @@ out/
 # Logs
 *.log
 npm-debug.log*
+.vercel

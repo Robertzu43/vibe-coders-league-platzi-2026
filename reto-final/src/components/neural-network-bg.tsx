@@ -103,9 +103,13 @@ export function NeuralNetworkBg() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      // Only track if mouse is within the canvas bounds
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        mouseRef.current = { x, y }
+      } else {
+        mouseRef.current = null
       }
     }
 
@@ -117,14 +121,16 @@ export function NeuralNetworkBg() {
       const rect = canvas.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
-      ripplesRef.current.push({
-        x,
-        y,
-        radius: 0,
-        maxRadius: RIPPLE_MAX_RADIUS,
-        strength: RIPPLE_PUSH_FORCE,
-        opacity: 0.6,
-      })
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        ripplesRef.current.push({
+          x,
+          y,
+          radius: 0,
+          maxRadius: RIPPLE_MAX_RADIUS,
+          strength: RIPPLE_PUSH_FORCE,
+          opacity: 0.6,
+        })
+      }
     }
 
     const SCROLL_PARALLAX_FACTOR = 0.15
@@ -138,9 +144,8 @@ export function NeuralNetworkBg() {
 
     window.addEventListener("resize", handleResize)
     window.addEventListener("scroll", handleScroll, { passive: true })
-    canvas.addEventListener("mousemove", handleMouseMove)
-    canvas.addEventListener("mouseleave", handleMouseLeave)
-    canvas.addEventListener("click", handleClick)
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("click", handleClick)
 
     const animate = () => {
       const parent = canvas.parentElement
@@ -335,16 +340,15 @@ export function NeuralNetworkBg() {
       cancelAnimationFrame(animationRef.current)
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("scroll", handleScroll)
-      canvas.removeEventListener("mousemove", handleMouseMove)
-      canvas.removeEventListener("mouseleave", handleMouseLeave)
-      canvas.removeEventListener("click", handleClick)
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("click", handleClick)
     }
   }, [initNodes])
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full pointer-events-auto"
       style={{ zIndex: 0 }}
       aria-hidden="true"
     />
