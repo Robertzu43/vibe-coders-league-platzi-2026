@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Github, Twitter, Linkedin, Instagram } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 
@@ -40,9 +41,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">P</span>
-              </div>
+              <Image src="/platzi-logo.png" alt="Platzi" width={40} height={40} className="w-10 h-10 rounded-xl" />
               <span className="text-xl font-semibold text-foreground">
                 Platzi Store
               </span>

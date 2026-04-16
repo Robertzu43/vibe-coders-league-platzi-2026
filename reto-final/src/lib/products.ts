@@ -197,6 +197,22 @@ export const products: Product[] = [
     badge: "Gift",
     badgeEs: "Regalo",
   },
+  // Premium — Book
+  {
+    id: "13",
+    name: "The Platzi Playbook",
+    nameEs: "El Playbook de Platzi",
+    slug: "platzi-playbook",
+    description: "The definitive guide to building your tech career. Hardcover, 300 pages of wisdom from the Platzi community.",
+    descriptionEs: "La gu\u00eda definitiva para construir tu carrera tech. Tapa dura, 300 p\u00e1ginas de sabidur\u00eda de la comunidad Platzi.",
+    price: 34.99,
+    image: `${IMG}/book.png`,
+    images: [`${IMG}/book.png`],
+    collection: "premium",
+    badges: null,
+    badge: "New",
+    badgeEs: "Nuevo",
+  },
 ]
 
 export function getProductById(id: string): Product | undefined {

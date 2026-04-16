@@ -19,5 +19,12 @@
     "percent_off": 10,
     "active": true,
     "description": "Community member discount — 10% off"
+  },
+  {
+    "id": "4",
+    "code": "EMPLEADOPLATZI",
+    "percent_off": 100,
+    "active": true,
+    "description": "Empleado Platzi — 100% descuento"
   }
 ]

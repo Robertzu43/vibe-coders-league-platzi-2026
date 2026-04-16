@@ -26,6 +26,8 @@ export function NeuralNetworkBg() {
   const nodesRef = useRef<Node[]>([])
   const mouseRef = useRef<{ x: number; y: number } | null>(null)
   const ripplesRef = useRef<Ripple[]>([])
+  const scrollOffsetRef = useRef(0)
+  const prevScrollRef = useRef(0)
 
   const CONNECTION_DISTANCE = 150
   const NODE_COUNT = 65
@@ -125,7 +127,17 @@ export function NeuralNetworkBg() {
       })
     }
 
+    const SCROLL_PARALLAX_FACTOR = 0.15
+
+    const handleScroll = () => {
+      const currentScroll = window.scrollY
+      const delta = currentScroll - prevScrollRef.current
+      prevScrollRef.current = currentScroll
+      scrollOffsetRef.current += delta * SCROLL_PARALLAX_FACTOR
+    }
+
     window.addEventListener("resize", handleResize)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     canvas.addEventListener("mousemove", handleMouseMove)
     canvas.addEventListener("mouseleave", handleMouseLeave)
     canvas.addEventListener("click", handleClick)
@@ -151,6 +163,15 @@ export function NeuralNetworkBg() {
         if (ripple.opacity <= 0 || ripple.radius >= ripple.maxRadius) {
           ripples.splice(i, 1)
         }
+      }
+
+      // Apply scroll parallax offset to all nodes
+      const scrollDelta = scrollOffsetRef.current
+      if (Math.abs(scrollDelta) > 0.01) {
+        for (const node of nodes) {
+          node.y -= scrollDelta
+        }
+        scrollOffsetRef.current = 0
       }
 
       // Update node positions
@@ -313,6 +334,7 @@ export function NeuralNetworkBg() {
     return () => {
       cancelAnimationFrame(animationRef.current)
       window.removeEventListener("resize", handleResize)
+      window.removeEventListener("scroll", handleScroll)
       canvas.removeEventListener("mousemove", handleMouseMove)
       canvas.removeEventListener("mouseleave", handleMouseLeave)
       canvas.removeEventListener("click", handleClick)
