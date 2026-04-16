@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { Product } from '@/lib/products'
+import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
@@ -12,6 +13,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ featuredProducts }: HeroSectionProps) {
+  const { t } = useLanguage()
+
   return (
     <section className="relative overflow-hidden">
       {/* Background gradient */}
@@ -22,26 +25,25 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-6 px-4 py-2 bg-primary/10 text-primary border-primary/20">
             <Sparkles className="w-4 h-4 mr-2" />
-            New Collection Available
+            {t.hero.badge}
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight text-balance">
-            Wear Your Code
-            <span className="block text-primary mt-2">With Pride</span>
+            {t.hero.title1}
+            <span className="block text-primary mt-2">{t.hero.title2}</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
-            Premium tech merchandise designed for developers who appreciate quality,
-            minimalist aesthetics, and the art of clean code.
+            {t.hero.subtitle}
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="h-14 px-8 text-base font-semibold">
               <Link href="/catalog">
-                Shop Collection
+                {t.hero.shopBtn}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-14 px-8 text-base font-semibold border-border hover:bg-secondary">
               <Link href="#featured">
-                View Featured
+                {t.hero.viewBtn}
               </Link>
             </Button>
           </div>
@@ -82,7 +84,7 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-2xl font-bold text-primary">${product.price}</span>
                   <span className="text-sm text-primary font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                    View Details
+                    {t.hero.viewDetails}
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>

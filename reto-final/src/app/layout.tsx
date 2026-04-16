@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { CartProvider } from '@/lib/cart-context'
+import { LanguageProvider } from '@/lib/language-context'
 import './globals.css'
 
 const inter = Inter({
@@ -21,14 +22,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="es" className="bg-background">
       <body className={`${inter.variable} font-sans antialiased`}>
         <CartProvider>
-          <Navbar />
-          <main className="min-h-screen pt-20">
-            {children}
-          </main>
-          <Footer />
+          <LanguageProvider>
+            <Navbar />
+            <main className="min-h-screen pt-20">
+              {children}
+            </main>
+            <Footer />
+          </LanguageProvider>
         </CartProvider>
       </body>
     </html>

@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/lib/cart-context'
+import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
 
 export function CartSlideOver() {
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, totalItems } = useCart()
+  const { t } = useLanguage()
 
   return (
     <>
@@ -29,7 +31,7 @@ export function CartSlideOver() {
           <div className="flex items-center justify-between px-6 py-5 border-b border-border">
             <div className="flex items-center gap-3">
               <ShoppingBag className="w-6 h-6 text-primary" />
-              <h2 className="text-lg font-semibold text-foreground">Your Cart</h2>
+              <h2 className="text-lg font-semibold text-foreground">{t.cart.yourCart}</h2>
               {totalItems > 0 && (
                 <span className="px-2 py-0.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
                   {totalItems}
@@ -39,7 +41,7 @@ export function CartSlideOver() {
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 rounded-xl hover:bg-secondary transition-colors"
-              aria-label="Close cart"
+              aria-label={t.cart.closeCart}
             >
               <X className="w-5 h-5 text-muted-foreground" />
             </button>
@@ -52,9 +54,9 @@ export function CartSlideOver() {
                 <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center mb-4">
                   <ShoppingBag className="w-10 h-10 text-muted-foreground" />
                 </div>
-                <p className="text-foreground font-medium mb-2">Your cart is empty</p>
+                <p className="text-foreground font-medium mb-2">{t.cart.emptyCart}</p>
                 <p className="text-muted-foreground text-sm">
-                  Add some awesome products to get started!
+                  {t.cart.emptyCartDescription}
                 </p>
               </div>
             ) : (
@@ -78,7 +80,7 @@ export function CartSlideOver() {
                       </h3>
                       {item.variant && (
                         <p className="text-xs text-muted-foreground mt-0.5">
-                          Size: {item.variant}
+                          {t.cart.size}: {item.variant}
                         </p>
                       )}
                       <p className="text-sm font-semibold text-primary mt-1">
@@ -105,7 +107,7 @@ export function CartSlideOver() {
                     <button
                       onClick={() => removeItem(item.id, item.variant)}
                       className="self-start p-1.5 rounded-lg hover:bg-secondary transition-colors"
-                      aria-label="Remove item"
+                      aria-label={t.cart.removeItem}
                     >
                       <X className="w-4 h-4 text-muted-foreground" />
                     </button>
@@ -119,16 +121,16 @@ export function CartSlideOver() {
           {items.length > 0 && (
             <div className="px-6 py-5 border-t border-border space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
+                <span className="text-muted-foreground">{t.cart.subtotal}</span>
                 <span className="text-xl font-bold text-foreground">
                   ${totalPrice.toFixed(2)}
                 </span>
               </div>
               <Button className="w-full h-12 text-base font-semibold">
-                Checkout
+                {t.cart.checkout}
               </Button>
               <p className="text-xs text-center text-muted-foreground">
-                Shipping and taxes calculated at checkout
+                {t.cart.shippingNote}
               </p>
             </div>
           )}

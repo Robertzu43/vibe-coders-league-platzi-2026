@@ -1,7 +1,10 @@
+"use client"
+
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Product } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
+import { useLanguage } from '@/lib/language-context'
 import { cn } from '@/lib/utils'
 
 interface CollectionSectionProps {
@@ -19,6 +22,8 @@ export function CollectionSection({
   collectionSlug,
   className,
 }: CollectionSectionProps) {
+  const { t } = useLanguage()
+
   return (
     <section className={cn("py-20 lg:py-28", className)}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +41,7 @@ export function CollectionSection({
             href={`/catalog?collection=${collectionSlug}`}
             className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all"
           >
-            View All
+            {t.collections.viewAll}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

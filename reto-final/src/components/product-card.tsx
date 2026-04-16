@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ShoppingBag } from 'lucide-react'
 import { Product } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
+import { useLanguage } from '@/lib/language-context'
 import { Badge } from '@/components/ui/badge'
 
 interface ProductCardProps {
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart()
+  const { t } = useLanguage()
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -46,7 +48,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <button
             onClick={handleAddToCart}
             className="absolute bottom-3 right-3 w-10 h-10 bg-primary text-primary-foreground rounded-xl flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:scale-110"
-            aria-label="Add to cart"
+            aria-label={t.product.addToCart}
           >
             <ShoppingBag className="w-5 h-5" />
           </button>
@@ -64,7 +66,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <span className="text-lg font-bold text-primary">${product.price}</span>
             {product.variants && (
               <span className="text-xs text-muted-foreground">
-                {product.variants.length} sizes
+                {product.variants.length} {t.product.sizes}
               </span>
             )}
           </div>

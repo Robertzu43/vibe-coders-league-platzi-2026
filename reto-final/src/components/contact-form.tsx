@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { FieldGroup, Field, FieldLabel } from '@/components/ui/field'
+import { useLanguage } from '@/lib/language-context'
 
 export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { t } = useLanguage()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -29,17 +31,17 @@ export function ContactForm() {
           <Check className="w-8 h-8 text-primary" />
         </div>
         <h3 className="text-2xl font-bold text-foreground mb-2">
-          Message Sent!
+          {t.contact.successTitle}
         </h3>
         <p className="text-muted-foreground max-w-sm">
-          Thank you for reaching out. Our team will get back to you within 24 hours.
+          {t.contact.successDescription}
         </p>
         <Button
           onClick={() => setIsSubmitted(false)}
           variant="outline"
           className="mt-8"
         >
-          Send Another Message
+          {t.contact.sendAnother}
         </Button>
       </div>
     )
@@ -48,17 +50,17 @@ export function ContactForm() {
   return (
     <div className="bg-card rounded-3xl border border-border p-8 lg:p-12">
       <h2 className="text-2xl font-bold text-foreground mb-2">
-        Send us a Message
+        {t.contact.formTitle}
       </h2>
       <p className="text-muted-foreground mb-8">
-        Fill out the form below and we&apos;ll get back to you as soon as possible.
+        {t.contact.formSubtitle}
       </p>
 
       <form onSubmit={handleSubmit}>
         <FieldGroup>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field>
-              <FieldLabel htmlFor="firstName">First Name</FieldLabel>
+              <FieldLabel htmlFor="firstName">{t.contact.firstName}</FieldLabel>
               <Input
                 id="firstName"
                 name="firstName"
@@ -68,7 +70,7 @@ export function ContactForm() {
               />
             </Field>
             <Field>
-              <FieldLabel htmlFor="lastName">Last Name</FieldLabel>
+              <FieldLabel htmlFor="lastName">{t.contact.lastName}</FieldLabel>
               <Input
                 id="lastName"
                 name="lastName"
@@ -80,7 +82,7 @@ export function ContactForm() {
           </div>
 
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <FieldLabel htmlFor="email">{t.contact.email}</FieldLabel>
             <Input
               id="email"
               name="email"
@@ -92,22 +94,22 @@ export function ContactForm() {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="subject">Subject</FieldLabel>
+            <FieldLabel htmlFor="subject">{t.contact.subject}</FieldLabel>
             <Input
               id="subject"
               name="subject"
-              placeholder="How can we help?"
+              placeholder={t.contact.subjectPlaceholder}
               required
               className="h-12 bg-background border-border"
             />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="message">Message</FieldLabel>
+            <FieldLabel htmlFor="message">{t.contact.message}</FieldLabel>
             <Textarea
               id="message"
               name="message"
-              placeholder="Tell us more about your inquiry..."
+              placeholder={t.contact.messagePlaceholder}
               required
               rows={5}
               className="bg-background border-border resize-none"
@@ -125,7 +127,7 @@ export function ContactForm() {
             ) : (
               <>
                 <Send className="w-5 h-5 mr-2" />
-                Send Message
+                {t.contact.sendMessage}
               </>
             )}
           </Button>

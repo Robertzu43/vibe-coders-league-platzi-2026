@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { CatalogContent } from '@/components/catalog-content'
+import { CatalogHeader } from '@/components/catalog-header'
 
 export const metadata = {
   title: 'Catalog | Platzi Store',
@@ -11,14 +12,7 @@ export default function CatalogPage() {
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground">
-            All Products
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            Explore our complete collection of premium tech merchandise designed for developers.
-          </p>
-        </div>
+        <CatalogHeader />
 
         {/* Content with filters */}
         <Suspense fallback={<CatalogSkeleton />}>

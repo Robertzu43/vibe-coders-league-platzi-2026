@@ -1,24 +1,8 @@
+"use client"
+
 import Link from 'next/link'
 import { Github, Twitter, Linkedin, Instagram } from 'lucide-react'
-
-const footerLinks = {
-  shop: [
-    { label: 'All Products', href: '/catalog' },
-    { label: 'Premium Collection', href: '/catalog?collection=premium' },
-    { label: 'Fun Collection', href: '/catalog?collection=fun' },
-    { label: 'Limited Edition', href: '/catalog?collection=limited' },
-  ],
-  company: [
-    { label: 'About Us', href: '#' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Careers', href: '#' },
-  ],
-  support: [
-    { label: 'FAQ', href: '#' },
-    { label: 'Shipping', href: '#' },
-    { label: 'Returns', href: '#' },
-  ],
-}
+import { useLanguage } from '@/lib/language-context'
 
 const socialLinks = [
   { icon: Github, href: '#', label: 'GitHub' },
@@ -28,6 +12,27 @@ const socialLinks = [
 ]
 
 export function Footer() {
+  const { t } = useLanguage()
+
+  const footerLinks = {
+    shop: [
+      { label: t.footer.allProducts, href: '/catalog' },
+      { label: t.footer.premiumCollection, href: '/catalog?collection=premium' },
+      { label: t.footer.funCollection, href: '/catalog?collection=fun' },
+      { label: t.footer.limitedEdition, href: '/catalog?collection=limited' },
+    ],
+    company: [
+      { label: t.footer.aboutUs, href: '#' },
+      { label: t.footer.contactLink, href: '/contact' },
+      { label: t.footer.careers, href: '#' },
+    ],
+    support: [
+      { label: t.footer.faq, href: '#' },
+      { label: t.footer.shipping, href: '#' },
+      { label: t.footer.returns, href: '#' },
+    ],
+  }
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -43,8 +48,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
-              Premium tech merchandise for developers who appreciate quality and minimalist design.
-              Wear your code with pride.
+              {t.footer.tagline}
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map(social => (
@@ -63,7 +67,7 @@ export function Footer() {
           {/* Shop Links */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Shop
+              {t.footer.shop}
             </h3>
             <ul className="space-y-3">
               {footerLinks.shop.map(link => (
@@ -82,7 +86,7 @@ export function Footer() {
           {/* Company Links */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Company
+              {t.footer.company}
             </h3>
             <ul className="space-y-3">
               {footerLinks.company.map(link => (
@@ -101,7 +105,7 @@ export function Footer() {
           {/* Support Links */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Support
+              {t.footer.support}
             </h3>
             <ul className="space-y-3">
               {footerLinks.support.map(link => (
@@ -121,14 +125,14 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Platzi Store. All rights reserved.
+            &copy; {new Date().getFullYear()} {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6">
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
+              {t.footer.privacy}
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
+              {t.footer.terms}
             </Link>
           </div>
         </div>
