@@ -1,8 +1,12 @@
+"use client"
+
 import { HeroSection } from '@/components/hero-section'
 import { CollectionSection } from '@/components/collection-section'
 import { getProductsByCollection, getFeaturedProducts } from '@/lib/products'
+import { useLanguage } from '@/lib/language-context'
 
 export default function HomePage() {
+  const { t } = useLanguage()
   const featuredProducts = getFeaturedProducts()
   const premiumProducts = getProductsByCollection('premium')
   const funProducts = getProductsByCollection('fun')
@@ -13,23 +17,23 @@ export default function HomePage() {
       <HeroSection featuredProducts={featuredProducts} />
 
       <CollectionSection
-        title="Limited Edition"
-        subtitle="Exclusive drops you won't find anywhere else"
+        title={t.collections.limited}
+        subtitle={t.collections.limitedSubtitle}
         products={limitedProducts}
         collectionSlug="limited"
         className="bg-card"
       />
 
       <CollectionSection
-        title="Premium Collection"
-        subtitle="Minimalist designs for the discerning developer"
+        title={t.collections.premium}
+        subtitle={t.collections.premiumSubtitle}
         products={premiumProducts}
         collectionSlug="premium"
       />
 
       <CollectionSection
-        title="Fun & Community"
-        subtitle="Express your love for code with playful designs"
+        title={t.collections.fun}
+        subtitle={t.collections.funSubtitle}
         products={funProducts}
         collectionSlug="fun"
         className="bg-card"

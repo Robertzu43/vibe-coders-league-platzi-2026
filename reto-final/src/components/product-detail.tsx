@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ChevronLeft, ShoppingBag, Check, Truck, Shield, RotateCcw } from 'lucide-react'
 import { Product } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
+import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -14,30 +15,31 @@ interface ProductDetailProps {
   product: Product
 }
 
-const features = [
-  { icon: Truck, label: 'Free shipping over $50' },
-  { icon: Shield, label: '2-year warranty' },
-  { icon: RotateCcw, label: '30-day returns' },
-]
-
-function getCollectionLabel(collection: string): string {
-  switch (collection) {
-    case 'premium':
-      return 'Premium Collection'
-    case 'fun':
-      return 'Fun & Community'
-    case 'limited':
-      return 'Limited Edition'
-    default:
-      return collection
-  }
-}
-
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0] || '')
   const [selectedImage, setSelectedImage] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
   const { addItem } = useCart()
+  const { t } = useLanguage()
+
+  const features = [
+    { icon: Truck, label: t.product.freeShipping },
+    { icon: Shield, label: t.product.warranty },
+    { icon: RotateCcw, label: t.product.returns },
+  ]
+
+  function getCollectionLabel(collection: string): string {
+    switch (collection) {
+      case 'premium':
+        return t.catalog.filterPremium
+      case 'fun':
+        return t.catalog.filterFun
+      case 'limited':
+        return t.catalog.filterLimited
+      default:
+        return collection
+    }
+  }
 
   const handleAddToCart = () => {
     addItem({
@@ -59,7 +61,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
         className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
       >
         <ChevronLeft className="w-4 h-4" />
-        Back to Catalog
+        {t.product.backToCatalog}
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
@@ -141,7 +143,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           {product.variants && product.variants.length > 0 && (
             <div className="mt-8">
               <label className="text-sm font-medium text-foreground mb-3 block">
-                Select Size
+                {t.product.selectSize}
               </label>
               <div className="flex flex-wrap gap-2">
                 {product.variants.map(variant => (
@@ -175,12 +177,12 @@ export function ProductDetail({ product }: ProductDetailProps) {
               {isAdded ? (
                 <>
                   <Check className="w-5 h-5 mr-2" />
-                  Added to Cart
+                  {t.product.addedToCart}
                 </>
               ) : (
                 <>
                   <ShoppingBag className="w-5 h-5 mr-2" />
-                  Add to Cart
+                  {t.product.addToCart}
                 </>
               )}
             </Button>

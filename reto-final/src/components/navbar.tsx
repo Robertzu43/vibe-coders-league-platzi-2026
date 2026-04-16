@@ -2,22 +2,28 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ShoppingBag, Menu, X } from 'lucide-react'
+import { ShoppingBag, Menu, X, Globe } from 'lucide-react'
 import { useState } from 'react'
 import { useCart } from '@/lib/cart-context'
+import { useLanguage } from '@/lib/language-context'
 import { CartSlideOver } from './cart-slide-over'
 import { cn } from '@/lib/utils'
-
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/catalog', label: 'Catalog' },
-  { href: '/contact', label: 'Contact' },
-]
 
 export function Navbar() {
   const pathname = usePathname()
   const { totalItems, setIsOpen } = useCart()
+  const { locale, setLocale, t } = useLanguage()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const navLinks = [
+    { href: '/', label: t.nav.home },
+    { href: '/catalog', label: t.nav.catalog },
+    { href: '/contact', label: t.nav.contact },
+  ]
+
+  const toggleLanguage = () => {
+    setLocale(locale === 'es' ? 'en' : 'es')
+  }
 
   return (
     <>
@@ -52,12 +58,23 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Cart Button */}
-            <div className="flex items-center gap-4">
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-colors"
+                aria-label="Toggle language"
+              >
+                <Globe className="w-4 h-4" />
+                <span>{locale === 'es' ? 'EN' : 'ES'}</span>
+              </button>
+
+              {/* Cart Button */}
               <button
                 onClick={() => setIsOpen(true)}
                 className="relative p-2 rounded-xl hover:bg-secondary transition-colors group"
-                aria-label="Open cart"
+                aria-label={t.cart.openCart}
               >
                 <ShoppingBag className="w-6 h-6 text-foreground group-hover:text-primary transition-colors" />
                 {totalItems > 0 && (

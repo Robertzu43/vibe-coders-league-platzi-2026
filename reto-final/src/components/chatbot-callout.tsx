@@ -4,21 +4,23 @@ import { useState } from 'react'
 import { Bot, Send, X, MessageCircle, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useLanguage } from '@/lib/language-context'
 import { cn } from '@/lib/utils'
 
-const quickResponses = [
-  "What's your return policy?",
-  "How long does shipping take?",
-  "Do you ship internationally?",
-  "Where is my order?",
-]
-
 export function ChatbotCallout() {
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'bot'; content: string }>>([
-    { role: 'bot', content: "Hi! I'm your Platzi Store assistant. How can I help you today?" }
+    { role: 'bot', content: t.chatbot.greeting }
   ])
   const [input, setInput] = useState('')
+
+  const quickResponses = [
+    t.chatbot.returnPolicy,
+    t.chatbot.shippingTime,
+    t.chatbot.international,
+    t.chatbot.orderStatus,
+  ]
 
   const handleSend = (message: string) => {
     if (!message.trim()) return
@@ -29,13 +31,13 @@ export function ChatbotCallout() {
     // Simulate bot response
     setTimeout(() => {
       const responses: Record<string, string> = {
-        "What's your return policy?": "We offer a 30-day hassle-free return policy. If you're not satisfied with your purchase, simply return it in its original condition for a full refund.",
-        "How long does shipping take?": "Standard shipping takes 3-5 business days. Express shipping (1-2 days) is available at checkout. Free shipping on orders over $50!",
-        "Do you ship internationally?": "Yes! We ship to over 50 countries worldwide. International shipping typically takes 7-14 business days depending on your location.",
-        "Where is my order?": "You can track your order using the tracking link in your confirmation email. If you need help, please provide your order number and I'll look it up for you.",
+        [t.chatbot.returnPolicy]: t.chatbot.returnPolicyAnswer,
+        [t.chatbot.shippingTime]: t.chatbot.shippingTimeAnswer,
+        [t.chatbot.international]: t.chatbot.internationalAnswer,
+        [t.chatbot.orderStatus]: t.chatbot.orderStatusAnswer,
       }
 
-      const botResponse = responses[message] || "Thanks for your question! Our team will get back to you shortly. For immediate assistance, please fill out the contact form or email us at support@platzistore.com"
+      const botResponse = responses[message] || t.chatbot.defaultAnswer
 
       setMessages(prev => [...prev, { role: 'bot', content: botResponse }])
     }, 1000)
@@ -50,14 +52,13 @@ export function ChatbotCallout() {
             <Bot className="w-7 h-7 text-primary" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-foreground">AI Assistant</h2>
-            <p className="text-muted-foreground">Get instant answers</p>
+            <h2 className="text-2xl font-bold text-foreground">{t.chatbot.title}</h2>
+            <p className="text-muted-foreground">{t.chatbot.subtitle}</p>
           </div>
         </div>
 
         <p className="text-muted-foreground mb-6 leading-relaxed">
-          Need quick answers? Our AI-powered assistant is available 24/7 to help with
-          shipping, returns, product questions, and more.
+          {t.chatbot.description}
         </p>
 
         <Button
@@ -65,14 +66,14 @@ export function ChatbotCallout() {
           className="w-full h-14 text-base font-semibold"
         >
           <MessageCircle className="w-5 h-5 mr-2" />
-          Start Chat
+          {t.chatbot.startChat}
         </Button>
       </div>
 
       {/* Contact Info */}
       <div className="bg-card rounded-3xl border border-border p-8 lg:p-12">
         <h3 className="text-lg font-semibold text-foreground mb-6">
-          Other Ways to Reach Us
+          {t.chatbot.otherWays}
         </h3>
         <div className="space-y-4">
           <div className="flex items-center gap-4">
@@ -80,7 +81,7 @@ export function ChatbotCallout() {
               <span className="text-lg">@</span>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Email</p>
+              <p className="text-sm text-muted-foreground">{t.chatbot.emailLabel}</p>
               <p className="text-foreground font-medium">support@platzistore.com</p>
             </div>
           </div>
@@ -89,8 +90,8 @@ export function ChatbotCallout() {
               <Sparkles className="w-5 h-5 text-muted-foreground" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Response Time</p>
-              <p className="text-foreground font-medium">Within 24 hours</p>
+              <p className="text-sm text-muted-foreground">{t.chatbot.responseTime}</p>
+              <p className="text-foreground font-medium">{t.chatbot.responseTimeValue}</p>
             </div>
           </div>
         </div>
@@ -111,10 +112,10 @@ export function ChatbotCallout() {
                   <Bot className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Platzi Assistant</h3>
+                  <h3 className="font-semibold text-foreground">{t.chatbot.assistantName}</h3>
                   <p className="text-xs text-primary flex items-center gap-1">
                     <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    Online
+                    {t.chatbot.online}
                   </p>
                 </div>
               </div>
@@ -177,7 +178,7 @@ export function ChatbotCallout() {
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
+                  placeholder={t.chatbot.inputPlaceholder}
                   className="flex-1 h-12 bg-background border-border"
                 />
                 <Button type="submit" size="icon" className="h-12 w-12">

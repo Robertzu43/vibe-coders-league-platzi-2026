@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { ChevronDown, SlidersHorizontal } from 'lucide-react'
 import { products } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
+import { useLanguage } from '@/lib/language-context'
 import { cn } from '@/lib/utils'
 import {
   DropdownMenu,
@@ -14,26 +15,27 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 
-const collections = [
-  { value: 'all', label: 'All Products' },
-  { value: 'premium', label: 'Premium Collection' },
-  { value: 'fun', label: 'Fun & Community' },
-  { value: 'limited', label: 'Limited Edition' },
-]
-
-const sortOptions = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'price-asc', label: 'Price: Low to High' },
-  { value: 'price-desc', label: 'Price: High to Low' },
-  { value: 'name', label: 'Alphabetical' },
-]
-
 export function CatalogContent() {
   const searchParams = useSearchParams()
   const initialCollection = searchParams.get('collection') || 'all'
+  const { t } = useLanguage()
 
   const [activeCollection, setActiveCollection] = useState(initialCollection)
   const [sortBy, setSortBy] = useState('featured')
+
+  const collections = [
+    { value: 'all', label: t.catalog.filterAll },
+    { value: 'premium', label: t.catalog.filterPremium },
+    { value: 'fun', label: t.catalog.filterFun },
+    { value: 'limited', label: t.catalog.filterLimited },
+  ]
+
+  const sortOptions = [
+    { value: 'featured', label: t.catalog.sortFeatured },
+    { value: 'price-asc', label: t.catalog.sortPriceLow },
+    { value: 'price-desc', label: t.catalog.sortPriceHigh },
+    { value: 'name', label: t.catalog.sortName },
+  ]
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = [...products]
@@ -115,7 +117,7 @@ export function CatalogContent() {
 
       {/* Results Count */}
       <p className="text-sm text-muted-foreground">
-        Showing {filteredAndSortedProducts.length} product{filteredAndSortedProducts.length !== 1 ? 's' : ''}
+        {t.catalog.showing} {filteredAndSortedProducts.length} {filteredAndSortedProducts.length !== 1 ? t.catalog.products : t.catalog.product}
       </p>
 
       {/* Products Grid */}
@@ -128,7 +130,7 @@ export function CatalogContent() {
       {/* Empty State */}
       {filteredAndSortedProducts.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-muted-foreground">No products found in this collection.</p>
+          <p className="text-muted-foreground">{t.catalog.noProducts}</p>
         </div>
       )}
     </div>
