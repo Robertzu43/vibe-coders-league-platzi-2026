@@ -32,27 +32,33 @@ export async function POST(request: NextRequest) {
 
     const lastMessage = messages[messages.length - 1];
 
-    // Try models in order — fallback if one is overloaded
-    for (const modelName of MODELS) {
-      try {
-        const model = genAI.getGenerativeModel({
-          model: modelName,
-          systemInstruction: systemPrompt,
-        });
+    // Try models with retries — handles 503 overload errors
+    const MAX_RETRIES = 3;
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      for (const modelName of MODELS) {
+        try {
+          const model = genAI.getGenerativeModel({
+            model: modelName,
+            systemInstruction: systemPrompt,
+          });
 
-        const chat = model.startChat({ history });
-        const result = await chat.sendMessage(lastMessage.content);
-        const response = result.response.text();
+          const chat = model.startChat({ history });
+          const result = await chat.sendMessage(lastMessage.content);
+          const response = result.response.text();
 
-        return Response.json({ message: response });
-      } catch (err: unknown) {
-        const errorMsg = err instanceof Error ? err.message : String(err);
-        console.warn(`Model ${modelName} failed: ${errorMsg}`);
-        // If it's not a 503/overload error, don't try other models
-        if (!errorMsg.includes("503") && !errorMsg.includes("high demand") && !errorMsg.includes("no longer available")) {
-          throw err;
+          return Response.json({ message: response });
+        } catch (err: unknown) {
+          const errorMsg = err instanceof Error ? err.message : String(err);
+          console.warn(`Model ${modelName} attempt ${attempt + 1} failed: ${errorMsg}`);
+          const isRetryable = errorMsg.includes("503") || errorMsg.includes("high demand") || errorMsg.includes("no longer available") || errorMsg.includes("overloaded");
+          if (!isRetryable) {
+            throw err;
+          }
         }
-        // Otherwise try the next model
+      }
+      // Wait before retrying all models
+      if (attempt < MAX_RETRIES - 1) {
+        await new Promise(resolve => setTimeout(resolve, 1500 * (attempt + 1)));
       }
     }
 
