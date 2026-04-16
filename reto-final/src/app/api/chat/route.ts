@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
         } catch (err: unknown) {
           const errorMsg = err instanceof Error ? err.message : String(err);
           console.warn(`Model ${modelName} attempt ${attempt + 1} failed: ${errorMsg}`);
-          const isRetryable = errorMsg.includes("503") || errorMsg.includes("high demand") || errorMsg.includes("no longer available") || errorMsg.includes("overloaded");
+          const isRetryable = errorMsg.includes("503") || errorMsg.includes("429") || errorMsg.includes("high demand") || errorMsg.includes("no longer available") || errorMsg.includes("overloaded") || errorMsg.includes("quota") || errorMsg.includes("rate");
           if (!isRetryable) {
             throw err;
           }
@@ -113,7 +113,8 @@ export async function POST(request: NextRequest) {
 
     return Response.json({ error: "All models are currently unavailable. Please try again in a moment." }, { status: 503 });
   } catch (error) {
-    console.error("Chat API error:", error);
-    return Response.json({ error: "Failed to process chat message" }, { status: 500 });
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("Chat API error:", errMsg);
+    return Response.json({ error: `Chat error: ${errMsg}` }, { status: 500 });
   }
 }
