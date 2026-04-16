@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { Product } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { useLanguage } from '@/lib/language-context'
+import { NeuralNetworkBg } from '@/components/neural-network-bg'
 import { cn } from '@/lib/utils'
 
 interface CollectionSectionProps {
@@ -25,8 +26,9 @@ export function CollectionSection({
   const { t } = useLanguage()
 
   return (
-    <section className={cn("py-20 lg:py-28", className)}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className={cn("py-20 lg:py-28 relative overflow-hidden", className)}>
+      <NeuralNetworkBg />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 1 }}>
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <div>
@@ -48,7 +50,7 @@ export function CollectionSection({
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.slice(0, 4).map(product => (
+          {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

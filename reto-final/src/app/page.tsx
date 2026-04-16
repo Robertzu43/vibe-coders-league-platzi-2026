@@ -17,6 +17,13 @@ export default function HomePage() {
       <HeroSection featuredProducts={featuredProducts} />
 
       <CollectionSection
+        title={t.collections.premium}
+        subtitle={t.collections.premiumSubtitle}
+        products={premiumProducts}
+        collectionSlug="premium"
+      />
+
+      <CollectionSection
         title={t.collections.limited}
         subtitle={t.collections.limitedSubtitle}
         products={limitedProducts}
@@ -25,18 +32,10 @@ export default function HomePage() {
       />
 
       <CollectionSection
-        title={t.collections.premium}
-        subtitle={t.collections.premiumSubtitle}
-        products={premiumProducts}
-        collectionSlug="premium"
-      />
-
-      <CollectionSection
         title={t.collections.fun}
         subtitle={t.collections.funSubtitle}
         products={funProducts}
         collectionSlug="fun"
-        className="bg-card"
       />
     </div>
   )
