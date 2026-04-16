@@ -91,14 +91,18 @@ Generate a high-resolution photorealistic image of a matte black ceramic coffee 
 
 ### 11. Vibe Coders League Cap — $54.99 (Limited Edition)
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a premium structured snapback cap for an e-commerce store. The cap is black with a premium embroidered "VCL" monogram on the front in emerald green (#0AE88A), with "Vibe Coders League" text embroidered in small white letters below. The interlocking diamond logo is embroidered on the side in emerald green. High-quality structured crown with a flat brim. A small "Limited Edition" woven label in emerald green is visible on the back strap. Positioned at a three-quarter angle on a dark reflective surface, dark background (#141414). Dramatic lighting with emerald green accent highlights and a subtle glow effect suggesting exclusivity. Premium streetwear limited-drop product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a premium structured snapback cap for an e-commerce store. The cap is black with a premium embroidered "VCL" monogram on the front in emerald green (#0AE88A), with "Vibe Coders League" text embroidered in small white letters below. The provided Platzi logo is embroidered on the side in emerald green. High-quality structured crown with a flat brim. A small "Limited Edition" woven label in emerald green is visible on the back strap. Positioned at a three-quarter angle on a dark reflective surface, dark background (#141414). Dramatic lighting with emerald green accent highlights and a subtle glow effect suggesting exclusivity. Premium streetwear limited-drop product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### 12. "Nunca Pares de Aprender" Gift Subscription — $49.99
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution photorealistic image of a beautiful digital gift card for an e-commerce store. The gift card is a sleek dark card with rounded corners, featuring the text "Nunca Pares de Aprender" in elegant white typography as the centerpiece. The interlocking diamond logo appears prominently in emerald green (#0AE88A) at the top. A subtle gradient from dark to emerald green flows across the bottom edge. The card appears to float with a soft shadow beneath it, dark background (#141414). Small text reads "1 Month Platzi Subscription" in light gray. Sparkle particles and a soft emerald green glow surround the card. Luxury digital gift card product shot. Ultra sharp, 4K quality.
+Generate a high-resolution photorealistic image of a beautiful digital gift card for an e-commerce store. The gift card is a sleek dark card with rounded corners, featuring the text "Nunca Pares de Aprender" in elegant white typography as the centerpiece. The provided Platzi logo appears prominently in emerald green (#0AE88A) at the top. A subtle gradient from dark to emerald green flows across the bottom edge. The card appears to float with a soft shadow beneath it, dark background (#141414). Small text reads "1 Month Platzi Subscription" in light gray. Sparkle particles and a soft emerald green glow surround the card. Luxury digital gift card product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ---
@@ -107,32 +111,42 @@ Generate a high-resolution photorealistic image of a beautiful digital gift card
 
 ### SM-1: Store Launch Announcement
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution social media announcement graphic (1080x1080 square format). Dark background (#141414). Large headline text "PLATZI STORE IS HERE" in bold white uppercase letters centered in the composition. An interlocking diamond logo in emerald green (#0AE88A) appears large above the text. Below the headline, a curated arrangement of miniature product silhouettes (hoodie, cap, mug, stickers) in emerald green outlines. Dynamic emerald green light rays and particle effects radiate from the center. A subtle grid pattern in dark gray (#1C1C1C) overlays the background. Bottom text: "Shop the first official merch collection" in light gray. Premium tech brand launch aesthetic, high energy, clean typography. Ultra sharp, 4K quality.
+Generate a high-resolution social media announcement graphic (1080x1080 square format). Dark background (#141414). The provided Platzi logo in emerald green (#0AE88A) appears large and centered above the headline. Large headline text "PLATZI STORE IS HERE" in bold white uppercase letters centered in the composition. Below the headline, a curated arrangement of miniature product silhouettes (hoodie, cap, mug, stickers) in emerald green outlines. Dynamic emerald green light rays and particle effects radiate from the center. A subtle grid pattern in dark gray (#1C1C1C) overlays the background. Bottom text: "Shop the first official merch collection" in light gray. Premium tech brand launch aesthetic, high energy, clean typography. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### SM-2: Premium Collection Showcase
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution lifestyle social media image (1080x1080 square format). Dark background (#141414). An elegant arrangement of premium merch products: a black hoodie draped over a modern chair, a black t-shirt folded neatly, a laptop sleeve leaning against a monitor, a matte black water bottle, and a black notebook with emerald green spine — all arranged in a sophisticated desk scene. Everything is dark-toned with emerald green (#0AE88A) accent details glowing subtly on each product (logos, spine, engravings). Moody studio lighting with directional emerald green rim light. Text overlay area at the top: "Premium Collection" in clean white sans-serif font. Aspirational, minimalist, high-end lifestyle photography. Ultra sharp, 4K quality.
+Generate a high-resolution lifestyle social media image (1080x1080 square format). Dark background (#141414). An elegant arrangement of premium merch products: a black hoodie draped over a modern chair, a black t-shirt folded neatly, a laptop sleeve leaning against a monitor, a matte black water bottle, and a black notebook with emerald green spine — all arranged in a sophisticated desk scene. Each product features the provided Platzi logo in emerald green (#0AE88A) as accent details glowing subtly. Moody studio lighting with directional emerald green rim light. Text overlay area at the top: "Premium Collection" in clean white sans-serif font. Aspirational, minimalist, high-end lifestyle photography. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### SM-3: Fun Collection Showcase
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution playful social media image (1080x1080 square format). Dark background (#141414). A fun, dynamic arrangement of merch products: colorful patterned socks, a spread of vinyl stickers, cozy slippers, an oversized Enter key plushie, and a coffee mug with "Nunca Pares de Codear" text — all arranged in a vibrant, slightly chaotic but intentional flat-lay composition. Pops of emerald green (#0AE88A) throughout. Confetti-like code symbols ({ }, < / >, ;) float around the products. Energetic lighting with emerald green accents and a fun, community-driven vibe. Text overlay area at the top: "Fun Collection" in a bold playful white font. Developer culture meets lifestyle brand. Ultra sharp, 4K quality.
+Generate a high-resolution playful social media image (1080x1080 square format). Dark background (#141414). A fun, dynamic arrangement of merch products: colorful patterned socks, a spread of vinyl stickers, cozy slippers, an oversized Enter key plushie, and a coffee mug with "Nunca Pares de Codear" text — all arranged in a vibrant, slightly chaotic but intentional flat-lay composition. Each product features the provided Platzi logo. Pops of emerald green (#0AE88A) throughout. Confetti-like code symbols ({ }, < / >, ;) float around the products. Energetic lighting with emerald green accents and a fun, community-driven vibe. Text overlay area at the top: "Fun Collection" in a bold playful white font. Developer culture meets lifestyle brand. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### SM-4: Limited Edition VCL Cap
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution dramatic social media image (1080x1080 square format). Dark background (#141414). A black snapback cap with embroidered "VCL" monogram in emerald green (#0AE88A) is the hero — centered and slightly floating with a dramatic emerald green glow halo behind it. The interlocking diamond logo is visible on the side in emerald green. Particle effects and light streaks suggest exclusivity and urgency. Bold text at the top: "LIMITED EDITION" in white uppercase. Below the cap: "Only available through April 2026" in emerald green text. Small tagline at the bottom: "Get yours before they're gone" in light gray. Premium hype-drop streetwear aesthetic, dramatic lighting, cinematic feel. Ultra sharp, 4K quality.
+Generate a high-resolution dramatic social media image (1080x1080 square format). Dark background (#141414). A black snapback cap with embroidered "VCL" monogram in emerald green (#0AE88A) is the hero — centered and slightly floating with a dramatic emerald green glow halo behind it. The provided Platzi logo is visible embroidered on the side in emerald green. Particle effects and light streaks suggest exclusivity and urgency. Bold text at the top: "LIMITED EDITION" in white uppercase. Below the cap: "Only available through April 2026" in emerald green text. Small tagline at the bottom: "Get yours before they're gone" in light gray. Premium hype-drop streetwear aesthetic, dramatic lighting, cinematic feel. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ### SM-5: Gift Subscription
 
+> **Reference images:** Upload Platzi logo
+
 ```
-Generate a high-resolution elegant social media image (1080x1080 square format). Dark background (#141414). A beautifully designed digital gift card floats at the center — dark card with "Nunca Pares de Aprender" in elegant white script typography and an interlocking diamond logo in emerald green (#0AE88A). The card is surrounded by a soft emerald green glow and floating sparkle particles. A gift ribbon or bow element in emerald green accents the composition. Text at the top: "Give the Gift of Learning" in clean white sans-serif font. Below the card: "1-Month Platzi Subscription" in light gray. Premium, thoughtful, and inspiring mood. Soft warm lighting mixed with emerald green accent glow. Ultra sharp, 4K quality.
+Generate a high-resolution elegant social media image (1080x1080 square format). Dark background (#141414). A beautifully designed digital gift card floats at the center — dark card with "Nunca Pares de Aprender" in elegant white script typography and the provided Platzi logo prominently in emerald green (#0AE88A). The card is surrounded by a soft emerald green glow and floating sparkle particles. A gift ribbon or bow element in emerald green accents the composition. Text at the top: "Give the Gift of Learning" in clean white sans-serif font. Below the card: "1-Month Platzi Subscription" in light gray. Premium, thoughtful, and inspiring mood. Soft warm lighting mixed with emerald green accent glow. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
 ```
 
 ---
@@ -140,7 +154,8 @@ Generate a high-resolution elegant social media image (1080x1080 square format).
 ## Usage Notes
 
 - **Platform:** Copy each prompt block directly into Google AI Studio
+- **Logo reference:** Always upload `/Users/robertozuniga/Downloads/platzi-logo.png` as a reference image alongside each prompt. Every prompt ends with "For the logo use the provided Platzi logo reference image exactly as shown."
+- **Socks special:** Product #6 (Socks) requires **two** reference images — the Platzi logo + Freddy Vega's face photo
 - **Aspect Ratio:** Product images — use default or 4:3 for e-commerce. Social media — use 1:1 (1080x1080) for Instagram
 - **Post-processing:** Upload final images to Supabase Storage bucket `product-images`
-- **Logo consistency:** Every prompt references "two interlocking diamond shapes" — the Platzi logo mark. If results don't match, upload the logo as a reference image in Google AI Studio alongside the prompt
 - **Color check:** Ensure the green in generated images matches `#0AE88A` — adjust in post if needed
