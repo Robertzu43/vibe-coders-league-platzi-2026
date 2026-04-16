@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
@@ -7,29 +8,102 @@ import { Product } from '@/lib/products'
 import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { NeuralNetworkBg } from '@/components/neural-network-bg'
 
 interface HeroSectionProps {
   featuredProducts: Product[]
 }
 
+function useTypewriter(line1: string, line2: string, speed = 80) {
+  const [displayLine1, setDisplayLine1] = useState("")
+  const [displayLine2, setDisplayLine2] = useState("")
+  const [showCursor, setShowCursor] = useState(true)
+  const [isTyping, setIsTyping] = useState(true)
+  const prevLine1 = useRef(line1)
+  const prevLine2 = useRef(line2)
+
+  useEffect(() => {
+    // Reset when text changes (language switch)
+    setDisplayLine1("")
+    setDisplayLine2("")
+    setShowCursor(true)
+    setIsTyping(true)
+    prevLine1.current = line1
+    prevLine2.current = line2
+
+    let charIndex = 0
+    const totalChars = line1.length + line2.length
+
+    const interval = setInterval(() => {
+      charIndex++
+
+      if (charIndex <= line1.length) {
+        setDisplayLine1(line1.slice(0, charIndex))
+      } else if (charIndex <= totalChars) {
+        const line2Index = charIndex - line1.length
+        setDisplayLine2(line2.slice(0, line2Index))
+      } else {
+        clearInterval(interval)
+        setIsTyping(false)
+
+        // Blink cursor a few times then hide it
+        let blinks = 0
+        const blinkInterval = setInterval(() => {
+          blinks++
+          setShowCursor((prev) => !prev)
+          if (blinks >= 6) {
+            clearInterval(blinkInterval)
+            setShowCursor(false)
+          }
+        }, 400)
+      }
+    }, speed)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [line1, line2, speed])
+
+  return { displayLine1, displayLine2, showCursor, isTyping }
+}
+
 export function HeroSection({ featuredProducts }: HeroSectionProps) {
   const { t } = useLanguage()
+  const { displayLine1, displayLine2, showCursor, isTyping } = useTypewriter(
+    t.hero.title1,
+    t.hero.title2
+  )
+
+  // Determine where the cursor should be shown
+  const cursorOnLine1 = displayLine1.length < t.hero.title1.length
+  const cursorOnLine2 = !cursorOnLine1
 
   return (
     <section className="relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
+      {/* Neural Network Background */}
+      <NeuralNetworkBg />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" style={{ zIndex: 1 }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" style={{ zIndex: 1 }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32" style={{ zIndex: 2 }}>
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-6 px-4 py-2 bg-primary/10 text-primary border-primary/20">
             <Sparkles className="w-4 h-4 mr-2" />
             {t.hero.badge}
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight text-balance">
-            {t.hero.title1}
-            <span className="block text-primary mt-2">{t.hero.title2}</span>
+            {displayLine1}
+            {showCursor && cursorOnLine1 && (
+              <span className="text-primary animate-pulse">|</span>
+            )}
+            <span className="block text-primary mt-2">
+              {displayLine2}
+              {showCursor && cursorOnLine2 && (
+                <span className="animate-pulse">|</span>
+              )}
+            </span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto text-balance leading-relaxed">
             {t.hero.subtitle}
