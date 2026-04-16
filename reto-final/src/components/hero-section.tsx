@@ -93,7 +93,7 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
             <Sparkles className="w-4 h-4 mr-2" />
             {t.hero.badge}
           </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground tracking-tight text-balance">
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold text-foreground tracking-tight text-balance">
             {displayLine1}
             {showCursor && cursorOnLine1 && (
               <span className="text-primary animate-pulse">|</span>
