@@ -7,7 +7,7 @@
 
 ---
 
-## Product Images (12)
+## Product Images (13)
 
 ### 1. Hoodie — $89.99
 
@@ -103,6 +103,14 @@ Generate a high-resolution photorealistic image of a premium structured snapback
 
 ```
 Generate a high-resolution photorealistic image of a beautiful digital gift card for an e-commerce store. The gift card is a sleek dark card with rounded corners, featuring the text "Nunca Pares de Aprender" in elegant white typography as the centerpiece. The provided Platzi logo appears prominently in emerald green (#0AE88A) at the top. A subtle gradient from dark to emerald green flows across the bottom edge. The card appears to float with a soft shadow beneath it, dark background (#141414). Small text reads "1 Month Platzi Subscription" in light gray. Sparkle particles and a soft emerald green glow surround the card. Luxury digital gift card product shot. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown.
+```
+
+### 13. "El Libro Real" by Freddy Vega — $34.99
+
+> **Reference images:** Upload Platzi logo + book cover photo
+
+```
+Generate a high-resolution photorealistic image of the book shown in the provided reference photo ("El Libro Real" by Freddy Vega, CEO of Platzi) for an e-commerce store. Display the book exactly as it appears in the reference image — same cover design, title, and artwork. The book is standing upright at a slight angle on a dark matte surface, dark background (#141414). Subtle emerald green (#0AE88A) accent lighting from behind creates a soft glow around the book edges. A second copy lies flat beside it showing the back cover or spine. The provided Platzi logo appears subtly in emerald green as a small watermark or sticker on the surface near the book. Premium, aspirational book product photography, clean composition, studio lighting. Ultra sharp, 4K quality. For the logo use the provided Platzi logo reference image exactly as shown. For the book use the provided book cover reference image exactly as shown.
 ```
 
 ---

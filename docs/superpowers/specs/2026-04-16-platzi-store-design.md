@@ -9,7 +9,7 @@
 
 ## Overview
 
-Build the Platzi Store — a fully functional online merch store for Platzi's first official merchandise line. The store features 12 products across three categories, an AI-powered shopping assistant chatbot, automated order confirmation emails, and a professional launch campaign.
+Build the Platzi Store — a fully functional online merch store for Platzi's first official merchandise line. The store features 13 products across three categories, an AI-powered shopping assistant chatbot, automated order confirmation emails, and a professional launch campaign.
 
 ## Tech Stack
 
@@ -19,9 +19,9 @@ Build the Platzi Store — a fully functional online merch store for Platzi's fi
 - **Deployment:** Vercel
 - **Chatbot:** Gemini API
 - **Automation:** Make.com (webhook + email)
-- **Product Images:** Midjourney (high resolution)
+- **Product Images:** Google AI Studio / Gemini (high resolution)
 - **Promo Video:** HeyGen
-- **Social Media Assets:** Midjourney
+- **Social Media Assets:** Google AI Studio / Gemini
 
 ## Brand System
 
@@ -40,7 +40,7 @@ All design follows the official Platzi brand. Dark theme default.
 
 The Platzi logo (interlocking diamond mark) appears in the navbar.
 
-## Products (12 Total)
+## Products (13 Total)
 
 ### Premium/Minimalist Collection (5)
 
@@ -62,12 +62,13 @@ The Platzi logo (interlocking diamond mark) appears in the navbar.
 | 9 | Giant Enter Key Plushie | $44.99 | Oversized Enter key you can slam — a debugging stress reliever | — |
 | 10 | Coffee Mug | $19.99 | Fun illustrations, "Nunca Pares de Codear" or similar tagline | — |
 
-### Special / Limited Edition (2)
+### Special / Limited Edition (3)
 
 | # | Product | Price (USD) | Description | Variants |
 |---|---------|-------------|-------------|----------|
 | 11 | Vibe Coders League Cap | $54.99 | Limited edition, March-April 2026 only. Premium embroidered VCL logo, structured cap. Badge: "Limited Edition" | One Size |
 | 12 | "Nunca Pares de Aprender" Gift Subscription | $49.99 | Buy a 1-month Platzi subscription as a gift. Beautifully designed gift card/voucher visual | — |
+| 13 | "El Libro Real" by Freddy Vega | $34.99 | The book by Platzi CEO Freddy Vega. Real product with actual book cover image | — |
 
 ## Pages
 
@@ -78,7 +79,7 @@ The Platzi logo (interlocking diamond mark) appears in the navbar.
 - CTA buttons linking to catalog
 
 ### Catalog Page
-- Grid view of all 12 products
+- Grid view of all 13 products
 - Filter by collection: Premium, Fun, Special/Limited
 - Sort options (price, name)
 - Product cards: image, name, price, collection badge
@@ -120,7 +121,7 @@ The cart is NOT a separate page — it's a slide-over modal panel that opens fro
 
 | Table | Columns | Purpose |
 |-------|---------|---------|
-| `products` | id, name, slug, description, price, collection, variants (jsonb), badges (jsonb), image_url, created_at | All 12 products |
+| `products` | id, name, slug, description, price, collection, variants (jsonb), badges (jsonb), image_url, created_at | All 13 products |
 | `orders` | id, order_number, customer_name, customer_email, items (jsonb), subtotal, discount_code, discount_percent, total, payment_method, status, created_at | Order records |
 | `discount_codes` | id, code, percent_off, active, description | Employee discount codes |
 
@@ -140,12 +141,13 @@ The cart is NOT a separate page — it's a slide-over modal panel that opens fro
 - **Styled:** Dark bubble with Platzi green accents, matches brand
 
 ### Capabilities
-- Answer questions about all 12 products (prices, descriptions, sizing, availability)
+- Answer questions about all 13 products (prices, descriptions, sizing, availability)
 - Recommend products based on user preferences ("something fun" → Fun collection)
 - Explain the limited edition VCL Cap and its March-April 2026 window
 - Answer general store questions (shipping, returns — fictional)
 - Recommend relevant Platzi courses based on conversation context
 - Highlight the Gift Subscription as a gifting option
+- Recommend "El Libro Real" by Freddy Vega for users interested in entrepreneurship or Platzi's story
 
 ### System Prompt
 Pre-loaded with:
@@ -210,11 +212,11 @@ Webhook (always listening) at a Make.com URL.
 ### Promo Video (HeyGen)
 - 30-60 second hype video
 - AI avatar presenter introducing the Platzi Store
-- Showcase both collections + VCL Cap + Gift Subscription
+- Showcase both collections + VCL Cap + Gift Subscription + El Libro Real
 - Platzi green branding throughout
 - CTA: "Visit the Platzi Store now"
 
-### Social Media Images (Midjourney)
+### Social Media Images (Google AI Studio)
 5 promotional images for Instagram/Twitter:
 
 1. **Store Launch Announcement** — "Platzi Store is HERE" graphic
@@ -230,8 +232,8 @@ All images high resolution, Platzi-branded.
 | Block | Time (COT) | Task |
 |-------|------------|------|
 | 1 | 5:30am - 6:30am | Finalize spec and implementation plan |
-| 2 | 6:30am - 7:30am | Generate Midjourney prompts, start image generation (parallel) |
-| 3 | 6:30am - 9:30am | Build store in v0 — all pages, branding, 12 products |
+| 2 | 6:30am - 7:30am | Generate Google AI Studio prompts, start image generation (parallel) |
+| 3 | 6:30am - 9:30am | Build store in v0 — all pages, branding, 13 products |
 | 4 | 9:30am - 11:00am | Pull v0 code into repo, integrate images, polish UI |
 | 5 | 11:00am - 12:30pm | Build Gemini chatbot — API route, widget, system prompt |
 | 6 | 12:30pm - 1:30pm | Build Make.com automation — webhook, email template, order flow |
@@ -240,12 +242,12 @@ All images high resolution, Platzi-branded.
 | 9 | 3:30pm - 4:30pm | Bug fixes, polish, README documentation |
 | 10 | 4:30pm - 5:30pm | Buffer — final touches, presentation prep |
 
-Key: Midjourney and HeyGen run in parallel with coding. Never block on asset generation.
+Key: Google AI Studio and HeyGen run in parallel with coding. Never block on asset generation.
 
 ## Success Criteria
 
 - Store is live on Vercel with a public URL
-- All 12 products displayed with HD AI-generated images served from Supabase Storage CDN
+- All 13 products displayed with HD AI-generated images served from Supabase Storage CDN
 - Products, orders, and discount codes stored in Supabase PostgreSQL
 - Cart modal works: add, remove, update quantity, apply employee discount, select payment method, place order
 - Order summary shows subtotal, discount, and total with running price calculations
