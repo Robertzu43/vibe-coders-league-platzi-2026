@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ShoppingBag, Check, Truck, Shield, RotateCcw } from 'lucide-react'
-import { Product } from '@/lib/products'
+import { Product, getLocalizedName, getLocalizedDescription, getLocalizedBadge } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
 import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
@@ -20,7 +20,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
   const { addItem } = useCart()
-  const { t } = useLanguage()
+  const { locale, t } = useLanguage()
 
   const features = [
     { icon: Truck, label: t.product.freeShipping },
@@ -44,7 +44,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      name: product.name,
+      name: getLocalizedName(product, locale),
       price: product.price,
       image: product.image,
       variant: selectedVariant || undefined,
@@ -71,14 +71,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <div className="relative aspect-square bg-card rounded-3xl overflow-hidden border border-border">
             <Image
               src={product.images[selectedImage]}
-              alt={product.name}
+              alt={getLocalizedName(product, locale)}
               fill
               className="object-cover"
               preload
             />
-            {product.badge && (
+            {getLocalizedBadge(product, locale) && (
               <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
-                {product.badge}
+                {getLocalizedBadge(product, locale)}
               </Badge>
             )}
           </div>
@@ -99,7 +99,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 >
                   <Image
                     src={image}
-                    alt={`${product.name} view ${index + 1}`}
+                    alt={`${getLocalizedName(product, locale)} view ${index + 1}`}
                     fill
                     className="object-cover"
                   />
@@ -117,10 +117,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
               {getCollectionLabel(product.collection)}
             </p>
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-              {product.name}
+              {getLocalizedName(product, locale)}
             </h1>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-              {product.description}
+              {getLocalizedDescription(product, locale)}
             </p>
             {/* Product badges */}
             {product.badges && product.badges.length > 0 && (

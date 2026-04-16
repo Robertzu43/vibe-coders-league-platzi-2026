@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingBag } from 'lucide-react'
-import { Product } from '@/lib/products'
+import { Product, getLocalizedName, getLocalizedDescription, getLocalizedBadge } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
 import { useLanguage } from '@/lib/language-context'
 import { Badge } from '@/components/ui/badge'
@@ -14,14 +14,14 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart()
-  const { t } = useLanguage()
+  const { locale, t } = useLanguage()
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     addItem({
       id: product.id,
-      name: product.name,
+      name: getLocalizedName(product, locale),
       price: product.price,
       image: product.image,
       variant: product.variants?.[0],
@@ -35,13 +35,13 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="relative aspect-square overflow-hidden bg-secondary">
           <Image
             src={product.image}
-            alt={product.name}
+            alt={getLocalizedName(product, locale)}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {product.badge && (
+          {getLocalizedBadge(product, locale) && (
             <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground font-medium">
-              {product.badge}
+              {getLocalizedBadge(product, locale)}
             </Badge>
           )}
           {/* Quick Add Button */}
@@ -57,10 +57,10 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Content */}
         <div className="p-4">
           <h3 className="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1">
-            {product.name}
+            {getLocalizedName(product, locale)}
           </h3>
           <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-            {product.description}
+            {getLocalizedDescription(product, locale)}
           </p>
           <div className="flex items-center justify-between mt-3">
             <span className="text-lg font-bold text-primary">${product.price}</span>

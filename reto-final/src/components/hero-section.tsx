@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
-import { Product } from '@/lib/products'
+import { Product, getLocalizedName, getLocalizedDescription, getLocalizedBadge } from '@/lib/products'
 import { useLanguage } from '@/lib/language-context'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -68,7 +68,7 @@ function useTypewriter(line1: string, line2: string, speed = 80) {
 }
 
 export function HeroSection({ featuredProducts }: HeroSectionProps) {
-  const { t } = useLanguage()
+  const { locale, t } = useLanguage()
   const { displayLine1, displayLine2, showCursor, isTyping } = useTypewriter(
     t.hero.title1,
     t.hero.title2
@@ -136,7 +136,7 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src={product.image}
-                  alt={product.name}
+                  alt={getLocalizedName(product, locale)}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   preload={index === 0}
@@ -144,16 +144,16 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                {product.badge && (
+                {getLocalizedBadge(product, locale) && (
                   <Badge className="mb-3 bg-primary text-primary-foreground">
-                    {product.badge}
+                    {getLocalizedBadge(product, locale)}
                   </Badge>
                 )}
                 <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {product.name}
+                  {getLocalizedName(product, locale)}
                 </h3>
                 <p className="text-muted-foreground mt-1 line-clamp-2 text-sm">
-                  {product.description}
+                  {getLocalizedDescription(product, locale)}
                 </p>
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-2xl font-bold text-primary">${product.price}</span>
