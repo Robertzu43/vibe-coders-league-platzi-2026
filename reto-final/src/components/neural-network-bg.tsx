@@ -8,6 +8,16 @@ interface Node {
   vx: number
   vy: number
   radius: number
+  baseRadius: number
+}
+
+interface Ripple {
+  x: number
+  y: number
+  radius: number
+  maxRadius: number
+  strength: number
+  opacity: number
 }
 
 export function NeuralNetworkBg() {
@@ -15,6 +25,7 @@ export function NeuralNetworkBg() {
   const animationRef = useRef<number>(0)
   const nodesRef = useRef<Node[]>([])
   const mouseRef = useRef<{ x: number; y: number } | null>(null)
+  const ripplesRef = useRef<Ripple[]>([])
 
   const CONNECTION_DISTANCE = 150
   const NODE_COUNT = 65
@@ -25,16 +36,28 @@ export function NeuralNetworkBg() {
   const NODE_RADIUS_MAX = 3
   const SPEED = 0.3
 
+  // Mouse interaction constants
+  const MOUSE_ATTRACTION_RADIUS = 200
+  const MOUSE_ATTRACTION_FORCE = 0.02
+  const MOUSE_GLOW_RADIUS = 180
+  const MOUSE_MAX_SPEED = SPEED * 3
+  const RIPPLE_MAX_RADIUS = 250
+  const RIPPLE_PUSH_FORCE = 4
+  const RIPPLE_EXPAND_SPEED = 5
+  const RIPPLE_FADE_SPEED = 0.02
+
   const initNodes = useCallback((width: number, height: number) => {
     const nodes: Node[] = []
     for (let i = 0; i < NODE_COUNT; i++) {
+      const baseRadius =
+        NODE_RADIUS_MIN + Math.random() * (NODE_RADIUS_MAX - NODE_RADIUS_MIN)
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * SPEED * 2,
         vy: (Math.random() - 0.5) * SPEED * 2,
-        radius:
-          NODE_RADIUS_MIN + Math.random() * (NODE_RADIUS_MAX - NODE_RADIUS_MIN),
+        radius: baseRadius,
+        baseRadius,
       })
     }
     nodesRef.current = nodes
@@ -72,10 +95,8 @@ export function NeuralNetworkBg() {
     resizeCanvas()
 
     const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1
       ctx.resetTransform()
       resizeCanvas()
-      // ctx.scale already called in resizeCanvas
     }
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -90,9 +111,24 @@ export function NeuralNetworkBg() {
       mouseRef.current = null
     }
 
+    const handleClick = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      ripplesRef.current.push({
+        x,
+        y,
+        radius: 0,
+        maxRadius: RIPPLE_MAX_RADIUS,
+        strength: RIPPLE_PUSH_FORCE,
+        opacity: 0.6,
+      })
+    }
+
     window.addEventListener("resize", handleResize)
     canvas.addEventListener("mousemove", handleMouseMove)
     canvas.addEventListener("mouseleave", handleMouseLeave)
+    canvas.addEventListener("click", handleClick)
 
     const animate = () => {
       const parent = canvas.parentElement
@@ -105,6 +141,17 @@ export function NeuralNetworkBg() {
 
       const nodes = nodesRef.current
       const mouse = mouseRef.current
+      const ripples = ripplesRef.current
+
+      // Update ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const ripple = ripples[i]
+        ripple.radius += RIPPLE_EXPAND_SPEED
+        ripple.opacity -= RIPPLE_FADE_SPEED
+        if (ripple.opacity <= 0 || ripple.radius >= ripple.maxRadius) {
+          ripples.splice(i, 1)
+        }
+      }
 
       // Update node positions
       for (const node of nodes) {
@@ -126,21 +173,60 @@ export function NeuralNetworkBg() {
           const dx = mouse.x - node.x
           const dy = mouse.y - node.y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 200 && dist > 1) {
-            node.vx += (dx / dist) * 0.02
-            node.vy += (dy / dist) * 0.02
+          if (dist < MOUSE_ATTRACTION_RADIUS && dist > 1) {
+            node.vx += (dx / dist) * MOUSE_ATTRACTION_FORCE
+            node.vy += (dy / dist) * MOUSE_ATTRACTION_FORCE
             // Clamp speed
             const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy)
-            if (speed > SPEED * 3) {
-              node.vx = (node.vx / speed) * SPEED * 3
-              node.vy = (node.vy / speed) * SPEED * 3
+            if (speed > MOUSE_MAX_SPEED) {
+              node.vx = (node.vx / speed) * MOUSE_MAX_SPEED
+              node.vy = (node.vy / speed) * MOUSE_MAX_SPEED
             }
           }
         }
+
+        // Ripple push effect
+        for (const ripple of ripples) {
+          const dx = node.x - ripple.x
+          const dy = node.y - ripple.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          // Push nodes that are near the expanding ripple edge
+          const rippleEdgeDist = Math.abs(dist - ripple.radius)
+          if (rippleEdgeDist < 40 && dist > 1) {
+            const pushStrength = ripple.strength * ripple.opacity * (1 - rippleEdgeDist / 40)
+            node.vx += (dx / dist) * pushStrength
+            node.vy += (dy / dist) * pushStrength
+            // Clamp speed after ripple push
+            const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy)
+            if (speed > MOUSE_MAX_SPEED * 2) {
+              node.vx = (node.vx / speed) * MOUSE_MAX_SPEED * 2
+              node.vy = (node.vy / speed) * MOUSE_MAX_SPEED * 2
+            }
+          }
+        }
+
+        // Smooth return: dampen velocity toward base speed
+        const currentSpeed = Math.sqrt(node.vx * node.vx + node.vy * node.vy)
+        if (currentSpeed > SPEED) {
+          const dampening = 0.995
+          node.vx *= dampening
+          node.vy *= dampening
+        }
+
+        // Smooth radius return to base
+        node.radius += (node.baseRadius - node.radius) * 0.1
+      }
+
+      // Draw ripple rings
+      for (const ripple of ripples) {
+        ctx.beginPath()
+        ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2)
+        ctx.strokeStyle = `rgba(${NODE_COLOR}, ${ripple.opacity * 0.5})`
+        ctx.lineWidth = 2
+        ctx.stroke()
       }
 
       // Draw connections
-      ctx.lineWidth = 0.7
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x
@@ -148,10 +234,25 @@ export function NeuralNetworkBg() {
           const dist = Math.sqrt(dx * dx + dy * dy)
 
           if (dist < CONNECTION_DISTANCE) {
-            const opacity =
-              LINE_OPACITY * (1 - dist / CONNECTION_DISTANCE)
+            let opacity = LINE_OPACITY * (1 - dist / CONNECTION_DISTANCE)
+
+            // Connection highlighting near cursor
+            if (mouse) {
+              const midX = (nodes[i].x + nodes[j].x) / 2
+              const midY = (nodes[i].y + nodes[j].y) / 2
+              const mouseDist = Math.sqrt(
+                (mouse.x - midX) * (mouse.x - midX) +
+                (mouse.y - midY) * (mouse.y - midY)
+              )
+              if (mouseDist < MOUSE_GLOW_RADIUS) {
+                const boost = (1 - mouseDist / MOUSE_GLOW_RADIUS) * 0.35
+                opacity = Math.min(opacity + boost, 0.6)
+              }
+            }
+
             ctx.beginPath()
             ctx.strokeStyle = `rgba(${NODE_COLOR}, ${opacity})`
+            ctx.lineWidth = 0.7
             ctx.moveTo(nodes[i].x, nodes[i].y)
             ctx.lineTo(nodes[j].x, nodes[j].y)
             ctx.stroke()
@@ -162,21 +263,46 @@ export function NeuralNetworkBg() {
       // Draw nodes
       for (const node of nodes) {
         let opacity = NODE_OPACITY
+        let drawRadius = node.radius
 
-        // Glow near mouse
+        // Glow on hover — increase opacity and size near mouse
         if (mouse) {
           const dx = mouse.x - node.x
           const dy = mouse.y - node.y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 150) {
-            opacity = NODE_OPACITY + (0.5 - NODE_OPACITY) * (1 - dist / 150)
+          if (dist < MOUSE_GLOW_RADIUS) {
+            const proximity = 1 - dist / MOUSE_GLOW_RADIUS
+            opacity = NODE_OPACITY + (0.7 - NODE_OPACITY) * proximity
+            // Increase size up to 2x for closest nodes
+            drawRadius = node.baseRadius * (1 + proximity * 1.0)
+            node.radius = drawRadius
+          }
+        }
+
+        // Extra glow from ripples
+        for (const ripple of ripples) {
+          const dx = node.x - ripple.x
+          const dy = node.y - ripple.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          const rippleEdgeDist = Math.abs(dist - ripple.radius)
+          if (rippleEdgeDist < 50) {
+            const rippleGlow = ripple.opacity * (1 - rippleEdgeDist / 50) * 0.4
+            opacity = Math.min(opacity + rippleGlow, 0.9)
           }
         }
 
         ctx.beginPath()
-        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
+        ctx.arc(node.x, node.y, drawRadius, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(${NODE_COLOR}, ${opacity})`
         ctx.fill()
+
+        // Add a soft glow halo for bright nodes
+        if (opacity > 0.4) {
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, drawRadius * 2.5, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(${NODE_COLOR}, ${(opacity - 0.4) * 0.15})`
+          ctx.fill()
+        }
       }
 
       animationRef.current = requestAnimationFrame(animate)
@@ -189,6 +315,7 @@ export function NeuralNetworkBg() {
       window.removeEventListener("resize", handleResize)
       canvas.removeEventListener("mousemove", handleMouseMove)
       canvas.removeEventListener("mouseleave", handleMouseLeave)
+      canvas.removeEventListener("click", handleClick)
     }
   }, [initNodes])
 
