@@ -200,11 +200,11 @@ export const products: Product[] = [
   // Premium — Book
   {
     id: "13",
-    name: "The Platzi Playbook",
-    nameEs: "El Playbook de Platzi",
+    name: "Control",
+    nameEs: "Control",
     slug: "platzi-playbook",
-    description: "The definitive guide to building your tech career. Hardcover, 300 pages of wisdom from the Platzi community.",
-    descriptionEs: "La gu\u00eda definitiva para construir tu carrera tech. Tapa dura, 300 p\u00e1ginas de sabidur\u00eda de la comunidad Platzi.",
+    description: "The radical guide to mastering your life, your future, and your wealth.",
+    descriptionEs: "La gu\u00eda radical para dominar tu vida, tu futuro y tu riqueza.",
     price: 34.99,
     image: `${IMG}/book.png`,
     images: [`${IMG}/book.png`],
