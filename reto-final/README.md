@@ -6,7 +6,7 @@ La primera tienda oficial de merchandising de Platzi. Construida en vivo durante
 
 ## 🌐 Demo en Vivo
 
-👉 [URL de Vercel aquí]
+👉 [https://reto-final.vercel.app](https://reto-final.vercel.app)
 
 ## 📸 Screenshots
 
