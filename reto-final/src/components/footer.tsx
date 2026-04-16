@@ -2,14 +2,12 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Twitter, Linkedin, Instagram } from 'lucide-react'
+import { Github, Globe } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 
 const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Github, href: 'https://github.com/platzi', label: 'GitHub' },
+  { icon: Globe, href: 'https://platzi.com/home/', label: 'Platzi' },
 ]
 
 export function Footer() {
