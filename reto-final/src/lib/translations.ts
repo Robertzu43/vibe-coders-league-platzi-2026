@@ -7,8 +7,8 @@ export const translations = {
     },
     hero: {
       badge: "New Collection Available",
-      title1: "Wear Your Code",
-      title2: "With Pride",
+      title1: "Learning Is",
+      title2: "The New Style",
       subtitle:
         "Premium tech merchandise designed for developers who appreciate quality, minimalist aesthetics, and the art of clean code.",
       shopBtn: "Shop Collection",
@@ -174,8 +174,8 @@ export const translations = {
     },
     hero: {
       badge: "Nueva Colecci\u00f3n Disponible",
-      title1: "Viste Tu C\u00f3digo",
-      title2: "Con Orgullo",
+      title1: "Aprender Es",
+      title2: "El Nuevo Estilo",
       subtitle:
         "Mercanc\u00eda tech premium dise\u00f1ada para desarrolladores que aprecian la calidad, la est\u00e9tica minimalista y el arte del c\u00f3digo limpio.",
       shopBtn: "Ver Colecci\u00f3n",
