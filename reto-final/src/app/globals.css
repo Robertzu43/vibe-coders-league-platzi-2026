@@ -81,3 +81,22 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #3A3A3A;
 }
+
+/* Confetti animation for order success */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(600px) rotate(720deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall 2.5s ease-out forwards;
+}
